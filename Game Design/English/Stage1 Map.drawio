@@ -1,0 +1,58 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0" version="26.0.10">
+  <diagram name="第 1 页" id="iAk1GWMNrEdtLBw4Q1fr">
+    <mxGraphModel dx="1733" dy="2266" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="40UIpqaHPGDksJpqaVvL-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="120" y="190" width="810" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="40UIpqaHPGDksJpqaVvL-4" value="Prison" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="120" y="190" width="220" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="40UIpqaHPGDksJpqaVvL-5" value="Gate" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="480" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="40UIpqaHPGDksJpqaVvL-6" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="480" y="-30" width="120" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="40UIpqaHPGDksJpqaVvL-7" value="Lift" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="480" y="-30" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="40UIpqaHPGDksJpqaVvL-8" value="Stairs" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="840" y="190" width="90" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="40UIpqaHPGDksJpqaVvL-9" value="box" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="120" y="190" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="40UIpqaHPGDksJpqaVvL-10" value="Level 1" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="860" y="660" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="nqa1lydx531YzczT0N9e-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="730" width="800" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="nqa1lydx531YzczT0N9e-2" value="Level 2" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="860" y="1200" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="nqa1lydx531YzczT0N9e-3" value="Stairs" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="730" width="90" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="nqa1lydx531YzczT0N9e-4" value="Shop" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="130" y="730" width="230" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="40UIpqaHPGDksJpqaVvL-2" value="Merchant" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="180" y="770" width="20" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="nqa1lydx531YzczT0N9e-6" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="240" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="nqa1lydx531YzczT0N9e-7" value="Player Spawn point" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1045" y="260" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="nqa1lydx531YzczT0N9e-8" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="380" y="810" width="20" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
