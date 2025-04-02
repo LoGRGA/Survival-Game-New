@@ -18,11 +18,11 @@ public class mouseHover : MonoBehaviour
 
     public void PointerEnter()
     {
-        transform.localScale = new Vector2(2f, 2f);
+        transform.localScale = new Vector2(1f, 2f);
     }
 
     public void PointerExit()
     {
-        transform.localScale = new Vector2(1f, 1f);
+        transform.localScale = new Vector2(.75f, 1.5f);
     }
 }
