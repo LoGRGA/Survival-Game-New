@@ -15,15 +15,24 @@ public class CrabBossBehaviour : EnemyBehaviour
 
     protected float attack2Range = 4f;
     protected float attack2Distance = 4f;
-    protected float attack2Duration = 1f * 1.2f;
+    protected float attack2Duration = 1.3f * 1.2f;
     protected float attack2WindUpDuration = 0.5f * 1.2f; //from frame 0 to 15 
     protected int attack2Damage = 5;
 
     protected float attack3Range = 5f;
     protected float attack3Distance = 5f;
-    protected float attack3Duration = 1f * 1.5f;
+    protected float attack3Duration = 1.2f * 1.5f;
     protected float attack3WindUpDuration = 0.5f * 1.5f; //from frame 0 to 15 
     protected int attack3Damage = 10;
+
+    //summon variable
+    protected bool isSummonHalf = false;
+    protected bool isSummoning = false;
+    protected float summonDuration = 1.7f;
+    protected float summonWindUpDuration = 1f;
+    public GameObject crabPrefab;
+    private float throwForce = 10f;
+
 
     //Coroutine variable
     protected Coroutine attack2TimerCoroutine;
@@ -31,10 +40,14 @@ public class CrabBossBehaviour : EnemyBehaviour
     protected Coroutine attack3TimerCoroutine;
     protected Coroutine attack3LogicCoroutine;
 
+    //SFX
+    protected AudioClip summonAudioClip;
+
     protected void Awake() {
         maxHealth = 150f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
         //Attack: 30 fps
         //Hit: 60 fps
+        //Summon：23fps
     }
     
     // Start is called before the first frame update
@@ -56,26 +69,27 @@ public class CrabBossBehaviour : EnemyBehaviour
         attackWindUpDuration = 0.5f * 1.2f; // from frme 0 to 15
         dealDamageDuration = 0.1f;
 
-        attackDuration = 1f * 1.2f;
+        attackDuration = 1.3f * 1.2f;
         attackDamage = 5;
         attackRaycastHeight = -1f;
 
         //fov
         detectionRadius = 20f; fov.radius = detectionRadius;
         detectionAngle = 145f; fov.angle = detectionAngle;
-        fovRaycastHeight = 0f;
+        fovRaycastHeight = 0.4f;
 
         speed = 3.5f; agent.speed = speed;
         rotationSpeed = 10f;
 
         //roar
-        roarDuration = 3f / 2f;
+        roarDuration = 3.3f / 2f;
 
         //SFX
         roarAudioClip = LoadAudioClip("CrabBoss SFX", "CrabBoss Roar");
         attackAudioClip = LoadAudioClip("CrabBoss SFX", "CrabBoss Attack");
         hitAudioClip = LoadAudioClip("CrabBoss SFX", "CrabBoss Hit");
         dieAudioClip = LoadAudioClip("CrabBoss SFX", "CrabBoss Die");
+        summonAudioClip = LoadAudioClip("CrabBoss SFX", "CrabBoss Summon");
     }
 
     // Update is called once per frame
@@ -87,24 +101,29 @@ public class CrabBossBehaviour : EnemyBehaviour
         if(currentHealth <= 0 && !isDying){
             Die();
         }
+        //summon reation check
+                //summon crab
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && currentHealth <= maxHealth / 2 && !isSummonHalf){
+            Summon();
+        }
         //attack reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange && isAttack){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange && isAttack && !isSummoning){
             Attack();
         }
         //attack2 reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack2Range && isAttack2){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack2Range && isAttack2 && !isSummoning){
             Attack2();
         }
         //attack3 reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack3Range && isAttack3){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack3Range && isAttack3 && !isSummoning){
             Attack3();
         }
         //Chases reaction check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isSummoning){
             Chase();
         }
         //patrolling if nothing happened 
-        else if(alive && !isAttacking && !isRoaring && !isHitting && !fov.canSeePlayer){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && !fov.canSeePlayer && !isSummoning){
             Patrol();
             agent.enabled = false;
             isRoared = false;
@@ -129,18 +148,21 @@ public class CrabBossBehaviour : EnemyBehaviour
         StopAttackLogic(attack2LogicCoroutine);
 
         StopAttackLogic(attack3LogicCoroutine);
+
+        Summon();
     }
 
     //override the Hit() funcction to include stop attack2
     protected override void Hit()
     {
-        base.Hit();
-        StopAttack(attack2TimerCoroutine);
-        StopAttackLogic(attack2LogicCoroutine);
+        if(!isSummoning){
+            base.Hit();
+            StopAttack(attack2TimerCoroutine);
+            StopAttackLogic(attack2LogicCoroutine);
 
-        StopAttack(attack3TimerCoroutine);
-        StopAttackLogic(attack3LogicCoroutine);
-
+            StopAttack(attack3TimerCoroutine);
+            StopAttackLogic(attack3LogicCoroutine);
+        }
     }
 
     //override the Attack() function
@@ -190,6 +212,68 @@ public class CrabBossBehaviour : EnemyBehaviour
         }
     }
 
+    protected void Summon(){
+        isSummonHalf = true;
+        if(currentHealth > 0){
+            SetAnimationActive(ExtendedAnimationState.Summon);
+        }
+        PlaySFX(summonAudioClip);
+        StartCoroutine(SummonTimer());
+        StartCoroutine(SummonLogic());
+
+    }
+
+    protected IEnumerator SummonTimer(){
+        isSummoning = true;
+        yield return new WaitForSeconds(summonDuration);
+        isSummoning = false;
+    }
+
+    protected IEnumerator SummonLogic(){
+        yield return new WaitForSeconds(summonWindUpDuration);
+        ThrowCrab();
+    }
+
+    protected void ThrowCrab(){
+        float[] Angles = { 0f, -45f, 45f };
+
+        foreach (float Angle in Angles)
+        {
+            //calculate the horizontal direction
+            Vector3 horizontalDir = Quaternion.Euler(0, Angle, 0) * transform.forward;
+
+            Vector3 throwDir = Quaternion.AngleAxis(-45, transform.right) * horizontalDir;
+
+            //instatiate crab prefab
+            GameObject crabInstance = Instantiate(crabPrefab, transform.position, transform.rotation);
+
+            Rigidbody rb = crabInstance.GetComponent<Rigidbody>();
+
+            if(Angle == 0){
+                StartCoroutine(ChangeKinematic(rb,2f));
+            }else{
+                StartCoroutine(ChangeKinematic(rb,1.5f));
+            }
+            StartCoroutine(ChangeCollision(rb));
+            if (rb != null)
+            {
+                rb.velocity = throwDir * throwForce;
+            }
+        }
+    }
+
+    protected IEnumerator ChangeKinematic(Rigidbody rb, float time){
+        rb.isKinematic = false;
+        yield return new WaitForSeconds(time);
+        rb.isKinematic = true;
+    }
+
+    protected IEnumerator ChangeCollision(Rigidbody rb){
+        rb.detectCollisions = false;
+        yield return new WaitForSeconds(0.5f);
+        rb.detectCollisions = true;
+    }
+
     //put the attack2 attack3 state inside the dictionary
     protected override Dictionary<object, string> GetExtendedAnimationParameterNames()
     {
@@ -200,5 +284,9 @@ public class CrabBossBehaviour : EnemyBehaviour
             { ExtendedAnimationState.Summon, "Summon" }
         };
     }
+
+    
+
+
 
 }

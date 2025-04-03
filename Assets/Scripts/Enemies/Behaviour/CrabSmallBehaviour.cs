@@ -2,15 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrabBehaviour : EnemyBehaviour
+public class CrabSmallBehaviour : EnemyBehaviour
 {
-    //summon variable
-    protected float summonWindUpDuration = 1f;
-    public GameObject crabPrefab;
-    protected float throwForce = 7f;
-
     protected void Awake() {
-        maxHealth = 50f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
+        maxHealth = 25f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
         //Attack: 30 fps
         //Hit: 60 fps
     }
@@ -36,7 +31,7 @@ public class CrabBehaviour : EnemyBehaviour
 
         attackDuration = 1f;
         attackDamage = 5;
-        attackRaycastHeight = -1f;
+        attackRaycastHeight = 0f;
 
         //fov
         detectionRadius = 20f; fov.radius = detectionRadius;
@@ -89,57 +84,5 @@ public class CrabBehaviour : EnemyBehaviour
         if(isAttacking || isHitting || isRoaring || isFaceToPlayer){
             FaceToPlayer();
         }
-    }
-
-    //override the Die() funcction to include stop attack2
-    protected override void Die()
-    {
-        base.Die();
-        StartCoroutine(SummonLogic());
-    }
-
-    protected IEnumerator SummonLogic(){
-        yield return new WaitForSeconds(summonWindUpDuration);
-        ThrowCrab();
-    }
-
-    protected void ThrowCrab(){
-        float[] Angles = { 0f, -45f, 45f };
-
-        foreach (float Angle in Angles)
-        {
-            //calculate the horizontal direction
-            Vector3 horizontalDir = Quaternion.Euler(0, Angle, 0) * transform.forward;
-
-            Vector3 throwDir = Quaternion.AngleAxis(-45, transform.right) * horizontalDir;
-
-            //instatiate crab prefab
-            GameObject crabInstance = Instantiate(crabPrefab, transform.position, transform.rotation);
-
-            Rigidbody rb = crabInstance.GetComponent<Rigidbody>();
-
-            if(Angle == 0){
-                StartCoroutine(ChangeKinematic(rb,2f));
-            }else{
-                StartCoroutine(ChangeKinematic(rb,1.5f));
-            }
-            StartCoroutine(ChangeCollision(rb));
-            if (rb != null)
-            {
-                rb.velocity = throwDir * throwForce;
-            }
-        }
-    }
-
-    protected IEnumerator ChangeKinematic(Rigidbody rb, float time){
-        rb.isKinematic = false;
-        yield return new WaitForSeconds(time);
-        rb.isKinematic = true;
-    }
-
-    protected IEnumerator ChangeCollision(Rigidbody rb){
-        rb.detectCollisions = false;
-        yield return new WaitForSeconds(0.5f);
-        rb.detectCollisions = true;
     }
 }

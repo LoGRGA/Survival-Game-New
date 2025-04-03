@@ -374,8 +374,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004aec3738cd21f409f4ca4da43a8a48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 972336110580150748}
-  easeHealthSlider: {fileID: 3276661905470546970}
 --- !u!114 &440419821338411399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,7 +386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0c25b32c1ac0644b6fde858f39fa11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
 --- !u!1 &2748541454544111218
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,7 +545,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &440900271279237354
 MonoBehaviour:
   m_ObjectHideFlags: 0

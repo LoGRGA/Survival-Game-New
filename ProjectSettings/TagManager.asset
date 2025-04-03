@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Weapon
   - Cone
+  - NPC
+  - Ground
   layers:
   - Default
   - TransparentFX
