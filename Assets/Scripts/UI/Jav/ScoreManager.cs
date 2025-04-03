@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -54,6 +55,11 @@ public class ScoreManager : MonoBehaviour
         playCount = PlayerPrefs.GetInt("PlayCount", 0);
         string savedData = PlayerPrefs.GetString("Leaderboard", "{}");
         scores = JsonUtility.FromJson<ScoreList>(savedData).entries;
+    }
+
+    public static implicit operator ScoreManager(ScoreManager_new v)
+    {
+        throw new NotImplementedException();
     }
 }
 

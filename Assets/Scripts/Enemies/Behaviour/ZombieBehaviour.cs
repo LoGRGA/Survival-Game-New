@@ -59,7 +59,13 @@ public class ZombieBehaviour : EnemyBehaviour
         //death check
         if(currentHealth <= 0 && !isDying){
             Die();
+            // Javier Addition: ADDING SCORE WHEN ZOMBIE DIES
+            if (ScoreManager_new.instance != null)
+            {
+                ScoreManager_new.instance.AddScore(10); // Adjust points as needed
+            }
         }
+        
         //attack reation check
         else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange){
             Attack();
