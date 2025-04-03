@@ -2085,7 +2085,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &272226161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5580,6 +5580,7 @@ GameObject:
   - component: {fileID: 1002844377}
   - component: {fileID: 1002844376}
   - component: {fileID: 1002844379}
+  - component: {fileID: 1002844380}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -5716,8 +5717,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6dc4d32642f9bf49b60570a6df7f58c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1002844380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002844374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57f9e88bbd852d469e219a8337fc7c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   scaleMultiplier: 1.2
-  glowColor: {r: 1, g: 0.28773582, b: 0.28773582, a: 1.5}
+  glowColor: {r: 0.9716981, g: 0.33459416, b: 0.33459416, a: 1}
 --- !u!1 &1022192374
 GameObject:
   m_ObjectHideFlags: 0
@@ -7781,8 +7794,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6dc4d32642f9bf49b60570a6df7f58c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scaleMultiplier: 1.2
-  glowColor: {r: 1, g: 1, b: 1, a: 1.5}
 --- !u!1 &1304980273
 GameObject:
   m_ObjectHideFlags: 0
@@ -9826,11 +9837,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1716379473}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6dc4d32642f9bf49b60570a6df7f58c, type: 3}
+  m_Script: {fileID: 11500000, guid: a57f9e88bbd852d469e219a8337fc7c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scaleMultiplier: 1.2
-  glowColor: {r: 1, g: 0.25943398, b: 0.25943398, a: 1.5}
+  glowColor: {r: 0.990566, g: 0.36912602, b: 0.36912602, a: 1}
 --- !u!114 &1716379476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10625,11 +10636,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1823658636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6dc4d32642f9bf49b60570a6df7f58c, type: 3}
+  m_Script: {fileID: 11500000, guid: a57f9e88bbd852d469e219a8337fc7c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scaleMultiplier: 1.2
-  glowColor: {r: 1, g: 0.2971698, b: 0.2971698, a: 1.5}
+  glowColor: {r: 1, g: 0.4481132, b: 0.4481132, a: 1}
 --- !u!1 &1844305119
 GameObject:
   m_ObjectHideFlags: 0
@@ -12096,11 +12107,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2070256818}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6dc4d32642f9bf49b60570a6df7f58c, type: 3}
+  m_Script: {fileID: 11500000, guid: a57f9e88bbd852d469e219a8337fc7c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scaleMultiplier: 1.2
-  glowColor: {r: 1, g: 0.25943398, b: 0.25943398, a: 1.5}
+  glowColor: {r: 1, g: 0.4198113, b: 0.4198113, a: 1}
 --- !u!1 &2077136631
 GameObject:
   m_ObjectHideFlags: 0
