@@ -19901,6 +19901,11 @@ Skybox:
   m_GameObject: {fileID: 1037492924}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: 95934441a51fdf943a858261c14db739, type: 2}
+--- !u!4 &1037492928 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7890991399465026748, guid: 62dd43258d3c727429a7397147b9dbf8, type: 3}
+  m_PrefabInstance: {fileID: 882085198}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1039084937
 GameObject:
   m_ObjectHideFlags: 0
@@ -26405,6 +26410,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7826688576035595260, guid: c2fb1bc8c9eb23048a872abf5be2f3a0, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1037492928}
     - target: {fileID: 9024922244344506306, guid: c2fb1bc8c9eb23048a872abf5be2f3a0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
