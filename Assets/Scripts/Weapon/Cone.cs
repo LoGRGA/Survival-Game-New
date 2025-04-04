@@ -14,9 +14,15 @@ public class Cone : MonoBehaviour
             currentCollisions.Add(c.gameObject);
     }
 
+    void OnCollisionStay(Collision c)
+    {
+        if (!currentCollisions.Contains(c.gameObject))
+            // Add the GameObject collided with to the list.
+            currentCollisions.Add(c.gameObject);
+    }
+
     void OnCollisionExit(Collision c)
     {
-
         // Remove the GameObject collided with from the list.
         currentCollisions.Remove(c.gameObject);
     }
