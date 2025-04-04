@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Proto menu (Jav).unity
     guid: 4429641f085ab2743a9753e14cfd3b06
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
+    path: Assets/Scenes/Demo/GameScene.unity
     guid: a39d4a7599d6f9e45a90d5da9cf62fac
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
