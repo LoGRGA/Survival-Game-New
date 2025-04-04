@@ -115,9 +115,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7ea2c37dc754849ab6ec157747865b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpeed: 6
   speed: 6
-  gravity: -9.8
+  baseJumpSpeed: 15
   jumpSpeed: 15
+  gravity: -9.8
   terminalVelocity: -20
   weapons: []
   cones: []
@@ -247,7 +249,7 @@ GameObject:
   - component: {fileID: 9193763800335780385}
   - component: {fileID: 1575549013688158277}
   - component: {fileID: 4520783509763888210}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SwordCone
   m_TagString: Cone
   m_Icon: {fileID: 0}
@@ -414,7 +416,7 @@ GameObject:
   - component: {fileID: 6401309931837118483}
   - component: {fileID: 8120468826577582341}
   - component: {fileID: 4746632337419514014}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AxeCone
   m_TagString: Cone
   m_Icon: {fileID: 0}
@@ -564,7 +566,7 @@ GameObject:
   - component: {fileID: 8482672124445521763}
   - component: {fileID: 4248146400258117144}
   - component: {fileID: 1041079762150500780}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DaggerCone
   m_TagString: Cone
   m_Icon: {fileID: 0}
