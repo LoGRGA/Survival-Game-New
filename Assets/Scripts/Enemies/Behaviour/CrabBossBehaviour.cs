@@ -15,14 +15,14 @@ public class CrabBossBehaviour : EnemyBehaviour
 
     protected float attack2Range = 4f;
     protected float attack2Distance = 4f;
-    protected float attack2Duration = 1.3f * 1.2f;
-    protected float attack2WindUpDuration = 0.5f * 1.2f; //from frame 0 to 15 
+    protected float attack2Duration = 1.26f * 1.2f;
+    protected float attack2WindUpDuration = 0.65f * 1.2f; //from frame 0 to 15 
     protected int attack2Damage = 5;
 
     protected float attack3Range = 5f;
     protected float attack3Distance = 5f;
-    protected float attack3Duration = 1.2f * 1.5f;
-    protected float attack3WindUpDuration = 0.5f * 1.5f; //from frame 0 to 15 
+    protected float attack3Duration = 1.26f * 1.2f;
+    protected float attack3WindUpDuration = 0.65f * 1.2f; //from frame 0 to 15 
     protected int attack3Damage = 10;
 
     //summon variable
@@ -66,10 +66,10 @@ public class CrabBossBehaviour : EnemyBehaviour
 
         attackRange = 4f;
         attackDistance = 4f;
-        attackWindUpDuration = 0.5f * 1.2f; // from frme 0 to 15
+        attackWindUpDuration = 0.65f * 1.2f; // from frme 0 to 15
         dealDamageDuration = 0.1f;
 
-        attackDuration = 1.3f * 1.2f;
+        attackDuration = 1.26f * 1.2f;
         attackDamage = 5;
         attackRaycastHeight = -1f;
 

@@ -31,12 +31,12 @@ public class CrabBehaviour : EnemyBehaviour
 
         attackRange = 3f;
         attackDistance = 3f;
-        attackWindUpDuration = 0.5f; // from frme 0 to 15
+        attackWindUpDuration = 0.65f; // from frme 0 to 15
         dealDamageDuration = 0.1f; //from frame 15 to 18
 
-        attackDuration = 1f;
+        attackDuration = 1.26f;
         attackDamage = 5;
-        attackRaycastHeight = -1f;
+        attackRaycastHeight = -0.5f;
 
         //fov
         detectionRadius = 20f; fov.radius = detectionRadius;
@@ -47,13 +47,16 @@ public class CrabBehaviour : EnemyBehaviour
         rotationSpeed = 10f;
 
         //roar
-        roarDuration = 3f / 2f;
+        roarDuration = 3.3f / 2f;
 
         //SFX
         roarAudioClip = LoadAudioClip("Crab SFX", "Crab Roar");
         attackAudioClip = LoadAudioClip("Crab SFX", "Crab Attack");
         hitAudioClip = LoadAudioClip("Crab SFX", "Crab Hit");
         dieAudioClip = LoadAudioClip("Crab SFX", "Crab Die");
+
+        //
+        StartCoroutine(FaceToPlayerWhenSummoned());
     }
 
     // Update is called once per frame
@@ -141,5 +144,11 @@ public class CrabBehaviour : EnemyBehaviour
         rb.detectCollisions = false;
         yield return new WaitForSeconds(0.5f);
         rb.detectCollisions = true;
+    }
+
+    protected IEnumerator FaceToPlayerWhenSummoned(){
+        isFaceToPlayer = true;
+        yield return new WaitForSeconds(2f);
+        isFaceToPlayer = false;
     }
 }

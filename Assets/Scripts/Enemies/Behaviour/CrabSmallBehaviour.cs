@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CrabSmallBehaviour : EnemyBehaviour
 {
+    //explosion
+    protected float explosionRange = 2f;
+
     protected void Awake() {
         maxHealth = 25f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
         //Attack: 30 fps
@@ -24,12 +27,12 @@ public class CrabSmallBehaviour : EnemyBehaviour
         hitDuration = 0.38f * 3f;
         disappearDuration = 4f;
 
-        attackRange = 3f;
-        attackDistance = 3f;
-        attackWindUpDuration = 0.5f; // from frme 0 to 15
+        attackRange = 2f;
+        attackDistance = 2f;
+        attackWindUpDuration = 0.65f; // from frme 0 to 15
         dealDamageDuration = 0.1f; //from frame 15 to 18
 
-        attackDuration = 1f;
+        attackDuration = 1.26f;
         attackDamage = 5;
         attackRaycastHeight = 0f;
 
@@ -42,13 +45,16 @@ public class CrabSmallBehaviour : EnemyBehaviour
         rotationSpeed = 10f;
 
         //roar
-        roarDuration = 3f / 2f;
+        roarDuration = 3.3f / 2f;
 
         //SFX
         roarAudioClip = LoadAudioClip("Crab SFX", "Crab Roar");
         attackAudioClip = LoadAudioClip("Crab SFX", "Crab Attack");
         hitAudioClip = LoadAudioClip("Crab SFX", "Crab Hit");
         dieAudioClip = LoadAudioClip("Crab SFX", "Crab Die");
+
+        //
+        StartCoroutine(FaceToPlayerWhenSummoned());
     }
 
     // Update is called once per frame
@@ -84,5 +90,17 @@ public class CrabSmallBehaviour : EnemyBehaviour
         if(isAttacking || isHitting || isRoaring || isFaceToPlayer){
             FaceToPlayer();
         }
+    }
+
+    protected IEnumerator FaceToPlayerWhenSummoned(){
+        isFaceToPlayer = true;
+        yield return new WaitForSeconds(2f);
+        isFaceToPlayer = false;
+    }
+
+    protected override void Die()
+    {
+        base.Die();
+
     }
 }
