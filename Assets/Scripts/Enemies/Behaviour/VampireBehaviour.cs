@@ -12,6 +12,17 @@ public class VampireBehaviour : EnemyBehaviour
     protected Transform skin;
     public VampireKnife knife;
 
+    //footprint
+    protected float time = 0;
+    protected bool isLeft = true;
+    protected Transform leftFootPrint;
+    protected Transform rightFootPrint;
+    public GameObject leftFootPrintGameObj;
+    public GameObject rightFootPrintGameObj;
+
+
+
+
     protected void Awake() {
         maxHealth = 150f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
     }
@@ -25,11 +36,12 @@ public class VampireBehaviour : EnemyBehaviour
         //get the skin and knife game object
         skin = transform.Find("Vampire");
 
-        //knife = transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:LeftShoulder/" +
-        //"mixamorig:LeftArm/mixamorig:LeftForeArm/mixamorig:LeftHand/mixamorig:LeftHandMiddle2/Vampire Knife");
-
         skin.gameObject.SetActive(!isInvisible);
-        //knife.gameObject.SetActive(false);
+
+        //footprint
+        leftFootPrint = transform.Find("left foot print");
+        rightFootPrint = transform.Find("right foot print");
+
 
         //initiate enemy attributes
         currentHealth = maxHealth;
@@ -106,6 +118,11 @@ public class VampireBehaviour : EnemyBehaviour
             isInvisible = true;
             skin.gameObject.SetActive(!isInvisible);
         }
+
+
+        //increase the time variable
+        time += Time.deltaTime;
+
     }
 
     //override the chase method as vampire will never roar
@@ -118,6 +135,11 @@ public class VampireBehaviour : EnemyBehaviour
         Vector3 targetPosition = playerTransform.position;
         agent.destination = targetPosition;
         FaceToPlayer();
+
+        if(time >= 0.5){
+            GenerateFootPrint();
+            time = 0;
+        }
     }
     
     protected void Idle(){
@@ -145,5 +167,15 @@ public class VampireBehaviour : EnemyBehaviour
 
     public bool GetIsInvisible(){
         return isInvisible;
+    }
+
+    protected void GenerateFootPrint(){
+        if(isLeft){
+            Instantiate(leftFootPrintGameObj,leftFootPrint.transform.position,transform.rotation);
+            isLeft = false;
+        }else{
+            Instantiate(rightFootPrintGameObj,rightFootPrint.transform.position,transform.rotation);
+            isLeft = true;
+        }
     }
 }
