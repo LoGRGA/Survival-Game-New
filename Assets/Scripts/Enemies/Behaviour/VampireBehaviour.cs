@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class VampireBehaviour : EnemyBehaviour
 {
+    //attack counter
+    protected float attackCounter = 0;
+
+    //invisible
+    protected bool isInvisible = true;
+    protected Transform skin;
+    public VampireKnife knife;
+
     protected void Awake() {
         maxHealth = 150f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
     }
@@ -13,6 +21,15 @@ public class VampireBehaviour : EnemyBehaviour
     {
         base.Start();
         hipsTransform = transform.Find("mixamorig:Hips").transform;
+
+        //get the skin and knife game object
+        skin = transform.Find("Vampire");
+
+        //knife = transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:LeftShoulder/" +
+        //"mixamorig:LeftArm/mixamorig:LeftForeArm/mixamorig:LeftHand/mixamorig:LeftHandMiddle2/Vampire Knife");
+
+        skin.gameObject.SetActive(!isInvisible);
+        //knife.gameObject.SetActive(false);
 
         //initiate enemy attributes
         currentHealth = maxHealth;
@@ -38,9 +55,6 @@ public class VampireBehaviour : EnemyBehaviour
 
         speed = 3.5f; agent.speed = speed;
         rotationSpeed = 10f;
-
-        //roar
-        //roarDuration = 2f / 1.2f;
 
         //SFX
         //roarAudioClip = LoadAudioClip("Vampire SFX", "Vampire Roar");
@@ -83,6 +97,15 @@ public class VampireBehaviour : EnemyBehaviour
         if(isAttacking || isHitting || isRoaring || isFaceToPlayer){
             FaceToPlayer();
         }
+
+        //checking the invisibility
+        if(!alive || distanceToPlayer <= attackRange || isHitting){
+            isInvisible = false;
+            skin.gameObject.SetActive(!isInvisible);
+        }else{
+            isInvisible = true;
+            skin.gameObject.SetActive(!isInvisible);
+        }
     }
 
     //override the chase method as vampire will never roar
@@ -99,5 +122,28 @@ public class VampireBehaviour : EnemyBehaviour
     
     protected void Idle(){
         SetAnimationActive(baseAnimationState.Idle);
+    }
+
+    protected override void Attack()
+    {
+        base.Attack();
+        attackCounter++;
+    }
+
+    protected override IEnumerator AttackLogic(){
+        if(alive && isAttacking){
+            yield return new WaitForSeconds(attackWindUpDuration);
+            if(attackCounter > 3){
+                PlaySFX(attackAudioClip);
+            }
+            
+            isDealingDamage = true;
+            StartCoroutine(DealDamageTimer(dealDamageDuration));
+            StartCoroutine(DealDamage(attackDamage, attackDistance));
+        }
+    }
+
+    public bool GetIsInvisible(){
+        return isInvisible;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemiesHealthBar : MonoBehaviour
+public class VampireHealthBar : MonoBehaviour
 {
     private Slider healthSlider;
     private Slider easeHealthSlider;
@@ -12,6 +12,10 @@ public class EnemiesHealthBar : MonoBehaviour
     private float lerpSpeed = 0.005f;
 
     private EnemyBehaviour enemy;
+
+    //invisible
+    private VampireBehaviour vampireBehaviour;
+    private bool isInvisible;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +31,9 @@ public class EnemiesHealthBar : MonoBehaviour
 
         healthSlider.maxValue = maxHealth; 
         easeHealthSlider.maxValue = maxHealth;
+
+        //invisible
+        vampireBehaviour = GetComponentInParent<VampireBehaviour>();
     }
 
     // Update is called once per frame
@@ -42,6 +49,9 @@ public class EnemiesHealthBar : MonoBehaviour
         if(healthSlider.value != easeHealthSlider.value){
             easeHealthSlider.value = Mathf.Lerp(easeHealthSlider.value, currentHealth, lerpSpeed);
         }
+
+        //invisible
+        isInvisible = vampireBehaviour.GetIsInvisible();
     }
 
     private EnemyBehaviour FindEnemyBehaviourComponent(Transform currentTransform)
@@ -65,11 +75,8 @@ public class EnemiesHealthBar : MonoBehaviour
 
     private void UpdateHealthBarVisibility()
     {
-        bool shouldHide = (currentHealth == maxHealth || currentHealth <= 0);
+        bool shouldHide = (currentHealth == maxHealth || currentHealth <= 0 || isInvisible);
         healthSlider.gameObject.SetActive(!shouldHide);
         easeHealthSlider.gameObject.SetActive(!shouldHide);
     }
 }
-
-
-//reference: https://www.youtube.com/watch?v=3JjBJfoWDCM
