@@ -249,6 +249,7 @@ GameObject:
   - component: {fileID: 9193763800335780385}
   - component: {fileID: 1575549013688158277}
   - component: {fileID: 4520783509763888210}
+  - component: {fileID: 5669922378414546026}
   m_Layer: 2
   m_Name: SwordCone
   m_TagString: Cone
@@ -355,6 +356,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1117442007318967633}
   m_Mesh: {fileID: 4300000, guid: e34d547d0e378f34289e8db0e6906794, type: 2}
+--- !u!54 &5669922378414546026
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117442007318967633}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1444689888392588118
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +444,7 @@ GameObject:
   - component: {fileID: 6401309931837118483}
   - component: {fileID: 8120468826577582341}
   - component: {fileID: 4746632337419514014}
+  - component: {fileID: 5930915263397113626}
   m_Layer: 2
   m_Name: AxeCone
   m_TagString: Cone
@@ -522,6 +551,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2978476401824595541}
   m_Mesh: {fileID: 4300000, guid: 71245297a379ea545a64653b00caf624, type: 2}
+--- !u!54 &5930915263397113626
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2978476401824595541}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5661782749211526231
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +622,7 @@ GameObject:
   - component: {fileID: 8482672124445521763}
   - component: {fileID: 4248146400258117144}
   - component: {fileID: 1041079762150500780}
+  - component: {fileID: 8939113039410243030}
   m_Layer: 2
   m_Name: DaggerCone
   m_TagString: Cone
@@ -672,6 +729,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7035405598204829042}
   m_Mesh: {fileID: 4300000, guid: ef42797365b7a8946960802039748e03, type: 2}
+--- !u!54 &8939113039410243030
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7035405598204829042}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8006619393641336568
 GameObject:
   m_ObjectHideFlags: 0

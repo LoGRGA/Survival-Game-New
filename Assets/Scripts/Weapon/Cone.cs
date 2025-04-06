@@ -9,16 +9,20 @@ public class Cone : MonoBehaviour
 
     void OnCollisionEnter(Collision c)
     {
-        if(!currentCollisions.Contains(c.gameObject))
+        if (!currentCollisions.Contains(c.gameObject))
+        {
             // Add the GameObject collided with to the list.
             currentCollisions.Add(c.gameObject);
+        }
     }
 
     void OnCollisionStay(Collision c)
     {
         if (!currentCollisions.Contains(c.gameObject))
+        {
             // Add the GameObject collided with to the list.
             currentCollisions.Add(c.gameObject);
+        }
     }
 
     void OnCollisionExit(Collision c)
