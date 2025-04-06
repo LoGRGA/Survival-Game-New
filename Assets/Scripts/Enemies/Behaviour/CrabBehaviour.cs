@@ -43,7 +43,7 @@ public class CrabBehaviour : EnemyBehaviour
         detectionAngle = 145f; fov.angle = detectionAngle;
         fovRaycastHeight = 0.4f;
 
-        speed = 3.5f; agent.speed = speed;
+        speed = 4f; agent.speed = speed;
         rotationSpeed = 10f;
 
         //roar

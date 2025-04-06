@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CrabSmallBehaviour : EnemyBehaviour
 {
-    //explosion
-    protected float explosionRange = 2f;
+    //explosion SFX
+    protected AudioClip explosionAudioClip;
 
     protected void Awake() {
         maxHealth = 25f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
@@ -18,6 +18,9 @@ public class CrabSmallBehaviour : EnemyBehaviour
     {
         base.Start();
         hipsTransform = transform.Find("Armature/Tooth_B_Target_L").transform;
+
+        //try to face player when summoned
+        StartCoroutine(FaceToPlayerWhenSummoned());
 
         //initiate enemy attributes
         currentHealth = maxHealth;
@@ -41,7 +44,7 @@ public class CrabSmallBehaviour : EnemyBehaviour
         detectionAngle = 145f; fov.angle = detectionAngle;
         fovRaycastHeight = 0.4f;
 
-        speed = 3.5f; agent.speed = speed;
+        speed = 4.5f; agent.speed = speed;
         rotationSpeed = 10f;
 
         //roar
@@ -52,9 +55,8 @@ public class CrabSmallBehaviour : EnemyBehaviour
         attackAudioClip = LoadAudioClip("Crab SFX", "Crab Attack");
         hitAudioClip = LoadAudioClip("Crab SFX", "Crab Hit");
         dieAudioClip = LoadAudioClip("Crab SFX", "Crab Die");
+        explosionAudioClip = LoadAudioClip("CrabSmall SFX", "CrabSmall Explosion");
 
-        //
-        StartCoroutine(FaceToPlayerWhenSummoned());
     }
 
     // Update is called once per frame
@@ -101,6 +103,26 @@ public class CrabSmallBehaviour : EnemyBehaviour
     protected override void Die()
     {
         base.Die();
-
+        StartCoroutine(Explosion());
     }
+
+    protected IEnumerator Explosion(){
+        yield return new WaitForSeconds(1f);
+        PlaySFX(explosionAudioClip);
+        StartCoroutine(ExplosionDamage());
+    }
+
+    protected IEnumerator ExplosionDamage(){
+        GameObject explosionVFX = transform.Find("Explosion/ExplosionVFX").gameObject;
+        GameObject explosionRange = transform.Find("Explosion/ExplosionRange").gameObject;
+        
+
+        if(!explosionRange.activeSelf && !explosionVFX.activeSelf){
+            explosionRange.gameObject.SetActive(true);
+            explosionVFX.SetActive(true);
+        }
+        yield return new WaitForSeconds(1f);
+        explosionVFX.SetActive(false);
+
+    } 
 }

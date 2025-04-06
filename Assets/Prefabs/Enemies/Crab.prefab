@@ -839,7 +839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  crabPrefab: {fileID: 4789942020236142751, guid: 5c6a9295eeab03b41bc9ffb57381a93a, type: 3}
+  crabPrefab: {fileID: 3273000785822027748, guid: 2d8254eb6e44634458f84284f6fabf52, type: 3}
 --- !u!1 &2738493359499140279 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100178, guid: fe36b9a465a353f4fb54c820d5f05ea6, type: 3}
