@@ -20,24 +20,6 @@ public class CrabExplosion : MonoBehaviour
         
     }
 
-/*
-    private void OnTriggerEnter(Collider other)
-    {
-
-
-        if(other.tag=="Player"){
-            PlayerController player = other.GetComponent<PlayerController>();
-            player.TakeDamge(damage);
-            Debug.Log("hit player");
-        }
-        else{
-            EnemyBehaviour enemy = other.GetComponentInParent<EnemyBehaviour>();
-            enemy.TakeDamage(damage);
-            Debug.Log("hit enemy");
-        }
-    }
-    
-*/
     private void ApplyDamageToAllInRange()
     {
         HashSet<GameObject> affectedObjects = new HashSet<GameObject>();

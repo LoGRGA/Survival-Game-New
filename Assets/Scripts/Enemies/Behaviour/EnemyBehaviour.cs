@@ -111,7 +111,6 @@ public class EnemyBehaviour : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
-        //rb = GetComponent<Rigidbody>();
 
         //attack raycast targetmask
         targetMask = LayerMask.GetMask("Player", "Obstacle");
@@ -131,10 +130,6 @@ public class EnemyBehaviour : MonoBehaviour
         attackRaycastTransformPosition = hipsTransform.position + new Vector3(0, attackRaycastHeight, 0);
         fovRaycastTransformPosition = hipsTransform.position + new Vector3(0, fovRaycastHeight, 0);
     }
-
-    //protected virtual void FixedUpdate() {
-    //    rb.MovePosition(transform.position * Time.fixedDeltaTime * 9.81f);
-    //}
 
     //die function
     protected virtual void Die(){
