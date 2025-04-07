@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class PlayerController : FPSInput
 {
@@ -318,6 +319,7 @@ public class PlayerController : FPSInput
 
         foreach (GameObject gObject in cone.GetArray())
         {
+            if(gObject.IsDestroyed()) continue;
             print(gObject.name);
             
             if (Physics.Linecast(cam.transform.position, gObject.transform.position, out RaycastHit hits, attackLayer))
