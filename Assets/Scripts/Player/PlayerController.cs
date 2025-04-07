@@ -11,6 +11,10 @@ using Unity.VisualScripting;
 
 public class PlayerController : FPSInput
 {
+
+    //------------------------------------------------------------------------------------junjie add debuff------------------------------------------------------------------------------
+    private List<string> debuffList = new List<string>();
+
     private Vector3 originalPos;
     private bool isInvincible;
     private Cone cone;
@@ -392,5 +396,9 @@ public class PlayerController : FPSInput
         }
     }
 
+    //------------------------------------------------------------------------------------junjie add debuff------------------------------------------------------------------------------
+    public void AddDebuff(string debuff){
+        debuffList.Add(debuff);
+    }
 
 }

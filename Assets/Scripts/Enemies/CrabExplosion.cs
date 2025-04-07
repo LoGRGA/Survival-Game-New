@@ -5,8 +5,7 @@ using UnityEngine;
 public class CrabExplosion : MonoBehaviour
 {
     //explosion damage
-    private int damage = 5;
-    private int counter = 0;
+    private int damage = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +35,6 @@ public class CrabExplosion : MonoBehaviour
                 DealDamage(hitCollider);
             }
         }
-
-        Debug.Log("counter= " + counter);
         Destroy(gameObject);
     }
 
@@ -45,15 +42,12 @@ public class CrabExplosion : MonoBehaviour
         if(other.tag=="Player"){
             PlayerController player = other.GetComponent<PlayerController>();
             player.TakeDamge(damage);
-            Debug.Log("hit player");
-            counter++;
+            player.AddDebuff("fire");
         }
         else{
             EnemyBehaviour enemy = other.GetComponentInParent<EnemyBehaviour>();
             if(enemy != null){
                 enemy.TakeDamage(damage);
-                Debug.Log("hit enemy");
-                counter++;
             }
             
         }
