@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Cone : MonoBehaviour
@@ -9,19 +12,29 @@ public class Cone : MonoBehaviour
 
     void OnCollisionEnter(Collision c)
     {
-        if (!currentCollisions.Contains(c.gameObject))
+        if (c.gameObject.IsDestroyed()) { }
+
+        else
         {
-            // Add the GameObject collided with to the list.
-            currentCollisions.Add(c.gameObject);
+            if (!currentCollisions.Contains(c.gameObject))
+            {
+                // Add the GameObject collided with to the list.
+                currentCollisions.Add(c.gameObject);
+            }
         }
     }
 
     void OnCollisionStay(Collision c)
     {
-        if (!currentCollisions.Contains(c.gameObject))
+        if (c.gameObject.IsDestroyed()) { }
+
+        else
         {
-            // Add the GameObject collided with to the list.
-            currentCollisions.Add(c.gameObject);
+            if (!currentCollisions.Contains(c.gameObject))
+            {
+                // Add the GameObject collided with to the list.
+                currentCollisions.Add(c.gameObject);
+            }
         }
     }
 
