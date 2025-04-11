@@ -20,6 +20,9 @@ public class PlayerController : FPSInput
     private Cone cone;
     private IEnumerator attackCoroutine;
 
+    //Debuff Booleans
+    private bool isPoisoned, isBurned, isBleeding;
+
     public GameObject[] weapons;
     public GameObject[] cones;
 
@@ -88,6 +91,7 @@ public class PlayerController : FPSInput
             isInvincible = true;
         }
 
+        Debuff();
         SceneChange();
     }
 
@@ -372,14 +376,7 @@ public class PlayerController : FPSInput
         
     }
 
-
-
-    //junjie add
-    public void ChangePlayerPosition(Vector3 position){
-        transform.position = position;
-    }
-
-    //new function
+    //Scene Change
     void SceneChange()
     {
         if (Input.GetKey(KeyCode.Y))
@@ -394,6 +391,95 @@ public class PlayerController : FPSInput
                 SceneManager.LoadScene("GameScene"); // Change the name to the demo scene name
             }
         }
+    }
+
+    //Debuffs
+
+    private void Debuff()
+    {
+        foreach (string d in debuffList)
+        {
+            switch (d)
+            {
+                case "Poison":
+
+                    if (isPoisoned)
+                        StopCoroutine(PoisonDegen(10));
+                    isPoisoned = true;
+                    StartCoroutine(PoisonDegen(10));
+                    break;
+                case "Burn":
+                    if (isBurned)
+                        StopCoroutine(Burned(5));
+                    isBurned = true;
+                    StartCoroutine(Burned(5));
+                    break;
+                case "Bleed":
+                    if (isBleeding)
+                        StopCoroutine(Bleeding(20));
+                    isBleeding = true;
+                    StartCoroutine(Bleeding(20));
+                    break;
+                default:
+                    Debug.LogWarning("Debuff does not exist");
+                    break;
+            }
+            
+        }
+        debuffList.Clear();
+    }
+
+    IEnumerator PoisonDegen(int degenCount)
+    {
+        for (int degenCounter = degenCount; degenCounter > 0; degenCounter--)
+        {
+            if (degenCounter != 0)
+            {
+                TakeDamge(3);
+                yield return new WaitForSeconds(1.0f);
+            }
+            else
+            {
+                isPoisoned = false;
+            }
+        }
+    }
+
+    IEnumerator Burned(int burnCount)
+    {
+        for (int burnCounter = burnCount; burnCounter > 0; burnCounter--)
+        {
+            if (burnCounter != 0)
+            {
+                TakeDamge(5);
+                yield return new WaitForSeconds(3.0f);
+            }
+            else
+            {
+                isBurned = false;
+            }
+        }
+    }
+
+    IEnumerator Bleeding(int bleedCount)
+    {
+        for (int bleedCounter = bleedCount; bleedCounter > 0; bleedCounter--)
+        {
+            if (bleedCounter != 0)
+            {
+                TakeDamge(1);
+                yield return new WaitForSeconds(0.5f);
+            }
+            else
+            {
+                isBurned = false;
+            }
+        }
+    }
+
+    //junjie add
+    public void ChangePlayerPosition(Vector3 position){
+        transform.position = position;
     }
 
     //------------------------------------------------------------------------------------junjie add debuff------------------------------------------------------------------------------
