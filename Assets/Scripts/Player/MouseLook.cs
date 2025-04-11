@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
-[AddComponentMenu("Control Script/Mouse Look")] // add to the Unity editor's component menu
+[AddComponentMenu("Control Script/MouseLook")] // add to the Unity editor's component menu
 public class MouseLook : MonoBehaviour
 {
     // enum to choose rotation axis in the Unity editor
@@ -26,6 +27,9 @@ public class MouseLook : MonoBehaviour
     // for the pitch
     private float verticalRot = 0;
 
+    //enable/disable looking
+    public bool canLook;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,11 +39,14 @@ public class MouseLook : MonoBehaviour
         {
             body.freezeRotation = true;
         }
+        canLook = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (!canLook) return;
         // yaw only
         if (axes == RotationAxes.MouseX)
         {

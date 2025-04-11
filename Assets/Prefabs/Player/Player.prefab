@@ -69,7 +69,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 396170207008044809}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba02b5cb73d2e114eb3c569c9ebcc3d1, type: 3}
+  m_Script: {fileID: 11500000, guid: ec2179b64eca8af48992383f989ff504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   axes: 1
@@ -77,6 +77,7 @@ MonoBehaviour:
   sensitivityVert: 9
   minimumVert: -45
   maximumVert: 45
+  canLook: 0
 --- !u!143 &1475572038254140583
 CharacterController:
   m_ObjectHideFlags: 0
@@ -862,14 +863,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8006619393641336568}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba02b5cb73d2e114eb3c569c9ebcc3d1, type: 3}
+  m_Script: {fileID: 11500000, guid: ec2179b64eca8af48992383f989ff504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  axes: 2
+  axes: 1
   sensitivityHor: 9
   sensitivityVert: 9
   minimumVert: -45
   maximumVert: 45
+  canLook: 0
 --- !u!1001 &576532466299411517
 PrefabInstance:
   m_ObjectHideFlags: 0

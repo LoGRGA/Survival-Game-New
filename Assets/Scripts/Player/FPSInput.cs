@@ -13,6 +13,8 @@ public class FPSInput : MonoBehaviour
     public float gravity = -9.8f;  // Gravity setting
     public float terminalVelocity = -20f;  // Max falling speed
 
+    
+
     private float vertSpeed;
     protected Vector3 movement;
     protected CharacterController charController;
@@ -28,6 +30,8 @@ public class FPSInput : MonoBehaviour
         // Set initial speed and jump speed based on base values
         speed = baseSpeed;
         jumpSpeed = baseJumpSpeed;
+
+       
     }
 
     protected virtual void Update()
