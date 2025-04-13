@@ -124,6 +124,11 @@ public class EnemyBehaviour : MonoBehaviour
 
     // Update is called once per frame
     protected virtual void Update(){
+        EnemyUpdate();
+    }
+
+    // Make the Update function individualy, so grandchild class can directly use it
+    protected void EnemyUpdate(){
         //checking the distance between player
         distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
         directionToPlayer = playerTransform.position - transform.position;
@@ -305,12 +310,12 @@ public class EnemyBehaviour : MonoBehaviour
         RaycastHit hit;
 
         if(isIdling && !isIdleCoroutine){
-            SetAnimationActive(baseAnimationState.Idle);
+            Idle();
             idleCoroutine = StartCoroutine(IdleTimer());
             float angle = UnityEngine.Random.Range(-110.0f, 110.0f);
             direction = Quaternion.LookRotation(Quaternion.Euler(0.0f, angle, 0.0f) * transform.forward);
         }else if(isRotating && !isMoving){
-            SetAnimationActive(baseAnimationState.Idle);
+            Idle();
             isRotating = true;
 
             // rotate the agent over several frames
@@ -443,6 +448,11 @@ public class EnemyBehaviour : MonoBehaviour
             // using Slerp ahcheive roation
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
+    }
+
+    //idle function
+    protected virtual void Idle(){
+        SetAnimationActive(baseAnimationState.Idle);
     }
 
     //SFX

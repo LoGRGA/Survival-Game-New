@@ -92,7 +92,7 @@ public class VampireBehaviour : EnemyBehaviour
         else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer){
             Chase();
         }
-        //patrolling if nothing happened 
+        //stay idle if nothing happened 
         else if(alive && !isAttacking && !isRoaring && !isHitting && !fov.canSeePlayer){
             Idle();
             //Patrol();
@@ -140,10 +140,6 @@ public class VampireBehaviour : EnemyBehaviour
             GenerateFootPrint();
             time = 0;
         }
-    }
-    
-    protected void Idle(){
-        SetAnimationActive(baseAnimationState.Idle);
     }
 
     protected override void Attack()
