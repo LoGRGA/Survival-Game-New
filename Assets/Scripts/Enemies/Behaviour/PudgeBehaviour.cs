@@ -73,7 +73,7 @@ public class PudgeBehaviour : EnemyBehaviour
     protected AudioClip rotAudioClip;
     
 
-    protected void Awake() {
+    protected virtual void Awake() {
         maxHealth = 300f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
     }
 
