@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class JuggernautBehaviour : EnemyBehaviour
 {
+    //Special Attack vaaraible
+    protected float attackWindUpDuration2 = 0.4f; //from 9 to 21, 30fps
+
+    //illusion gameobjects
+    public GameObject attackIllusion;
+
+    //Coroutine variable
+    //protected Coroutine attackTimerCoroutine;
+    //protected Coroutine
+    protected Coroutine generateIllusionCoroutine;
+
+
+
     protected void Awake() {
         maxHealth = 300f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
     }
@@ -36,17 +49,17 @@ public class JuggernautBehaviour : EnemyBehaviour
         detectionAngle = 145f; fov.angle = detectionAngle;
         fovRaycastHeight = 0.5f;
 
-        speed = 3.5f; agent.speed = speed;
+        speed = 5f; agent.speed = speed;
         rotationSpeed = 10f;
 
         //roar
         roarDuration = 2.183f;
 
         //SFX
-        roarAudioClip = LoadAudioClip("Zombie SFX", "Zombie Roar");
-        attackAudioClip = LoadAudioClip("Zombie SFX", "Zombie Attack");
-        hitAudioClip = LoadAudioClip("Zombie SFX", "Zombie Hit");
-        dieAudioClip = LoadAudioClip("Zombie SFX", "Zombie Die");
+        roarAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Roar");
+        attackAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Attack");
+        hitAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Hit");
+        dieAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Die");
     }
 
     // Update is called once per frame
@@ -61,7 +74,7 @@ public class JuggernautBehaviour : EnemyBehaviour
         
         //attack reation check
         else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange){
-            Attack();
+            AttackWithIllusion();
         }
         //Chases reaction check
         else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer){
@@ -84,4 +97,50 @@ public class JuggernautBehaviour : EnemyBehaviour
             FaceToPlayer();
         }
     }
+
+    //override the Die() funcction to include stop attack2
+    protected override void Die()
+    {
+        base.Die();
+
+    }
+
+    //override the Hit() funcction to include stop attack2
+    protected override void Hit()
+    { 
+        base.Hit();
+
+        StopCoroutine(generateIllusionCoroutine);
+    }
+
+    protected override IEnumerator AttackLogic()
+    {
+       if(alive && isAttacking){
+            //deal damage first time
+            yield return new WaitForSeconds(attackWindUpDuration);
+            PlaySFX(attackAudioClip);
+            isDealingDamage = true;
+            StartCoroutine(DealDamageTimer(dealDamageDuration));
+            StartCoroutine(DealDamage(attackDamage, attackDistance));
+
+            //deal damage second time
+            yield return new WaitForSeconds(attackWindUpDuration2);
+            PlaySFX(attackAudioClip);
+            isDealingDamage = true;
+            StartCoroutine(DealDamageTimer(dealDamageDuration));
+            StartCoroutine(DealDamage(attackDamage, attackDistance));
+       }
+    }
+
+    protected void AttackWithIllusion(){
+        base.Attack();
+        generateIllusionCoroutine = StartCoroutine(GenerateIllusion(attackIllusion, attackDuration));
+    }
+
+    protected IEnumerator GenerateIllusion(GameObject gameObject, float delaytime){
+        yield return new WaitForSeconds(delaytime);
+        Instantiate(gameObject, playerTransform.position + playerTransform.forward * 2f, transform.rotation);
+    }
+
+
 }
