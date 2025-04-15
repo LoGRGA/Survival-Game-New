@@ -75,6 +75,8 @@ public class PudgeBehaviour : EnemyBehaviour
 
     protected virtual void Awake() {
         maxHealth = 300f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
+        //Added for testing, will remove after stage 3 boss done
+        currentHealth = maxHealth;
     }
 
     // Start is called before the first frame update

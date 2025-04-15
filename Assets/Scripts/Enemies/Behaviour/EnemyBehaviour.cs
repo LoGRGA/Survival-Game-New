@@ -103,6 +103,10 @@ public class EnemyBehaviour : MonoBehaviour
     protected AudioClip dieAudioClip;
     protected AudioClip zombieRoarAudioClip;
 
+    //For finalboss hpcheck use 
+    public float CurrentHealth => currentHealth;
+    public float MaxHealth => maxHealth;
+
 
     // Start is called before the first frame update
     protected virtual void Start()
