@@ -12,6 +12,7 @@ public class JuggernautBehaviour : EnemyBehaviour
     protected bool isAttack = true;
     protected bool isAttack2 = false;
     protected bool isAttack3 = false;
+    protected bool isResetPosition = false;
 
     protected float attackWindUpDuration2 = 0.4f; //from 9 to 21, 30fps
 
@@ -147,7 +148,7 @@ public class JuggernautBehaviour : EnemyBehaviour
         }
 
         //disable the movement when roaring
-        if(isDying || isAttacking || isRoaring || isHitting){
+        if((isDying || isAttacking || isRoaring || isHitting) && !isResetPosition){
             agent.enabled = false;
         }
 
@@ -221,6 +222,7 @@ public class JuggernautBehaviour : EnemyBehaviour
         SetAnimationActive(ExtendedAnimationState.Attack2);
         attack2TimerCoroutine = StartCoroutine(AttackTimer(attack2Duration));
         attack2LogicCoroutine = StartCoroutine(Attack2Logic());
+        StartCoroutine(EnableNavMeshAgent(attack2Duration));
         isAttack2 = false;
         isAttack3 = true;
     }
@@ -248,6 +250,7 @@ public class JuggernautBehaviour : EnemyBehaviour
         SetAnimationActive(ExtendedAnimationState.Attack3);
         attack3TimerCoroutine = StartCoroutine(AttackTimer(attack3Duration));
         attack3LogicCoroutine = StartCoroutine(Attack3Logic());
+        StartCoroutine(EnableNavMeshAgent(attack3Duration));
         isAttack3 = false;
         isAttack = true;
     }
@@ -282,9 +285,6 @@ public class JuggernautBehaviour : EnemyBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        // ensure the final position is correct
-        transform.position = targetPosition;
     }
 
     //function  that will generate illusion to repeat attack
@@ -298,6 +298,15 @@ public class JuggernautBehaviour : EnemyBehaviour
         delayTime = UnityEngine.Random.Range(delayTime - 0.5f, delayTime + 0.5f);
         yield return new WaitForSeconds(delayTime);
         Instantiate(gameObject, transform.position, transform.rotation);
+    }
+
+    //using nav mesh agent to correct the position of jugg after attacks
+    protected IEnumerator EnableNavMeshAgent(float delayTime){
+        yield return new WaitForSeconds(delayTime);
+        isResetPosition = true;
+        agent.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        isResetPosition = false;
     }
 
     //put the attack2 attack3 state inside the dictionary
