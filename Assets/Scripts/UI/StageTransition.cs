@@ -1,19 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class StageTransition : MonoBehaviour
 {
-    public GameObject stageToHide;       // Text to hide (e.g., Stage 1)
-    public GameObject stageToShow;       // Text to show (e.g., Stage 2)
-    public float interactionDistance = 3f; // Distance for interaction
-    private Transform player;
-
-    void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
-    }
+    public GameObject stageToHide;
+    public GameObject stageToShow;
+    public float interactionDistance = 3f;
+    public Transform player; // Assign this manually in the Inspector
 
     void Update()
     {
@@ -27,4 +21,6 @@ public class StageTransition : MonoBehaviour
         }
     }
 }
+
+
 
