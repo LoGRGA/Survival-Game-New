@@ -7,10 +7,13 @@ public class Stage2RoomTeleporter : MonoBehaviour
     public Transform normalRoom1;
     public Transform normalRoom2;
     public Transform bossRoom;
+    public Transform finalRoom;
     public GameObject player;
 
     private List<int> visitedRooms = new List<int>();
     private bool isPlayerNearby = false;
+    private bool hasVisitedBossRoom = false;
+    private bool hasVisitedFinalRoom = false;
 
     private void Update()
     {
@@ -52,20 +55,40 @@ public class Stage2RoomTeleporter : MonoBehaviour
             visitedRooms.Add(roomToTeleport);
 
             Vector3 targetPosition = (roomToTeleport == 1) ? normalRoom1.position : normalRoom2.position;
-            player.GetComponent<CharacterController>().enabled = false;
-            player.transform.position = targetPosition;
-            player.GetComponent<CharacterController>().enabled = true;
+            MovePlayerTo(targetPosition);
 
             Debug.Log("Teleported to normal room " + roomToTeleport);
         }
+        else if (!hasVisitedBossRoom)
+        {
+            MovePlayerTo(bossRoom.position);
+            hasVisitedBossRoom = true;
+            Debug.Log("Teleported to boss room.");
+        }
+        else if (!hasVisitedFinalRoom)
+        {
+            MovePlayerTo(finalRoom.position);
+            hasVisitedFinalRoom = true;
+            Debug.Log("Teleported to final room.");
+        }
         else
         {
-            // Teleport to boss room
-            player.GetComponent<CharacterController>().enabled = false;
-            player.transform.position = bossRoom.position;
-            player.GetComponent<CharacterController>().enabled = true;
+            Debug.Log("All rooms visited.");
+        }
+    }
 
-            Debug.Log("Teleported to boss room.");
+    private void MovePlayerTo(Vector3 targetPosition)
+    {
+        CharacterController controller = player.GetComponent<CharacterController>();
+        if (controller != null)
+        {
+            controller.enabled = false;
+            player.transform.position = targetPosition;
+            controller.enabled = true;
+        }
+        else
+        {
+            player.transform.position = targetPosition;
         }
     }
 }
