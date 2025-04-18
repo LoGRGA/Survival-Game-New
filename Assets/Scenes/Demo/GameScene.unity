@@ -2409,7 +2409,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53413533}
   m_Mesh: {fileID: 4300000, guid: c833e90bb9060764da5ec0e3726bda1a, type: 3}
-<<<<<<< Updated upstream
 --- !u!1 &55473866
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,13 +2484,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55473866}
   m_CullTransparentMesh: 1
-=======
---- !u!4 &58246935 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4198824870721703581, guid: 82552a2dc25ad0243a5ad0f0a81908c5, type: 3}
-  m_PrefabInstance: {fileID: 1844226087}
-  m_PrefabAsset: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!1 &60937161
 GameObject:
   m_ObjectHideFlags: 0
@@ -25676,14 +25668,10 @@ RectTransform:
   - {fileID: 1895008203}
   - {fileID: 325962115}
   - {fileID: 41566836}
-<<<<<<< Updated upstream
   - {fileID: 476477219}
   - {fileID: 1391057577}
   - {fileID: 712294653}
-  m_Father: {fileID: 0}
-=======
   m_Father: {fileID: 1435602565}
->>>>>>> Stashed changes
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -62270,11 +62258,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668703837}
   m_Mesh: {fileID: 4300000, guid: 252af556c6617a4458e79c0373d631de, type: 3}
-<<<<<<< Updated upstream
---- !u!1 &1671873589
-=======
 --- !u!1 &1675055693
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62282,35 +62266,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< Updated upstream
   - component: {fileID: 1671873592}
   - component: {fileID: 1671873591}
   - component: {fileID: 1671873590}
   m_Layer: 5
   m_Name: Gatekeeper tick
-=======
-  - component: {fileID: 1675055694}
-  m_Layer: 0
-  m_Name: Enemy
->>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-<<<<<<< Updated upstream
-  m_IsActive: 0
---- !u!114 &1671873590
-MonoBehaviour:
-=======
   m_IsActive: 1
 --- !u!4 &1675055694
 Transform:
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
   m_GameObject: {fileID: 1671873589}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -62362,18 +62333,6 @@ RectTransform:
   m_AnchoredPosition: {x: -237.6, y: -60}
   m_SizeDelta: {x: 23, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
-=======
-  m_GameObject: {fileID: 1675055693}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1613971028}
-  m_Father: {fileID: 776172515}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
->>>>>>> Stashed changes
 --- !u!1 &1675554690
 GameObject:
   m_ObjectHideFlags: 0
