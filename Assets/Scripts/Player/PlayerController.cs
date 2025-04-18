@@ -56,7 +56,6 @@ public class PlayerController : FPSInput
         currentHealth = maxHealth;
         healthText.SetText(currentHealth.ToString());
 
-        slider.maxValue = maxHealth;
         slider.value = currentHealth; 
 
         weapons = new GameObject[2];
@@ -72,6 +71,7 @@ public class PlayerController : FPSInput
     protected override void Update()
     {
         base.Update();
+        slider.maxValue = maxHealth;
         // initiate attack on fire button press
         if (Input.GetButtonDown("Fire1"))
         {
