@@ -435,12 +435,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
-  attackDelay: 0.4
-  attackSpeed: 1
-  attackDamage: 25
-  hitEffect: {fileID: 0}
-  swordSwing: {fileID: 0}
-  hitSound: {fileID: 0}
+  attackDelay: 2.5
+  attackSpeed: 3
+  attackDamage: 75
+  hitEffect: {fileID: 5334228485563152753, guid: 4364d82a897c28945a6ee4170f8e70fb, type: 3}
+  swordSwing: {fileID: 8300000, guid: 7923190c5e80b4d4d9396acc5d0b48cf, type: 3}
+  hitSound: {fileID: 8300000, guid: 11245d3945c564b45a1bafad5ecb70e5, type: 3}
 --- !u!54 &5268004094046748891
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -597,12 +597,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
-  attackDelay: 0.4
-  attackSpeed: 1
-  attackDamage: 25
-  hitEffect: {fileID: 0}
-  swordSwing: {fileID: 0}
-  hitSound: {fileID: 0}
+  attackDelay: 1.75
+  attackSpeed: 2
+  attackDamage: 50
+  hitEffect: {fileID: 5334228485563152753, guid: 4364d82a897c28945a6ee4170f8e70fb, type: 3}
+  swordSwing: {fileID: 8300000, guid: 7923190c5e80b4d4d9396acc5d0b48cf, type: 3}
+  hitSound: {fileID: 8300000, guid: 11245d3945c564b45a1bafad5ecb70e5, type: 3}
 --- !u!54 &328486182005292747
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -757,7 +757,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   attackDelay: 0.4
   attackSpeed: 1
-  attackDamage: 25
+  attackDamage: 30
   hitEffect: {fileID: 5334228485563152753, guid: 4364d82a897c28945a6ee4170f8e70fb, type: 3}
   swordSwing: {fileID: 8300000, guid: 7923190c5e80b4d4d9396acc5d0b48cf, type: 3}
   hitSound: {fileID: 8300000, guid: 11245d3945c564b45a1bafad5ecb70e5, type: 3}
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   attackDelay: 0.4
   attackSpeed: 1
-  attackDamage: 25
+  attackDamage: 45
   hitEffect: {fileID: 5334228485563152753, guid: 4364d82a897c28945a6ee4170f8e70fb, type: 3}
   swordSwing: {fileID: 8300000, guid: 7923190c5e80b4d4d9396acc5d0b48cf, type: 3}
   hitSound: {fileID: 8300000, guid: 11245d3945c564b45a1bafad5ecb70e5, type: 3}
@@ -1300,9 +1300,9 @@ MonoBehaviour:
   attackDelay: 0.4
   attackSpeed: 1
   attackDamage: 25
-  hitEffect: {fileID: 0}
-  swordSwing: {fileID: 0}
-  hitSound: {fileID: 0}
+  hitEffect: {fileID: 5334228485563152753, guid: 4364d82a897c28945a6ee4170f8e70fb, type: 3}
+  swordSwing: {fileID: 8300000, guid: 7923190c5e80b4d4d9396acc5d0b48cf, type: 3}
+  hitSound: {fileID: 8300000, guid: 11245d3945c564b45a1bafad5ecb70e5, type: 3}
 --- !u!54 &7368549721874592902
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1524,9 +1524,9 @@ MonoBehaviour:
   attackDelay: 0.4
   attackSpeed: 1
   attackDamage: 25
-  hitEffect: {fileID: 0}
-  swordSwing: {fileID: 0}
-  hitSound: {fileID: 0}
+  hitEffect: {fileID: 5334228485563152753, guid: 4364d82a897c28945a6ee4170f8e70fb, type: 3}
+  swordSwing: {fileID: 8300000, guid: 7923190c5e80b4d4d9396acc5d0b48cf, type: 3}
+  hitSound: {fileID: 8300000, guid: 11245d3945c564b45a1bafad5ecb70e5, type: 3}
 --- !u!54 &2102585673813140328
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1679,9 +1679,9 @@ MonoBehaviour:
   attackDelay: 0.4
   attackSpeed: 1
   attackDamage: 25
-  hitEffect: {fileID: 0}
-  swordSwing: {fileID: 0}
-  hitSound: {fileID: 0}
+  hitEffect: {fileID: 5334228485563152753, guid: 4364d82a897c28945a6ee4170f8e70fb, type: 3}
+  swordSwing: {fileID: 8300000, guid: 7923190c5e80b4d4d9396acc5d0b48cf, type: 3}
+  hitSound: {fileID: 8300000, guid: 11245d3945c564b45a1bafad5ecb70e5, type: 3}
 --- !u!54 &2816942645806046263
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1839,9 +1839,9 @@ MonoBehaviour:
   attackDelay: 0.4
   attackSpeed: 1
   attackDamage: 25
-  hitEffect: {fileID: 0}
-  swordSwing: {fileID: 0}
-  hitSound: {fileID: 0}
+  hitEffect: {fileID: 5334228485563152753, guid: 4364d82a897c28945a6ee4170f8e70fb, type: 3}
+  swordSwing: {fileID: 8300000, guid: 7923190c5e80b4d4d9396acc5d0b48cf, type: 3}
+  hitSound: {fileID: 8300000, guid: 11245d3945c564b45a1bafad5ecb70e5, type: 3}
 --- !u!54 &2675726933631160318
 Rigidbody:
   m_ObjectHideFlags: 0

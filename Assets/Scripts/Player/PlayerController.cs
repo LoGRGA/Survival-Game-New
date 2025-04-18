@@ -67,6 +67,7 @@ public class PlayerController : FPSInput
         currentHealth = maxHealth;
         healthText.SetText(currentHealth.ToString());
 
+        slider.maxValue = maxHealth;
         slider.value = currentHealth; 
 
         weapons = new GameObject[2];
@@ -82,6 +83,7 @@ public class PlayerController : FPSInput
     protected override void Update()
     {
         base.Update();
+
         slider.maxValue = maxHealth;
         // initiate attack on fire button press
         if (Input.GetButtonDown("Fire1"))
@@ -279,7 +281,10 @@ public class PlayerController : FPSInput
     {
         basicSpeed = attackSpeed;
         basicDamage = attackDamage;
+        attackSpeed = 2.5f;
+        attackDelay = 2f;
         attackDamage = 45;
+        hitSoundDelay = 2.5f;
 
         bool attack = Attacking();
         if (!attack)
@@ -341,10 +346,10 @@ public class PlayerController : FPSInput
     {
         basicSpeed = attackSpeed;
         basicDamage = attackDamage;
-        attackSpeed = 2f;
+        attackSpeed = 2.5f;
         attackDelay = 2f;
         attackDamage = 45;
-        hitSoundDelay = 2f;
+        hitSoundDelay = 2.5f;
 
         bool attack = Attacking();
         if (!attack)
@@ -358,10 +363,10 @@ public class PlayerController : FPSInput
     {
         basicSpeed = attackSpeed;
         basicDamage = attackDamage;
-        attackSpeed = 2.5f;
-        attackDelay = 2f;
-        attackDamage = 75;
-        hitSoundDelay = 2f;
+        attackSpeed = 2f;
+        attackDelay = 1.75f;
+        attackDamage = 30;
+        hitSoundDelay = 1.75f;
 
         bool attack = Attacking();
         if (!attack)
@@ -605,13 +610,8 @@ public class PlayerController : FPSInput
         WeaponStats weapstat = GetComponentInChildren<WeaponStats>();
         if (weapstat.transform.name == "Grim_Reaper_Scythe")
         {
-            if (T.IsDestroyed())
-            {
-                maxHealth += 10;
-                Heal(10);
-            }
-            else
-                Heal(1);
+            Heal(4);
+            maxHealth += 1;
         }
     }
 
