@@ -1,24 +1,40 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BuffChest : MonoBehaviour
 {
-    public GameObject keyPrefab; // Key for progression
-    public GameObject interactionBorder;
+    public GameObject keyPrefab;
+    private CanvasGroup interactionCanvasGroup;
 
-    public float baseKeyChance = 5f; // Starts at 5%
-    public float keyChanceIncrease = 2f; // Increases each time a chest is opened
+    public float baseKeyChance = 5f;
+    public float keyChanceIncrease = 2f;
     private static float currentKeyChance = 5f;
 
     private bool isPlayerInRange = false;
     private PlayerController playerController;
 
+    public float fadeDuration = 0.5f;
+
+    private void Start()
+    {
+        GameObject borderObj = GameObject.Find("interactionborder");
+        if (borderObj != null)
+        {
+            interactionCanvasGroup = borderObj.GetComponent<CanvasGroup>();
+            if (interactionCanvasGroup != null)
+                interactionCanvasGroup.alpha = 0f; // Start invisible
+        }
+        else
+        {
+            Debug.LogWarning("Interaction border not found.");
+        }
+    }
+
     private void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.F))
         {
-            interactionBorder.SetActive(true);
+            StartCoroutine(FadeOutUI());
             OpenChest();
         }
     }
@@ -29,8 +45,8 @@ public class BuffChest : MonoBehaviour
         {
             isPlayerInRange = true;
             playerController = other.GetComponent<PlayerController>();
-            Debug.Log("Press F to open the chest.");
-            interactionBorder.SetActive(true);
+            if (interactionCanvasGroup != null)
+                StartCoroutine(FadeInUI());
         }
     }
 
@@ -40,7 +56,8 @@ public class BuffChest : MonoBehaviour
         {
             isPlayerInRange = false;
             playerController = null;
-            interactionBorder.SetActive(false);
+            if (interactionCanvasGroup != null)
+                StartCoroutine(FadeOutUI());
         }
     }
 
@@ -50,63 +67,69 @@ public class BuffChest : MonoBehaviour
 
         float roll = Random.Range(0f, 100f);
 
-        if (roll < currentKeyChance) // Key reward
+        if (roll < currentKeyChance)
         {
             Instantiate(keyPrefab, transform.position, Quaternion.identity);
             Debug.Log("Key obtained!");
-            currentKeyChance = baseKeyChance; // Reset key chance after key is found
+            currentKeyChance = baseKeyChance;
         }
-        else if (roll < 50f) // 50% chance for a good effect
+        else if (roll < 50f)
         {
             ApplyGoodEffect();
         }
-        else // Remaining chance for a bad effect
+        else
         {
             ApplyBadEffect();
         }
 
-        currentKeyChance += keyChanceIncrease; // Increase key drop chance
-        Destroy(gameObject); // Remove the chest after opening
-        interactionBorder.SetActive(false);
+        currentKeyChance += keyChanceIncrease;
+        Destroy(gameObject);
+        interactionCanvasGroup.alpha = 0f;
     }
 
     private void ApplyGoodEffect()
     {
-        int effectType = Random.Range(0, 3); // 0 = health, 1 = speed, 2 = jump
+        int effectType = Random.Range(0, 3);
         switch (effectType)
         {
-            case 0:
-                playerController.Heal(10);
-                Debug.Log("Gained +10 Health!");
-                break;
-            case 1:
-                playerController.ChangeSpeed(3);
-                Debug.Log("Gained +3 Speed!");
-                break;
-            case 2:
-                playerController.ChangeJump(10);
-                Debug.Log("Gained +10 Jump!");
-                break;
+            case 0: playerController.Heal(10); break;
+            case 1: playerController.ChangeSpeed(3); break;
+            case 2: playerController.ChangeJump(10); break;
         }
     }
 
     private void ApplyBadEffect()
     {
-        int effectType = Random.Range(0, 3); // 0 = health, 1 = speed, 2 = jump
+        int effectType = Random.Range(0, 3);
         switch (effectType)
         {
-            case 0:
-                playerController.TakeDamge(10);
-                Debug.Log("Lost -10 Health!");
-                break;
-            case 1:
-                playerController.ChangeSpeed(-3);
-                Debug.Log("Lost -3 Speed!");
-                break;
-            case 2:
-                playerController.ChangeJump(-3);
-                Debug.Log("Lost -3 Jump!");
-                break;
+            case 0: playerController.TakeDamge(10); break;
+            case 1: playerController.ChangeSpeed(-3); break;
+            case 2: playerController.ChangeJump(-3); break;
         }
+    }
+
+    private IEnumerator FadeInUI()
+    {
+        float t = 0f;
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            interactionCanvasGroup.alpha = Mathf.Lerp(0f, 1f, t / fadeDuration);
+            yield return null;
+        }
+        interactionCanvasGroup.alpha = 1f;
+    }
+
+    private IEnumerator FadeOutUI()
+    {
+        float t = 0f;
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            interactionCanvasGroup.alpha = Mathf.Lerp(1f, 0f, t / fadeDuration);
+            yield return null;
+        }
+        interactionCanvasGroup.alpha = 0f;
     }
 }
