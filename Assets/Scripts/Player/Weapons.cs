@@ -62,8 +62,8 @@ public class Weapons : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha8))
             selectedweapon = 7;
 
-        //if (Input.GetKeyDown(KeyCode.Alpha9))
-        //    selectedweapon = 8;
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+            selectedweapon = 8;
 
         //if (Input.GetKeyDown(KeyCode.Alpha0))
         //    selectedweapon = 9;
@@ -98,7 +98,7 @@ public class Weapons : MonoBehaviour
         {
             playerController.SwordIdle();
         }
-        else if (weap.transform.name == "Grim_Reaper_Scythe" || weap.transform.name == "Guan_Dao" || weap.transform.name == "Shuriken")
+        else if (weap.transform.name == "Guan_Dao" || weap.transform.name == "Shuriken")
         {
             playerController.THIdle();
         }
@@ -114,12 +114,12 @@ public class Weapons : MonoBehaviour
         {
             playerController.Walk();
         }
-        //else if (weap.transform.name == "Sword" || weap.transform.name == "Axe" || weap.transform.name == "Hammer" ||
-        //        weap.transform.name == "Runes_Axe" || weap.transform.name == "Lightning_Sword")
-        //{
-        //    playerController.ShieldIdle();
-        //}
-        else if (weap.transform.name == "Grim_Reaper_Scythe" || weap.transform.name == "Guan_Dao" || weap.transform.name == "Shuriken")
+        else if (weap.transform.name == "Sword" || weap.transform.name == "Axe" || weap.transform.name == "Hammer" ||
+                weap.transform.name == "Runes_Axe" || weap.transform.name == "Lightning_Sword")
+        {
+            playerController.ShieldIdle();
+        }
+        else if (weap.transform.name == "Guan_Dao" || weap.transform.name == "Shuriken")
         {
             playerController.THIdle();
         }
@@ -139,22 +139,18 @@ public class Weapons : MonoBehaviour
             Sword();
         else if (weap.transform.name == "Axe")
             Axe();
-        else if (weap.transform.name == "Elven_Long_Bow")
-            PocketKnife();
         else if (weap.transform.name == "Grim_Reaper_Scythe")
-            Axe();
+            Grim();
         else if (weap.transform.name == "Hammer")
-            Sword();
+            Hammer();
         else if (weap.transform.name == "Guan_Dao")
-            Sword();
+            GDao();
         else if (weap.transform.name == "Runes_Axe")
-            Axe();
+            RAxe();
         else if (weap.transform.name == "Lightning_Sword")
-            PocketKnife();
+            LSword();
         else if (weap.transform.name == "Shuriken")
-            PocketKnife();
-        else if (weap.transform.name == "Musket")
-            PocketKnife();
+            Shuriken();
     }
 
     public void SpecialAttack()
@@ -169,19 +165,24 @@ public class Weapons : MonoBehaviour
             SwordSA();
         else if (weap.transform.name == "Axe")
             AxeSA();
+        else if (weap.transform.name == "Grim_Reaper_Scythe")
+            GrimHeavy();
+        else if (weap.transform.name == "Hammer")
+            HammerHeavy();
+        else if (weap.transform.name == "Guan_Dao")
+            GDaoHeavy();
+        else if (weap.transform.name == "Runes_Axe")
+            RAxeHeavy();
+        else if (weap.transform.name == "Lightning_Sword")
+            LSwordHeavy();
+        else if (weap.transform.name == "Shuriken")
+            ShurikenHeavy();
     }
 
-    // Pocket Knife "Special" Attack 
+    // Basic Attacks
     void PocketKnife()
     {
         playerController.Attack();
-    }
-
-    // Dagger Special Attack
-    void Dagger()
-    {
-        if (readyToThrow)
-            playerController.Throw();
     }
 
     void Sword()
@@ -189,19 +190,86 @@ public class Weapons : MonoBehaviour
         playerController.SwordAttack();
     }
 
-    void SwordSA()
-    {
-        playerController.SwordHeavy();
-    }
-
     void Axe()
     {
         playerController.AxeAttack();
     }
 
+    void Grim()
+    {
+        playerController.GrimAttack();
+    }
+
+    void Hammer()
+    {
+        playerController.HammerAttack();
+    }
+
+    void GDao()
+    {
+        playerController.GDaoAttack();
+    }
+
+    void RAxe()
+    {
+        playerController.RAxeAttack();
+    }
+
+    void LSword()
+    {
+        playerController.LSwordAttack();
+    }
+
+    void Shuriken()
+    {
+
+    }
+
+    // Special Attacks
+    void Dagger()
+    {
+        if (readyToThrow)
+            playerController.Throw();
+    }
+
+    void SwordSA()
+    {
+        playerController.SwordHeavy();
+    }
+
     void AxeSA()
     {
         playerController.AxeHeavy();
+    }
+
+    void GrimHeavy()
+    {
+        playerController.GrimHeavy();
+    }
+
+    void HammerHeavy()
+    {
+        playerController.HammerHeavy();
+    }
+
+    void GDaoHeavy()
+    {
+        playerController.GDaoHeavy();
+    }
+
+    void RAxeHeavy()
+    {
+        playerController.RAxeHeavy();
+    }
+
+    void LSwordHeavy()
+    {
+        playerController.LSwordHeavy();
+    }
+
+    void ShurikenHeavy()
+    {
+
     }
 
     public void Thrown()

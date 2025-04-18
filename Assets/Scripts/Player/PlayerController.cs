@@ -16,7 +16,7 @@ public class PlayerController : FPSInput
     private List<string> debuffList = new List<string>();
 
     private Vector3 originalPos;
-    private bool isInvincible;
+    private bool isInvincible, isGrimSpeed;
     private Cone cone;
     private IEnumerator attackCoroutine;
 
@@ -107,6 +107,8 @@ public class PlayerController : FPSInput
     public const string SWORDHEAVY = "Sword Heavy";
     public const string AXEATTACK = "Axe Attack";
     public const string AXEHEAVY = "Axe Heavy";
+    public const string SLAM = "Slam";
+    public const string SPIN = "Spin";
     public const string THROW = "Throw";
     
     public const string BLOCk = "Block";
@@ -132,8 +134,9 @@ public class PlayerController : FPSInput
         // If player is not attacking
         if (!attacking)
         {
-
+            LH.transform.localPosition = Vector3.zero + new Vector3(-0.133f, -1.441f, 0.126f);
             RH.transform.localPosition = Vector3.zero + new Vector3(0.05f, -1.46f, 0.7f); // Reset Arm animation
+            LH.transform.localRotation = new Quaternion(-0.03524f, 0, 0.00504f, 0.99937f);
             RH.transform.localRotation = new Quaternion(-0.16044f, 0, 0.02294f, 0.98678f);
             if (movement.x == 0 && movement.z == 0)
             { weap.Idle(); }
@@ -251,6 +254,7 @@ public class PlayerController : FPSInput
     {
         basicSpeed = attackSpeed;
         basicDamage = attackDamage;
+        attackDamage = 30;
 
         bool attack = Attacking();
         if (!attack)
@@ -258,13 +262,13 @@ public class PlayerController : FPSInput
 
         RH.transform.localPosition = Vector3.zero + new Vector3(0.05f, -1.46f, 0.0f);
         ChangeAnimationState(SWORDATTACK);
-        attackCount++;
     }
 
     public void AxeAttack()
     {
         basicSpeed = attackSpeed;
         basicDamage = attackDamage;
+        attackDamage = 45;
 
         bool attack = Attacking();
         if (!attack)
@@ -272,7 +276,105 @@ public class PlayerController : FPSInput
 
         RH.transform.localPosition = Vector3.zero + new Vector3(0.05f, -1.46f, 0.2f);
         ChangeAnimationState(AXEATTACK);
-        attackCount++;
+    }
+
+    public void GrimAttack()
+    {
+        basicSpeed = attackSpeed;
+        basicDamage = attackDamage;
+        attackDamage = 15;
+
+        bool attack = Attacking();
+        if (!attack)
+            return;
+
+        RH.transform.localPosition = Vector3.zero + new Vector3(0.05f, -1.46f, 0.2f);
+        ChangeAnimationState(SWORDATTACK);
+    }
+
+    public void HammerAttack()
+    {
+        basicSpeed = attackSpeed;
+        basicDamage = attackDamage;
+        attackSpeed = 3f;
+        attackDelay = 2.5f;
+        attackDamage = 75;
+        hitSoundDelay = 2.5f;
+
+        bool attack = Attacking();
+        if (!attack)
+            return;
+
+        RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
+        ChangeAnimationState(AXEHEAVY);
+    }
+
+    public void GDaoAttack()
+    {
+        basicSpeed = attackSpeed;
+        basicDamage = attackDamage;
+        attackSpeed = 2f;
+        attackDelay = 1.75f;
+        attackDamage = 50;
+        hitSoundDelay = 1.75f;
+
+        bool attack = Attacking();
+        if (!attack)
+            return;
+
+        RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
+        ChangeAnimationState(SWORDHEAVY);
+    }
+
+    public void RAxeAttack()
+    {
+        basicSpeed = attackSpeed;
+        basicDamage = attackDamage;
+        attackSpeed = 2f;
+        attackDelay = 2f;
+        attackDamage = 45;
+        hitSoundDelay = 2f;
+
+        bool attack = Attacking();
+        if (!attack)
+            return;
+
+        RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
+        ChangeAnimationState(AXEHEAVY);
+    }
+
+    public void LSwordAttack()
+    {
+        basicSpeed = attackSpeed;
+        basicDamage = attackDamage;
+        attackSpeed = 2.5f;
+        attackDelay = 2f;
+        attackDamage = 75;
+        hitSoundDelay = 2f;
+
+        bool attack = Attacking();
+        if (!attack)
+            return;
+
+        RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
+        ChangeAnimationState(SWORDHEAVY);
+    }
+
+    public void ShurikenAttack()
+    {
+        basicSpeed = attackSpeed;
+        basicDamage = attackDamage;
+        attackSpeed = 2.5f;
+        attackDelay = 2f;
+        attackDamage = 75;
+        hitSoundDelay = 2f;
+
+        bool attack = Attacking();
+        if (!attack)
+            return;
+
+        RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
+        ChangeAnimationState(AXEHEAVY);
     }
 
     public void Thrown()
@@ -292,9 +394,9 @@ public class PlayerController : FPSInput
         bool attack = Attacking();
         if (!attack)
             return;
+
         RH.transform.localPosition = Vector3.zero + new Vector3(0.3f, -1.46f, 0.2f);
         ChangeAnimationState(SWORDHEAVY);
-        attackCount++;
     }
 
     public void AxeHeavy()
@@ -312,7 +414,102 @@ public class PlayerController : FPSInput
 
         RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
         ChangeAnimationState(AXEHEAVY);
-        attackCount++;
+    }
+
+    public void GrimHeavy()
+    {
+        if(isGrimSpeed)
+            return;
+
+        isGrimSpeed = true;
+        speed += 5f;
+
+    }
+
+    public void HammerHeavy()
+    {
+        basicSpeed = attackSpeed;
+        basicDamage = attackDamage;
+        attackSpeed = 2.5f;
+        attackDelay = 2f;
+        attackDamage = 75;
+        hitSoundDelay = 2f;
+
+        bool attack = Attacking();
+        if (!attack)
+            return;
+
+        //LH.transform.Rotate(-30f, 0f, 0f, Space.Self);
+        //RH.transform.Rotate(-30f, 0f, 0f, Space.Self);
+        RH.transform.localPosition = Vector3.zero + new Vector3(0.3f, -1.46f, 0f);     
+        ChangeAnimationState(SLAM);
+    }
+
+    public void GDaoHeavy()
+    {
+        basicSpeed = attackSpeed;
+        basicDamage = attackDamage;
+        attackSpeed = 0.5f;
+        attackDelay = 0.2f;
+        attackDamage = 10;
+        hitSoundDelay = 0.2f;
+
+        bool attack = Attacking();
+        if (!attack)
+            return;
+
+        ChangeAnimationState(SPIN);
+    }
+
+    public void RAxeHeavy()
+    {
+        basicSpeed = attackSpeed;
+        basicDamage = attackDamage;
+        attackSpeed = 2.5f;
+        attackDelay = 2f;
+        attackDamage = 75;
+        hitSoundDelay = 2f;
+
+        bool attack = Attacking();
+        if (!attack)
+            return;
+
+        RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
+        ChangeAnimationState(AXEHEAVY);
+    }
+
+    public void LSwordHeavy()
+    {
+        basicSpeed = attackSpeed;
+        basicDamage = attackDamage;
+        attackSpeed = 2.5f;
+        attackDelay = 2f;
+        attackDamage = 75;
+        hitSoundDelay = 2f;
+
+        bool attack = Attacking();
+        if (!attack)
+            return;
+
+        RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
+        ChangeAnimationState(SWORDHEAVY);
+    }
+
+    public void ShurikenHeavy()
+    {
+        basicSpeed = attackSpeed;
+        basicDamage = attackDamage;
+        attackSpeed = 2.5f;
+        attackDelay = 2f;
+        attackDamage = 75;
+        hitSoundDelay = 2f;
+
+        bool attack = Attacking();
+        if (!attack)
+            return;
+
+        RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
+        ChangeAnimationState(AXEHEAVY);
     }
 
     void ResetAttack()
@@ -337,6 +534,7 @@ public class PlayerController : FPSInput
                 if (hits.transform.TryGetComponent<EnemyBehaviour>(out EnemyBehaviour T))
                 {
                     T.TakeDamage(attackDamage);
+                    GrimHeal(T);
                 }
             }
         }
@@ -374,6 +572,21 @@ public class PlayerController : FPSInput
             healthText.SetText(currentHealth.ToString());  // Update health text display
             slider.value = currentHealth;  // Update slider value
         
+    }
+
+    private void GrimHeal(EnemyBehaviour T)
+    {
+        WeaponStats weapstat = GetComponentInChildren<WeaponStats>();
+        if (weapstat.transform.name == "Grim_Reaper_Scythe")
+        {
+            if (T.IsDestroyed())
+            {
+                maxHealth += 10;
+                Heal(10);
+            }
+            else
+                Heal(1);
+        }
     }
 
     //Scene Change
@@ -475,6 +688,13 @@ public class PlayerController : FPSInput
                 isBurned = false;
             }
         }
+    }
+
+    IEnumerator GrimSpeed()
+    {
+        yield return new WaitForSeconds(20);
+        isGrimSpeed = false;
+        speed -= 5;
     }
 
     //junjie add

@@ -732,7 +732,7 @@ ModelImporter:
       name: Armature|Slam
       takeName: Armature|Slam
       internalID: 3298876594328316340
-      firstFrame: 0
+      firstFrame: 44
       lastFrame: 110
       wrapMode: 0
       orientationOffsetY: 0
@@ -762,7 +762,7 @@ ModelImporter:
       takeName: Armature|Spin
       internalID: 3982517599449649964
       firstFrame: 0
-      lastFrame: 56
+      lastFrame: 23
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -791,7 +791,7 @@ ModelImporter:
       takeName: Armature|SpinMirror
       internalID: 5241436355396823241
       firstFrame: 0
-      lastFrame: 56
+      lastFrame: 23
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

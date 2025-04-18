@@ -22,7 +22,7 @@ public class Cones : MonoBehaviour
         if (weap.transform.name == "Pocket_Knife")
             selectedCone = 0;
 
-        if (weap.transform.name == "Pocket_Knife")
+        if (weap.transform.name == "Dagger")
             selectedCone = 0;
 
         if (weap.transform.name == "Sword")
@@ -30,6 +30,25 @@ public class Cones : MonoBehaviour
 
         if (weap.transform.name == "Axe")
             selectedCone = 2;
+
+        if (weap.transform.name == "Grim_Reaper_Scythe")
+            selectedCone = 2;
+
+        if (weap.transform.name == "Hammer")
+            selectedCone = 2;
+
+        if (weap.transform.name == "Guan_Dao")
+            selectedCone = 2;
+
+        if (weap.transform.name == "Runes_Axe")
+            selectedCone = 2;
+
+        if (weap.transform.name == "Lightning_Sword")
+            selectedCone = 2;
+
+        if (weap.transform.name == "Shuriken")
+            selectedCone = 2;
+
 
         if (previousSelectedCone != selectedCone)
             SwapCones();

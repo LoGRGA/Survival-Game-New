@@ -22,6 +22,7 @@ public class WeaponStats : MonoBehaviour
     // onEnable is called upon being active
     protected virtual void OnEnable()
     {
+        controller = GetComponentInParent<PlayerController>();
         controller.attackDelay = attackDelay;
         controller.attackSpeed = attackSpeed;
         controller.attackDamage = attackDamage;
