@@ -52,6 +52,66 @@ public class Pickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            // Check if the item is a health potion
+            /*
+            if (itemName == "HealthPotion") // Make sure the name matches
+            {
+                int targetIndex = 4; // Slot index 4 is the fifth slot
+
+                if (inventory.isFull[targetIndex] == true &&
+                    inventory.slots[targetIndex].transform.GetComponent<Slot>().amount < 6)
+                {
+                    if (itemName == inventory.slots[targetIndex].transform.GetComponentInChildren<Spawn>().itemName)
+                    {
+                        Destroy(gameObject);
+                        inventory.slots[targetIndex].GetComponent<Slot>().amount += 1;
+                        return;
+                    }
+                }
+                else if (inventory.isFull[targetIndex] == false)
+                {
+                    inventory.isFull[targetIndex] = true;
+                    Instantiate(itemButton, inventory.slots[targetIndex].transform, false);
+                    inventory.slots[targetIndex].GetComponent<Slot>().amount += 1;
+                    Destroy(gameObject);
+                    return;
+                }
+            }  */
+
+            // Step 1: Create a mapping from item names to preferred slots
+            Dictionary<string, int> itemSlotMap = new Dictionary<string, int>()
+        {
+            { "HealthPotion", 4 },  // slot 5
+            { "JumpPotion", 5 },    // slot 6
+            { "SpeedPotion", 6 }    // slot 7
+        };
+
+            // Step 2: Check if itemName has a mapped slot
+            if (itemSlotMap.ContainsKey(itemName))
+            {
+                int targetIndex = itemSlotMap[itemName];
+
+                if (inventory.isFull[targetIndex] == true &&
+                    inventory.slots[targetIndex].transform.GetComponent<Slot>().amount < 6)
+                {
+                    if (itemName == inventory.slots[targetIndex].transform.GetComponentInChildren<Spawn>().itemName)
+                    {
+                        Destroy(gameObject);
+                        inventory.slots[targetIndex].GetComponent<Slot>().amount += 1;
+                        return;
+                    }
+                }
+                else if (inventory.isFull[targetIndex] == false)
+                {
+                    inventory.isFull[targetIndex] = true;
+                    Instantiate(itemButton, inventory.slots[targetIndex].transform, false);
+                    inventory.slots[targetIndex].GetComponent<Slot>().amount += 1;
+                    Destroy(gameObject);
+                    return;
+                }
+            }
+
+            //Normal Behaviour For other items
             for (int i = 0; i < inventory.slots.Length; i++)
             {
 

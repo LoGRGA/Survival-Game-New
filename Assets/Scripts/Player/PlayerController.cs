@@ -8,10 +8,17 @@ using static UnityEngine.Rendering.DebugUI;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using TMPro;
 
 public class PlayerController : FPSInput
 {
+    //HAZIQ Health Warning Panel 
+    public GameObject healthWarningPanel;
+    public TMP_Text healthWarningText;
+    private bool hasShownWarning = false;
+    //HAZIQ
 
+    //
     //------------------------------------------------------------------------------------junjie add debuff------------------------------------------------------------------------------
     private List<string> debuffList = new List<string>();
 
@@ -33,7 +40,11 @@ public class PlayerController : FPSInput
     public int maxHealth = 100;
     public TMP_Text healthText;
     public Slider slider;
-    int currentHealth;
+
+    //HAZIQ CHANGE from int to public int
+    public int currentHealth;
+    //HAZIQ
+
     GameObject currentWeap;
     Weapons weap;
     Shield shield;
@@ -563,6 +574,14 @@ public class PlayerController : FPSInput
             slider.value = currentHealth;  // Update slider value
         //}
         //else { }
+
+        //Haziq Warning Panel
+        if (!hasShownWarning && currentHealth <= maxHealth / 2)
+        {
+            ShowHealthWarning("Your health is at 50 percent!\n Time to restock some health potion at my shop!\nCome!\nI will also put in a discount price for the potion!!");
+            hasShownWarning = true;
+        }
+        //Haziq
     }
     public void Heal(int amount)
     {
@@ -571,7 +590,14 @@ public class PlayerController : FPSInput
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);  // Prevent health from going above maxHealth
             healthText.SetText(currentHealth.ToString());  // Update health text display
             slider.value = currentHealth;  // Update slider value
-        
+
+        //HAZIQ
+        // Reset warning Panel if health goes above 50%
+        if (currentHealth > maxHealth / 2)
+        {
+            hasShownWarning = false;
+        }
+        //HAZIQ
     }
 
     private void GrimHeal(EnemyBehaviour T)
@@ -706,5 +732,35 @@ public class PlayerController : FPSInput
     public void AddDebuff(string debuff){
         debuffList.Add(debuff);
     }
+
+    //HAZIQ Add Warning Panel 
+    private void ShowHealthWarning(string message)
+    {
+        healthWarningText.text = message;
+        healthWarningPanel.SetActive(true);
+        //StartCoroutine(HideHealthWarningAfterDelay(5f));
+        StopAllCoroutines(); // Stop any previous typing coroutines
+        StartCoroutine(TypeTextEffect(message));
+        StartCoroutine(HideHealthWarningAfterDelay(8f));
+    }
+
+    //Type of write effect of the text for the warning panel
+    private IEnumerator TypeTextEffect(string message)
+    {
+        healthWarningText.text = "";
+        foreach (char letter in message.ToCharArray())
+        {
+            healthWarningText.text += letter;
+            yield return new WaitForSeconds(0.030f); // Speed of typing (0.03 = fast, 0.1 = slower)
+        }
+    }
+
+    private IEnumerator HideHealthWarningAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        healthWarningPanel.SetActive(false);
+    }
+
+    //HAZIQ
 
 }

@@ -71,7 +71,7 @@ public class Slot : MonoBehaviour
     {
         if (amount > 0)
         {
-            player.TakeDamge(10);                        // Reduce HP by 10
+            player.Heal(10);                        // Reduce HP by 10
             //player.ChangeJump(10);  //Jump HP by 10
             amount--;
 
@@ -83,4 +83,35 @@ public class Slot : MonoBehaviour
         }
     }
 
+    public void UseItemJump()
+    {
+        if (amount > 0)
+        {
+            player.ChangeJump(10);                        // Reduce HP by 10
+            //player.ChangeJump(10);  //Jump HP by 10
+            amount--;
+
+            if (amount <= 0)
+            {
+                // Optionally destroy the item visuals or GameObject
+                Destroy(transform.GetChild(1).gameObject); // Assuming 1 = item prefab
+            }
+        }
+    }
+
+    public void UseItemSpeed()
+    {
+        if (amount > 0)
+        {
+            player.ChangeSpeed(10);                        // Reduce HP by 10
+            //player.ChangeJump(10);  //Jump HP by 10
+            amount--;
+
+            if (amount <= 0)
+            {
+                // Optionally destroy the item visuals or GameObject
+                Destroy(transform.GetChild(1).gameObject); // Assuming 1 = item prefab
+            }
+        }
+    }
 }

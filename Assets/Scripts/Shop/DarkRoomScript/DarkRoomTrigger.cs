@@ -8,6 +8,9 @@ public class DarkRoomTrigger : MonoBehaviour
     //DarkRoom GameObject
     //public GameObject darkRoomTrigger;
 
+    //DOOOOOOOOOOOOOOOOOR
+    public GameObject doorPrefab;
+    public Transform[] doorSpawnPoints;
 
     // Start is called before the first frame update
     public Light playerSpotlight;
@@ -50,6 +53,10 @@ public class DarkRoomTrigger : MonoBehaviour
             playerSpotlight.enabled = false; // keep off until triggered
         }
 
+        //Spawn Door At Start
+        SpawnRandomDoor();
+
+
     }
 
     // Update is called once per frame
@@ -64,6 +71,11 @@ public class DarkRoomTrigger : MonoBehaviour
         {
             ToggleFlashlight();
         }
+
+        //if (playerInRange && Input.GetKeyDown(KeyCode.L))
+        //{
+        //    SpawnRandomDoor();
+        //}
     }
 
     void ToggleDarkRoom()
@@ -129,6 +141,19 @@ public class DarkRoomTrigger : MonoBehaviour
             playerSpotlight.enabled = flightlightOn;
             Debug.Log("Flashlight toggled: " + flightlightOn);
         }
+    }
+
+    void SpawnRandomDoor()
+    {
+        if (doorPrefab == null || doorSpawnPoints.Length == 0)
+        {
+            Debug.LogWarning("Door prefab or spawn points not set!");
+            return;
+        }
+
+        int randomIndex = Random.Range(0, doorSpawnPoints.Length);
+        Transform spawnPoint = doorSpawnPoints[randomIndex];
+        Instantiate(doorPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 
     void OnTriggerEnter(Collider other)
