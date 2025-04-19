@@ -6,9 +6,9 @@ using UnityEngine;
 public class JuggernautBehaviour : EnemyBehaviour
 {
     //add in attack2 animation state
-    protected enum ExtendedAnimationState { Attack2, Attack3}
+    protected enum ExtendedAnimationState { Attack2, Attack3, BlinkBackAttack, JumpAttack}
 
-    //Special Attack vaaraible
+    //Special Attack varaible
     protected bool isAttack = true;
     protected bool isAttack2 = false;
     protected bool isAttack3 = false;
@@ -30,11 +30,38 @@ public class JuggernautBehaviour : EnemyBehaviour
     protected int attack3Damage = 10;
     protected float attack3MoveDistance = 10f;
 
+    //Melee attack skill
+    protected float meleeAttackSkillAttackRange = 15f;
+    protected float meleeAttackSkillCoolDown = 15f;
+    protected bool isMeleeAttackSkillCoolDown = false;
+
+    //BlinkBackAttack variable
+    protected float blinkBackAttackDistance = 3f;
+    protected float blinkBackAttackDuration = 2.4666666f; //30fps
+    protected float blinkBackAttackBlinkWindUpDuration = 0.7f; // from 0 to 21, 30fps
+    protected float blinkBackAttackWindUpDuration = 0.3f; //from 21 to 30, 30fps
+    protected int blinkBackAttackDamage = 10;
+    protected bool isBlinkBackAttack = true;
+
+    //JumpAttack variable
+    protected float jumpAttackDistance = 3f;
+    protected float jumpAttackDuration = 2.3f; 
+    protected float jumpAttackWindUpDuration = 0.467f; //from 0 to 14, 30fps
+    protected int jumpAttackDamage = 10;
+    protected bool isJumpAttack = false;
+    protected float jumpAttackJumpHeight = 3f;
+    
+    
+
+
+
 
     //illusion gameobjects
     public GameObject attackIllusion;
     public GameObject attack2Illusion;
     public GameObject attack3Illusion;
+    public GameObject blinkBackAttackIllusion;
+    public GameObject jumpAttackIllusion;
 
     //Coroutine variable
     protected Coroutine generateIllusionCoroutine;
@@ -43,11 +70,24 @@ public class JuggernautBehaviour : EnemyBehaviour
     protected Coroutine attack3TimerCoroutine;
     protected Coroutine attack3LogicCoroutine;
 
+    protected Coroutine meleeAttackSkillCoolDownCoroutine;
+    protected Coroutine blinkBackAttackTimerCoroutine;
+    protected Coroutine blinkBackAttackLogicCoroutine;
+    protected Coroutine jumpAttackTimerCoroutine;
+    protected Coroutine jumpAttackLogicCoroutine;
+
     //SFX
     protected AudioSource[] audioSources;
     protected AudioSource audioSource2;
+    protected AudioClip attackSpeechAudioClip;
     protected AudioClip attack2AudioClip;
+    protected AudioClip attack2SpeechAudioClip;
     protected AudioClip attack3AudioClip;
+    protected AudioClip attack3SpeechAudioClip;
+    protected AudioClip blinkBackAttackBlinkAudioClip;
+    protected AudioClip blinkBackAttackAudioClip;
+    protected AudioClip jumpAttackAudioClip;
+    protected AudioClip jumpAttackSpeechAudioClip;
 
 
     protected void Awake() {
@@ -95,11 +135,22 @@ public class JuggernautBehaviour : EnemyBehaviour
 
         roarAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Roar");
         attackAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Attack");
+        attackSpeechAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Attack Speech");
         hitAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Hit");
         dieAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Die");
+
         
-        attack2AudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Attack");;
-        attack3AudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Attack");;
+        attack2AudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Attack2");
+        attack2SpeechAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Attack2 Speech");
+
+        attack3AudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Attack3");
+        attack3SpeechAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Attack3 Speech");
+
+        blinkBackAttackBlinkAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Blink");
+        blinkBackAttackAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Attack");
+
+        jumpAttackAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Jump Attack");
+        jumpAttackSpeechAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Jump Attack Speech");
     }
 
     // Update is called once per frame
@@ -111,13 +162,31 @@ public class JuggernautBehaviour : EnemyBehaviour
         if(currentHealth <= 0 && !isDying){
             Die();
         }
-        
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRoared){
+            TryRoar();
+        }
+        //blink back attack reation check
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= meleeAttackSkillAttackRange && !isMeleeAttackSkillCoolDown && isBlinkBackAttack){
+            if(currentHealth <= maxHealth/2){
+                BlinkBackAttackWithIllusion();   
+            }else{
+                BlinkBackAttack();
+            } 
+        }
+        //jump attack reation check
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= meleeAttackSkillAttackRange && !isMeleeAttackSkillCoolDown && isJumpAttack){
+            if(currentHealth <= maxHealth/2){
+                JumpAttackWithIllusion();
+            }else{
+                JumpAttack(true);
+            } 
+        }
         //attack reation check
         else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange && isAttack){
             if(currentHealth <= maxHealth/2){
                 AttackWithIllusion();
             }else{
-                Attack();
+                Attack(true);
             } 
         }
         //attack2 reation check
@@ -125,7 +194,7 @@ public class JuggernautBehaviour : EnemyBehaviour
            if(currentHealth <= maxHealth/2){
                 Attack2WithIllusion();
             }else{
-                Attack2();
+                Attack2(true);
             } 
         }
         ///attack3 reation check
@@ -133,7 +202,7 @@ public class JuggernautBehaviour : EnemyBehaviour
             if(currentHealth <= maxHealth/2){
                 Attack3WithIllusion();
             }else{
-                Attack3();
+                Attack3(true);
             } 
         }
         //Chases reaction check
@@ -166,6 +235,10 @@ public class JuggernautBehaviour : EnemyBehaviour
         StopAttackLogic(attack2LogicCoroutine);
 
         StopAttackLogic(attack3LogicCoroutine);
+
+        StopAttackLogic(blinkBackAttackLogicCoroutine);
+
+        StopAttackLogic(jumpAttackLogicCoroutine);
     }
 
     //override the Hit() funcction to include stop attack2
@@ -180,20 +253,28 @@ public class JuggernautBehaviour : EnemyBehaviour
 
         StopAttack(attack3TimerCoroutine);
         StopAttackLogic(attack3LogicCoroutine);
+
+        StopAttack(blinkBackAttackTimerCoroutine);
+        StopAttackLogic(blinkBackAttackLogicCoroutine);
+
+        StopAttack(jumpAttackTimerCoroutine);
+        StopAttackLogic(jumpAttackLogicCoroutine);
+
     }
 
     //override the Attack() function
-    protected override void Attack(){
-        base.Attack();
+    protected void Attack(bool speech){
+        SetAnimationActive(baseAnimationState.Attack);
+        if(speech)PlaySFX(attackSpeechAudioClip);
+        attackTimerCoroutine = StartCoroutine(AttackTimer(attackDuration));
+        attackLogicCoroutine = StartCoroutine(AttackLogic());
         isAttack = false;
         isAttack2 = true;
     }
 
     //attack with generate illusion function
     protected void AttackWithIllusion(){
-        base.Attack();
-        isAttack = false;
-        isAttack2 = true;
+        Attack(true);
         generateIllusionCoroutine = StartCoroutine(GenerateIllusion(attackIllusion, attackDuration));
     }
 
@@ -203,14 +284,14 @@ public class JuggernautBehaviour : EnemyBehaviour
        if(alive && isAttacking){
             //deal damage first time
             yield return new WaitForSeconds(attackWindUpDuration);
-            PlaySFX(attackAudioClip);
+            PlaySFX2(attackAudioClip);
             isDealingDamage = true;
             StartCoroutine(DealDamageTimer(dealDamageDuration));
             StartCoroutine(DealDamage(attackDamage, attackDistance));
 
             //deal damage second time
             yield return new WaitForSeconds(attackWindUpDuration2);
-            PlaySFX(attackAudioClip);
+            PlaySFX2(attackAudioClip);
             isDealingDamage = true;
             StartCoroutine(DealDamageTimer(dealDamageDuration));
             StartCoroutine(DealDamage(attackDamage, attackDistance));
@@ -218,8 +299,9 @@ public class JuggernautBehaviour : EnemyBehaviour
     }
 
     //add in new attack2 function
-    protected void Attack2(){
+    protected void Attack2(bool speech){
         SetAnimationActive(ExtendedAnimationState.Attack2);
+        if(speech)PlaySFX(attack2SpeechAudioClip);
         attack2TimerCoroutine = StartCoroutine(AttackTimer(attack2Duration));
         attack2LogicCoroutine = StartCoroutine(Attack2Logic());
         StartCoroutine(EnableNavMeshAgent(attack2Duration));
@@ -229,16 +311,14 @@ public class JuggernautBehaviour : EnemyBehaviour
 
     //attack with generate illusion function
     protected void Attack2WithIllusion(){
-        Attack2();
-        isAttack2 = false;
-        isAttack3 = true;
+        Attack2(true);
         generateIllusionCoroutine = StartCoroutine(GenerateIllusion2(attack2Illusion, attack2Duration));
     }
 
     //deal damage to player with time checking (Attack 2)
     protected IEnumerator Attack2Logic(){
         yield return new WaitForSeconds(attack2WindUpDuration);
-        PlaySFX(attack2AudioClip);
+        PlaySFX2(attack2AudioClip);
         isDealingDamage = true;
         StartCoroutine(DealDamageTimer(dealDamageDuration));
         StartCoroutine(DealDamage(attack2Damage, attack2Distance));
@@ -246,8 +326,9 @@ public class JuggernautBehaviour : EnemyBehaviour
     }
 
     //add in new attack2 function
-    protected void Attack3(){
+    protected void Attack3(bool speech){
         SetAnimationActive(ExtendedAnimationState.Attack3);
+        if(speech)PlaySFX(attack3SpeechAudioClip);
         attack3TimerCoroutine = StartCoroutine(AttackTimer(attack3Duration));
         attack3LogicCoroutine = StartCoroutine(Attack3Logic());
         StartCoroutine(EnableNavMeshAgent(attack3Duration));
@@ -257,22 +338,115 @@ public class JuggernautBehaviour : EnemyBehaviour
 
     //attack with generate illusion function
     protected void Attack3WithIllusion(){
-        Attack3();
-        isAttack3 = false;
-        isAttack = true;
+        Attack3(true);
         generateIllusionCoroutine = StartCoroutine(GenerateIllusion2(attack3Illusion, attack3Duration));
     }
 
     //deal damage to player with time checking (Attack 2)
     protected IEnumerator Attack3Logic(){
         yield return new WaitForSeconds(attack3WindUpDuration);
-        PlaySFX(attack3AudioClip);
+        PlaySFX2(attack3AudioClip);
         isDealingDamage = true;
         StartCoroutine(DealDamageTimer(dealDamageDuration));
         StartCoroutine(DealDamage(attack3Damage, attack3Distance));
         StartCoroutine(SmoothMoveForward(attack3MoveDistance, dealDamageDuration));
     }
     
+    //blink back attack function
+    protected void BlinkBackAttack(){
+        SetAnimationActive(ExtendedAnimationState.BlinkBackAttack);
+        blinkBackAttackTimerCoroutine = StartCoroutine(AttackTimer(blinkBackAttackDuration));
+        blinkBackAttackLogicCoroutine = StartCoroutine(BlinkBackAttackLogic());
+        StartCoroutine(MeleeAttackSkillCoolDownTimer());
+        StartCoroutine(EnableNavMeshAgent(blinkBackAttackDuration));
+        isBlinkBackAttack = false;
+        isJumpAttack = true;
+    }
+
+    protected void BlinkBackAttackWithIllusion(){
+        BlinkBackAttack();
+        generateIllusionCoroutine = StartCoroutine(GenerateIllusion2(blinkBackAttackIllusion, blinkBackAttackDuration));
+    }
+
+    protected IEnumerator BlinkBackAttackLogic(){
+        yield return new WaitForSeconds(blinkBackAttackBlinkWindUpDuration);
+        BinkToPlayerBack();
+        PlaySFX(blinkBackAttackBlinkAudioClip);
+        yield return new WaitForSeconds(blinkBackAttackWindUpDuration);
+        PlaySFX2(blinkBackAttackAudioClip);
+        isDealingDamage = true;
+        StartCoroutine(DealDamageTimer(dealDamageDuration));
+        StartCoroutine(DealDamage(blinkBackAttackDamage, blinkBackAttackDistance));
+    }
+
+    protected void BinkToPlayerBack(){
+        transform.position = playerTransform.position - playerTransform.forward * 2f;
+    }
+
+    protected void JumpAttack(bool speech){
+        SetAnimationActive(ExtendedAnimationState.JumpAttack);
+        if(speech)PlaySFX(jumpAttackSpeechAudioClip);
+        jumpAttackTimerCoroutine = StartCoroutine(AttackTimer(jumpAttackDuration));
+        jumpAttackLogicCoroutine = StartCoroutine(JumpAttackLogic());
+        StartCoroutine(MeleeAttackSkillCoolDownTimer());
+        StartCoroutine(EnableNavMeshAgent(jumpAttackDuration));
+        isBlinkBackAttack = true;
+        isJumpAttack = false;
+    }
+
+    protected void JumpAttackWithIllusion(){
+        JumpAttack(true);
+        generateIllusionCoroutine = StartCoroutine(GenerateIllusion2(jumpAttackIllusion, jumpAttackDuration));
+        
+    }
+
+    protected IEnumerator JumpAttackLogic(){
+        Vector3 targetPosition = playerTransform.position;
+        StartCoroutine(Jump());
+        yield return new WaitForSeconds(jumpAttackWindUpDuration);
+        StartCoroutine(ChargeTowardsPlayer(targetPosition));
+        PlaySFX2(jumpAttackAudioClip);
+        isDealingDamage = true;
+        StartCoroutine(DealDamageTimer(dealDamageDuration+ 0.1f));
+        StartCoroutine(DealDamage(jumpAttackDamage, jumpAttackDistance));
+    }
+
+    protected IEnumerator Jump(){
+        Vector3 startPosition = transform.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < jumpAttackWindUpDuration){
+            elapsedTime += Time.deltaTime;
+            float ratio = elapsedTime / jumpAttackWindUpDuration;
+           
+            float heightRatio = Mathf.SmoothStep(0f, jumpAttackJumpHeight, ratio);
+            transform.position = new Vector3(transform.position.x, startPosition.y + heightRatio, transform.position.z);
+
+            yield return null;
+        }
+    }
+
+    protected IEnumerator ChargeTowardsPlayer(Vector3 targetPosition){
+        Vector3 startPosition = transform.position;
+        //Vector3 targetPosition = playerTransform.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < dealDamageDuration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / dealDamageDuration);
+
+            yield return null; 
+        }
+    }
+
+    protected IEnumerator MeleeAttackSkillCoolDownTimer(){
+        isMeleeAttackSkillCoolDown = true;
+        yield return new WaitForSeconds(meleeAttackSkillCoolDown);
+        isMeleeAttackSkillCoolDown = false;
+    }
+
     //function that controll juugernaut move forward when use some attacks
     protected IEnumerator SmoothMoveForward(float distance, float duration){
         Vector3 startingPosition = transform.position;
@@ -309,13 +483,20 @@ public class JuggernautBehaviour : EnemyBehaviour
         isResetPosition = false;
     }
 
+    protected void PlaySFX2(AudioClip audioClip){
+        audioSource2.clip = audioClip;
+        audioSource2.Play();
+    }
+
     //put the attack2 attack3 state inside the dictionary
     protected override Dictionary<object, string> GetExtendedAnimationParameterNames()
     {
         return new Dictionary<object, string>
         {
             { ExtendedAnimationState.Attack2, "Attack2" },
-            { ExtendedAnimationState.Attack3, "Attack3" }
+            { ExtendedAnimationState.Attack3, "Attack3" },
+            { ExtendedAnimationState.BlinkBackAttack, "BlinkBackAttack"},
+            { ExtendedAnimationState.JumpAttack, "JumpAttack"}
         };
     }
 

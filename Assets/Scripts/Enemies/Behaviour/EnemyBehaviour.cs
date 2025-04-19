@@ -307,6 +307,13 @@ public class EnemyBehaviour : MonoBehaviour
         isRoaring = false;
     }
 
+    protected void TryRoar(){
+        if(!isRoared){
+            PlaySFX(roarAudioClip);
+            roarCoroutine = StartCoroutine(Roaring());
+        }
+    }
+
     //patrol logic
     protected void Patrol(){
         Ray ray = new Ray(attackRaycastTransformPosition, transform.forward);

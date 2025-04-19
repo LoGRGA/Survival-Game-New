@@ -9,7 +9,7 @@ public class JuggernautAttack2IllusionBehaviour : JuggernautBehaviour
     {
         base.Start();
         disappearDuration = attack2Duration;
-        Attack2();
+        Attack2(false);
         StartCoroutine(DestroyWithDelay());
     }
 }
