@@ -222,4 +222,53 @@ public class DarkRoomTrigger : MonoBehaviour
             */
         }
     }
+
+
+    //Sean Added this to auto press o when entering the room
+    public void ActivateDarkRoomManually()
+    {
+        if (darkRoomActive) return;
+
+        darkRoomActive = true;
+
+        // Make environment dark
+        RenderSettings.skybox = null;
+        RenderSettings.ambientMode = AmbientMode.Flat;
+        RenderSettings.ambientLight = Color.black;
+
+        if (playerCam != null)
+        {
+            playerCam.clearFlags = CameraClearFlags.SolidColor;
+            playerCam.backgroundColor = Color.black;
+        }
+
+        RenderSettings.fog = true;
+        RenderSettings.fogColor = Color.black;
+        RenderSettings.fogDensity = 0.30f;
+
+        Debug.Log("Dark room manually activated!");
+    }
+
+    public void ResetDarkRoom()
+    {
+        darkRoomActive = false;
+
+        // Restore original lighting
+        RenderSettings.skybox = ogSkybox;
+        RenderSettings.ambientMode = ogAmbientMode;
+        RenderSettings.ambientLight = ogAmbientColor;
+
+        // Restore camera settings
+        if (playerCam != null)
+        {
+            playerCam.clearFlags = ogClearFlags;
+            playerCam.backgroundColor = ogBackgroundColor;
+        }
+
+        // Turn off fog
+        RenderSettings.fog = false;
+
+        Debug.Log("Dark room deactivated and lighting reset.");
+    }
+
 }

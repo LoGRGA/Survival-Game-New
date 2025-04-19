@@ -6,16 +6,19 @@ public class Stage2RoomTeleporter : MonoBehaviour
 {
     public Transform normalRoom1;
     public Transform normalRoom2;
-    public Transform bossRoom;
-    public Transform finalRoom;
+    public Transform stage2BossRoom;
+    public Transform stage3BossRoom;
+    public Transform goalRoom;
     public GameObject player;
 
-    private List<int> visitedRooms = new List<int>();
-    private bool isPlayerNearby = false;
-    private bool hasVisitedBossRoom = false;
-    private bool hasVisitedFinalRoom = false;
+    public DarkRoomTrigger darkRoomTriggerScript; // Reference to the dark room controller
 
-    private void Update()
+    private List<int> visitedRooms = new List<int>();
+    private int currentStage = 0; // 0: normal rooms, 1: stage 2 boss, 2: stage 3 boss, 3: goal
+    private bool isPlayerNearby = false;
+    private int lastRoomIndex = -1;
+
+    void Update()
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.F))
         {
@@ -42,11 +45,19 @@ public class Stage2RoomTeleporter : MonoBehaviour
 
     private void TeleportPlayer()
     {
-        if (visitedRooms.Count < 2)
+        Vector3 targetPosition = Vector3.zero;
+
+        // --- Leaving Room 2? Reset the dark room ---
+        if (lastRoomIndex == 2 && darkRoomTriggerScript != null)
+        {
+            darkRoomTriggerScript.ResetDarkRoom();
+        }
+
+        if (currentStage == 0)
         {
             int roomToTeleport;
 
-            // Pick a room the player hasn't visited yet
+            // Choose a room not yet visited
             do
             {
                 roomToTeleport = Random.Range(1, 3); // 1 or 2
@@ -54,41 +65,57 @@ public class Stage2RoomTeleporter : MonoBehaviour
 
             visitedRooms.Add(roomToTeleport);
 
-            Vector3 targetPosition = (roomToTeleport == 1) ? normalRoom1.position : normalRoom2.position;
-            MovePlayerTo(targetPosition);
+            if (roomToTeleport == 1) targetPosition = normalRoom1.position;
+            else if (roomToTeleport == 2) targetPosition = normalRoom2.position;
 
-            Debug.Log("Teleported to normal room " + roomToTeleport);
+            lastRoomIndex = roomToTeleport;
+
+            Debug.Log("Teleported to Normal Room " + roomToTeleport);
+
+            if (visitedRooms.Count == 2)
+            {
+                currentStage = 1; // Next teleport will be stage 2 boss
+            }
+
+            // Entering Room 2? Activate dark mode
+            if (roomToTeleport == 2 && darkRoomTriggerScript != null)
+            {
+                darkRoomTriggerScript.ActivateDarkRoomManually();
+            }
         }
-        else if (!hasVisitedBossRoom)
+        else if (currentStage == 1)
         {
-            MovePlayerTo(bossRoom.position);
-            hasVisitedBossRoom = true;
-            Debug.Log("Teleported to boss room.");
+            targetPosition = stage2BossRoom.position;
+            currentStage = 2;
+            lastRoomIndex = 3;
+            Debug.Log("Teleported to Stage 2 Boss Room");
         }
-        else if (!hasVisitedFinalRoom)
+        else if (currentStage == 2)
         {
-            MovePlayerTo(finalRoom.position);
-            hasVisitedFinalRoom = true;
-            Debug.Log("Teleported to final room.");
+            targetPosition = stage3BossRoom.position;
+            currentStage = 3;
+            lastRoomIndex = 4;
+            Debug.Log("Teleported to Stage 3 Boss Room");
+        }
+        else if (currentStage == 3)
+        {
+            targetPosition = goalRoom.position;
+            currentStage = 4;
+            lastRoomIndex = 5;
+            Debug.Log("Teleported to Goal Room");
         }
         else
         {
-            Debug.Log("All rooms visited.");
+            Debug.Log("No further teleport destinations.");
+            return;
         }
-    }
 
-    private void MovePlayerTo(Vector3 targetPosition)
-    {
+        // Teleport the player
         CharacterController controller = player.GetComponent<CharacterController>();
-        if (controller != null)
-        {
-            controller.enabled = false;
-            player.transform.position = targetPosition;
-            controller.enabled = true;
-        }
-        else
-        {
-            player.transform.position = targetPosition;
-        }
+        if (controller != null) controller.enabled = false;
+
+        player.transform.position = targetPosition;
+
+        if (controller != null) controller.enabled = true;
     }
 }
