@@ -6,7 +6,7 @@ using UnityEngine;
 public class JuggernautBehaviour : EnemyBehaviour
 {
     //add in attack2 animation state
-    protected enum ExtendedAnimationState { Attack2, Attack3, BlinkBackAttack, JumpAttack}
+    protected enum ExtendedAnimationState { Attack2, Attack3, Rage, BlinkBackAttack, JumpAttack}
 
     //Special Attack varaible
     protected bool isAttack = true;
@@ -52,6 +52,10 @@ public class JuggernautBehaviour : EnemyBehaviour
     protected float jumpAttackJumpHeight = 3f;
     
     
+    //Rage variables
+    protected bool isRaged = false;
+    protected bool isRaging = false;
+    protected float rageDuration = 2.33333f;
 
 
 
@@ -84,6 +88,7 @@ public class JuggernautBehaviour : EnemyBehaviour
     protected AudioClip attack2SpeechAudioClip;
     protected AudioClip attack3AudioClip;
     protected AudioClip attack3SpeechAudioClip;
+    protected AudioClip rageAudioClip;
     protected AudioClip blinkBackAttackBlinkAudioClip;
     protected AudioClip blinkBackAttackAudioClip;
     protected AudioClip jumpAttackAudioClip;
@@ -146,6 +151,8 @@ public class JuggernautBehaviour : EnemyBehaviour
         attack3AudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Attack3");
         attack3SpeechAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Attack3 Speech");
 
+        rageAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Rage");
+
         blinkBackAttackBlinkAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Blink");
         blinkBackAttackAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Attack");
 
@@ -162,11 +169,16 @@ public class JuggernautBehaviour : EnemyBehaviour
         if(currentHealth <= 0 && !isDying){
             Die();
         }
+        //rage reation check
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRaged && currentHealth <= maxHealth/2 && !isRaging){
+            Rage();
+        }
+        //roar reation check
         else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRoared){
             TryRoar();
         }
         //blink back attack reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= meleeAttackSkillAttackRange && !isMeleeAttackSkillCoolDown && isBlinkBackAttack){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= meleeAttackSkillAttackRange && !isMeleeAttackSkillCoolDown && isBlinkBackAttack && !isRaging){
             if(currentHealth <= maxHealth/2){
                 BlinkBackAttackWithIllusion();   
             }else{
@@ -174,7 +186,7 @@ public class JuggernautBehaviour : EnemyBehaviour
             } 
         }
         //jump attack reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= meleeAttackSkillAttackRange && !isMeleeAttackSkillCoolDown && isJumpAttack){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= meleeAttackSkillAttackRange && !isMeleeAttackSkillCoolDown && isJumpAttack && !isRaging){
             if(currentHealth <= maxHealth/2){
                 JumpAttackWithIllusion();
             }else{
@@ -182,7 +194,7 @@ public class JuggernautBehaviour : EnemyBehaviour
             } 
         }
         //attack reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange && isAttack){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange && isAttack && !isRaging){
             if(currentHealth <= maxHealth/2){
                 AttackWithIllusion();
             }else{
@@ -190,7 +202,7 @@ public class JuggernautBehaviour : EnemyBehaviour
             } 
         }
         //attack2 reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack2Range && isAttack2){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack2Range && isAttack2 && !isRaging){
            if(currentHealth <= maxHealth/2){
                 Attack2WithIllusion();
             }else{
@@ -198,7 +210,7 @@ public class JuggernautBehaviour : EnemyBehaviour
             } 
         }
         ///attack3 reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack3Range && isAttack3){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack3Range && isAttack3 && !isRaging){
             if(currentHealth <= maxHealth/2){
                 Attack3WithIllusion();
             }else{
@@ -206,23 +218,23 @@ public class JuggernautBehaviour : EnemyBehaviour
             } 
         }
         //Chases reaction check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRaging){
             Chase();
         }
         //patrolling if nothing happened 
-        else if(alive && !isAttacking && !isRoaring && !isHitting && !fov.canSeePlayer){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && !fov.canSeePlayer && !isRaging){
             Patrol();
             agent.enabled = false;
             isRoared = false;
         }
 
         //disable the movement when roaring
-        if((isDying || isAttacking || isRoaring || isHitting) && !isResetPosition){
+        if((isDying || isAttacking || isRoaring || isHitting || isRaging) && !isResetPosition){
             agent.enabled = false;
         }
 
         //face to player while attacking
-        if(isAttacking || isHitting || isRoaring || isFaceToPlayer){
+        if(isAttacking || isHitting || isRoaring || isFaceToPlayer || isRaging){
             FaceToPlayer();
         }
     }
@@ -244,22 +256,23 @@ public class JuggernautBehaviour : EnemyBehaviour
     //override the Hit() funcction to include stop attack2
     protected override void Hit()
     { 
-        base.Hit();
+        if(!isRaging){
+            base.Hit();
 
-        if(generateIllusionCoroutine != null){StopCoroutine(generateIllusionCoroutine);}
+            if(generateIllusionCoroutine != null){StopCoroutine(generateIllusionCoroutine);}
 
-        StopAttack(attack2TimerCoroutine);
-        StopAttackLogic(attack2LogicCoroutine);
+            StopAttack(attack2TimerCoroutine);
+            StopAttackLogic(attack2LogicCoroutine);
 
-        StopAttack(attack3TimerCoroutine);
-        StopAttackLogic(attack3LogicCoroutine);
+            StopAttack(attack3TimerCoroutine);
+            StopAttackLogic(attack3LogicCoroutine);
 
-        StopAttack(blinkBackAttackTimerCoroutine);
-        StopAttackLogic(blinkBackAttackLogicCoroutine);
+            StopAttack(blinkBackAttackTimerCoroutine);
+            StopAttackLogic(blinkBackAttackLogicCoroutine);
 
-        StopAttack(jumpAttackTimerCoroutine);
-        StopAttackLogic(jumpAttackLogicCoroutine);
-
+            StopAttack(jumpAttackTimerCoroutine);
+            StopAttackLogic(jumpAttackLogicCoroutine);
+        }
     }
 
     //override the Attack() function
@@ -428,7 +441,6 @@ public class JuggernautBehaviour : EnemyBehaviour
 
     protected IEnumerator ChargeTowardsPlayer(Vector3 targetPosition){
         Vector3 startPosition = transform.position;
-        //Vector3 targetPosition = playerTransform.position;
         float elapsedTime = 0f;
 
         while (elapsedTime < dealDamageDuration)
@@ -459,6 +471,19 @@ public class JuggernautBehaviour : EnemyBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+    }
+
+    protected void Rage(){
+        SetAnimationActive(ExtendedAnimationState.Rage);
+        PlaySFX(rageAudioClip);
+        StartCoroutine(RageTimer());
+        isRaged = true;
+    }
+
+    protected IEnumerator RageTimer(){
+        isRaging = true;
+        yield return new WaitForSeconds(rageDuration);
+        isRaging = false;
     }
 
     //function  that will generate illusion to repeat attack
@@ -495,6 +520,7 @@ public class JuggernautBehaviour : EnemyBehaviour
         {
             { ExtendedAnimationState.Attack2, "Attack2" },
             { ExtendedAnimationState.Attack3, "Attack3" },
+            { ExtendedAnimationState.Rage, "Rage" },
             { ExtendedAnimationState.BlinkBackAttack, "BlinkBackAttack"},
             { ExtendedAnimationState.JumpAttack, "JumpAttack"}
         };
