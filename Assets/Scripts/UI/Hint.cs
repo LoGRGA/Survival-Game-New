@@ -28,15 +28,19 @@ public class Hint : MonoBehaviour
 
     IEnumerator HintTracker()
     {
+
         randNum = Random.Range(1,3);
+        TMP_Text hintText = hintDisp.GetComponent<TMP_Text>();
+        hintText.fontSize = 25;
+        
         if (randNum == 1)
         {
-            hintDisp.GetComponent<TMP_Text>().text = "<color=#000000>Hint:</color> \nHaving difficulty fighting boss ?<color=#000000>,</color>  \ntry using stronger weapon";
+            hintText.text = "Having difficulty fighting boss ?<color=#000000>,</color> try using stronger weapon";
         }
 
         if (randNum == 2)
         {
-            hintDisp.GetComponent<TMP_Text>().text = "<color=#000000>Hint:</color> \nHealth too low ?<color=#000000>,</color> try using item";
+            hintText.text = "Health too low ?<color=#000000>,</color> try using item";
         }
         hintDisp.GetComponent<Animator>().Play("HinText");
         yield return new WaitForSeconds(9);

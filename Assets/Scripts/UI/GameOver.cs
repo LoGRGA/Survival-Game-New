@@ -23,7 +23,7 @@ public class GameOver : MonoBehaviour
     public void Setup(int score)
     {
         gameObject.SetActive(true);
-        scoreTexts.text = score.ToString() + " SCORE";
+        scoreTexts.text = "SCORE: " + score.ToString();
         Debug.Log("Your Game SCORE");
     }
 
