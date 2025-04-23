@@ -44,7 +44,7 @@ public class Cones : MonoBehaviour
             selectedCone = 2;
 
         if (weap.transform.name == "Lightning_Sword")
-            selectedCone = 2;
+            selectedCone = 1;
 
         if (weap.transform.name == "Shuriken")
             selectedCone = 2;
@@ -52,6 +52,29 @@ public class Cones : MonoBehaviour
 
         if (previousSelectedCone != selectedCone)
             SwapCones();
+    }
+
+    public void SelectCone(int coneNumber)
+    {
+        switch(coneNumber)
+        {
+            case 0:
+                selectedCone = 0;
+                break;
+            case 1:
+                selectedCone = 1;
+                break;
+            case 2:
+                selectedCone = 2;
+                break;
+            case 3:
+                selectedCone = 3;
+                break;
+            default:
+                return;
+        }
+
+        SwapCones();
     }
 
     public void SwapCones()

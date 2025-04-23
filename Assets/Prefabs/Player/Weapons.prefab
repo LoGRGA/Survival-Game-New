@@ -58,9 +58,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedweapon: 0
   shield: {fileID: 6414904991425455402, guid: 48bbdecbe7c699345971fb847394d5bb, type: 3}
+  lightningPrefab: {fileID: 178460, guid: 2a6bbef8cbed3ce419a79ce8f29ee675, type: 3}
+  aoeRadius: 5
+  aoeDamage: 50
+  raycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 321
+  mainCamera: {fileID: 0}
   cam: {fileID: 0}
   attackPoint: {fileID: 0}
-  daggerObject: {fileID: 0}
+  thrownObject: {fileID: 0}
   throwForce: 0
   throwUpwardForce: 0
   weaponslot: 0

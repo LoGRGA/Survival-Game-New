@@ -19,4 +19,26 @@ public class ShieldStat : MonoBehaviour
     {
         
     }
+
+    public void BlockDamage(int damage)
+    {
+        if (durability > 0)
+        {
+            durability -= damage;
+            Debug.Log($"Shield absorbed damage. Durability left: {durability}");
+
+            if (durability <= 0)
+            {
+                Debug.Log("Shield broke!");
+                UnequipShield();
+                Destroy(gameObject); // Destroy the shield object
+            }
+        }
+    }
+
+    public void UnequipShield()
+    {
+        controller.InvincibleSwap("false");
+    }
+
 }

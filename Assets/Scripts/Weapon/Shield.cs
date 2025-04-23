@@ -5,7 +5,7 @@ using UnityEngine;
 public class Shield : MonoBehaviour
 {
 
-    public int selectedshield = 0;
+    public int selectedshield = 3;
     PlayerController playerController;
 
     // Start is called before the first frame update
@@ -19,11 +19,14 @@ public class Shield : MonoBehaviour
     {
         int previousSelectedShield = selectedshield;
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.J))
             selectedshield = 0;
 
-        if (Input.GetKeyDown(KeyCode.Alpha9))
+        if (Input.GetKeyDown(KeyCode.K))
             selectedshield = 1;
+
+        if (Input.GetKeyDown(KeyCode.L))
+            selectedshield = 2;
 
         if (Input.GetKeyDown(KeyCode.Alpha0))
             GetComponentInChildren<ShieldStat>().gameObject.SetActive(false);
@@ -35,6 +38,7 @@ public class Shield : MonoBehaviour
     public void SwapShield()
     {
         int i = 0;
+        playerController.InvincibleSwap("true");
 
         foreach (Transform shield in transform)
         {
@@ -45,4 +49,6 @@ public class Shield : MonoBehaviour
             i++;
         }
     }
+
+
 }

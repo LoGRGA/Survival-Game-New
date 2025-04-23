@@ -9,6 +9,7 @@ TagManager:
   - Cone
   - NPC
   - Ground
+  - Shield
   layers:
   - Default
   - TransparentFX

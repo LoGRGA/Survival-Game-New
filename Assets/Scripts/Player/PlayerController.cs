@@ -23,15 +23,15 @@ public class PlayerController : FPSInput
     private List<string> debuffList = new List<string>();
 
     private Vector3 originalPos;
-    private bool isInvincible, isGrimSpeed;
+    private bool isInvincible, isGrimSpeed, isLightningCooldown;
     private Cone cone;
+    private Cones cones;
     private IEnumerator attackCoroutine;
 
     //Debuff Booleans
     private bool isPoisoned, isBurned, isBleeding;
 
     public GameObject[] weapons;
-    public GameObject[] cones;
 
     [Header("Camera")]
     public Camera cam;
@@ -63,6 +63,7 @@ public class PlayerController : FPSInput
         audioSource = GetComponent<AudioSource>();
         weap = GetComponentInChildren<Weapons>();
         shield = GetComponentInChildren<Shield>();
+        cones = GetComponentInChildren<Cones>();
 
         currentHealth = maxHealth;
         healthText.SetText(currentHealth.ToString());
@@ -97,12 +98,6 @@ public class PlayerController : FPSInput
         }
 
         SetAnimations();
-
-        if (TryGetComponent(out ShieldStat shieldStat))
-        {
-            Debug.Log("True");
-            isInvincible = true;
-        }
 
         Debuff();
         SceneChange();
@@ -329,17 +324,14 @@ public class PlayerController : FPSInput
     {
         basicSpeed = attackSpeed;
         basicDamage = attackDamage;
-        attackSpeed = 2f;
-        attackDelay = 1.75f;
         attackDamage = 50;
-        hitSoundDelay = 1.75f;
 
         bool attack = Attacking();
         if (!attack)
             return;
 
         RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
-        ChangeAnimationState(SWORDHEAVY);
+        ChangeAnimationState(SWORDATTACK);
     }
 
     public void RAxeAttack()
@@ -356,24 +348,21 @@ public class PlayerController : FPSInput
             return;
 
         RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
-        ChangeAnimationState(AXEHEAVY);
+        ChangeAnimationState(AXEATTACK);
     }
 
     public void LSwordAttack()
     {
         basicSpeed = attackSpeed;
         basicDamage = attackDamage;
-        attackSpeed = 2f;
-        attackDelay = 1.75f;
         attackDamage = 30;
-        hitSoundDelay = 1.75f;
 
         bool attack = Attacking();
         if (!attack)
             return;
 
         RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
-        ChangeAnimationState(SWORDHEAVY);
+        ChangeAnimationState(SWORDATTACK);
     }
 
     public void ShurikenAttack()
@@ -451,6 +440,7 @@ public class PlayerController : FPSInput
         attackDamage = 75;
         hitSoundDelay = 2f;
 
+        cones.SelectCone(3);
         bool attack = Attacking();
         if (!attack)
             return;
@@ -496,19 +486,11 @@ public class PlayerController : FPSInput
 
     public void LSwordHeavy()
     {
-        basicSpeed = attackSpeed;
-        basicDamage = attackDamage;
-        attackSpeed = 2.5f;
-        attackDelay = 2f;
-        attackDamage = 75;
-        hitSoundDelay = 2f;
-
-        bool attack = Attacking();
-        if (!attack)
+        if (isLightningCooldown)
             return;
 
-        RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
-        ChangeAnimationState(SWORDHEAVY);
+        weap.TriggerLightningStrike();
+        StartCoroutine(LightningCooldown());
     }
 
     public void ShurikenHeavy()
@@ -571,14 +553,18 @@ public class PlayerController : FPSInput
     // Health Logic
     public void TakeDamge(int amount)
     {
-        //if (!isInvincible)
-        //{
+        if (!isInvincible)
+        {
             currentHealth -= amount;
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);  // Prevent health from going below 0
             healthText.SetText(currentHealth.ToString());  // Update health text display
             slider.value = currentHealth;  // Update slider value
-        //}
-        //else { }
+        }
+        else 
+        {
+            ShieldStat shieldstat = GetComponentInChildren<ShieldStat>();
+            shieldstat.BlockDamage(amount);
+        }
 
         //Haziq Warning Panel
         if (!hasShownWarning && currentHealth <= maxHealth / 2)
@@ -612,6 +598,18 @@ public class PlayerController : FPSInput
         {
             Heal(4);
             maxHealth += 1;
+        }
+    }
+
+    public void InvincibleSwap(string bol)
+    {
+        if (bol == "true")
+        {
+            isInvincible = true;
+        }
+        else
+        {
+            isInvincible = false;
         }
     }
 
@@ -721,6 +719,15 @@ public class PlayerController : FPSInput
         yield return new WaitForSeconds(20);
         isGrimSpeed = false;
         speed -= 5;
+    }
+
+    IEnumerator LightningCooldown()
+    {
+        isLightningCooldown = true;
+
+        yield return new WaitForSeconds(30f);
+
+        isLightningCooldown = false;
     }
 
     //junjie add

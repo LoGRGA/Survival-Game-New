@@ -1,22 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class Weapons : MonoBehaviour
 {
+
     public int selectedweapon = 0;
     PlayerController playerController;
     public Shield shield;
 
+    public GameObject lightningPrefab;
+    public float aoeRadius = 5.0f; // Radius for AOE damage
+    public int aoeDamage = 100; // Damage dealt by the lightning strike
+    public LayerMask raycastLayerMask;
 
     //Settings
     float throwCooldown;
 
     [Header("Throwing")]
+    public Camera mainCamera;
     public Transform cam;
     public Transform attackPoint;
-    public GameObject daggerObject;
+    public GameObject thrownObject;
     public float throwForce;
     public float throwUpwardForce;
 
@@ -29,6 +36,7 @@ public class Weapons : MonoBehaviour
     {
         readyToThrow = true;
         playerController = GetComponentInParent<PlayerController>();
+        mainCamera = Camera.main;
     }
 
     // Update is called once per frame
@@ -279,7 +287,7 @@ public class Weapons : MonoBehaviour
         //Quaternion rot = new Quaternion(4.038f, 81.843f, -90.581f, 0);
 
         // Instantiate object for throwing
-        GameObject projectile = Instantiate(daggerObject, attackPoint.position, cam.rotation);
+        GameObject projectile = Instantiate(thrownObject, attackPoint.position, cam.rotation);
 
         // Rigidbody component
         Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
@@ -297,5 +305,44 @@ public class Weapons : MonoBehaviour
     private void ResetThrow()
     {
         readyToThrow = true;
+    }
+
+    //Lightning Sword Stuff
+    public void TriggerLightningStrike()
+    {
+        // Get the mouse position in the world
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, raycastLayerMask))
+        {
+            Vector3 strikePosition = hit.point;
+
+            // Instantiate the lightning effect at the hit position
+            GameObject Lightning = Instantiate(lightningPrefab, strikePosition, Quaternion.identity);
+            Destroy(Lightning, 5);
+            // Apply AOE damage
+            ApplyAOEDamage(strikePosition);
+        }
+    }
+
+    private void ApplyAOEDamage(Vector3 center)
+    {
+        LayerMask attackLayer;
+        attackLayer = LayerMask.GetMask("Hittable");
+        Collider[] colliders = Physics.OverlapSphere(center, aoeRadius, attackLayer);
+        Debug.Log($"Number of colliders detected in AOE: {colliders.Length}");
+        List<GameObject> currentCollisions = new List<GameObject>();
+
+        foreach (Collider c in colliders)
+        {
+            currentCollisions.Add(c.gameObject);
+            
+        }
+        foreach (GameObject gObject in currentCollisions)
+        {
+            if (gObject.transform.parent.TryGetComponent(out EnemyBehaviour T))
+            {
+                T.TakeDamage(aoeDamage); // Assuming a Damageable script handles taking damage
+            }
+        }
     }
 }
