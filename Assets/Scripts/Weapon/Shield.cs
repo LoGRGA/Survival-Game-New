@@ -28,7 +28,7 @@ public class Shield : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
             selectedshield = 2;
 
-        if (Input.GetKeyDown(KeyCode.Alpha0))
+        if (Input.GetKeyDown(KeyCode.P))
             GetComponentInChildren<ShieldStat>().gameObject.SetActive(false);
 
         if (previousSelectedShield != selectedshield)

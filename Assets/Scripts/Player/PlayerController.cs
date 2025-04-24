@@ -192,6 +192,20 @@ public class PlayerController : FPSInput
         ChangeAnimationState(THROW);
     }
 
+    public void ShuriThrow()
+    {
+        if (!readyToAttack || attacking) return;
+        attacking = true;
+        readyToAttack = false;
+
+        // Set Arm animation to throw at the right position
+        RH.transform.position = RH.position - new Vector3(0, 0.4f, 0);
+        Invoke(nameof(ResetAttack), attackSpeed);
+        Invoke(nameof(ShuriThrown), attackDelay);
+
+        ChangeAnimationState(THROW);
+    }
+
     // Attack
 
     [HideInInspector] public float attackDistance = 3f;
@@ -365,23 +379,6 @@ public class PlayerController : FPSInput
         ChangeAnimationState(SWORDATTACK);
     }
 
-    public void ShurikenAttack()
-    {
-        basicSpeed = attackSpeed;
-        basicDamage = attackDamage;
-        attackSpeed = 2.5f;
-        attackDelay = 2f;
-        attackDamage = 75;
-        hitSoundDelay = 2f;
-
-        bool attack = Attacking();
-        if (!attack)
-            return;
-
-        RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
-        ChangeAnimationState(AXEHEAVY);
-    }
-
     public void Thrown()
     {
         weap.Thrown();
@@ -493,21 +490,9 @@ public class PlayerController : FPSInput
         StartCoroutine(LightningCooldown());
     }
 
-    public void ShurikenHeavy()
+    public void ShuriThrown()
     {
-        basicSpeed = attackSpeed;
-        basicDamage = attackDamage;
-        attackSpeed = 2.5f;
-        attackDelay = 2f;
-        attackDamage = 75;
-        hitSoundDelay = 2f;
-
-        bool attack = Attacking();
-        if (!attack)
-            return;
-
-        RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
-        ChangeAnimationState(AXEHEAVY);
+        weap.ShuriThrown();
     }
 
     void ResetAttack()

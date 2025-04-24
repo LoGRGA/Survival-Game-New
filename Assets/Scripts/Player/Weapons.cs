@@ -23,17 +23,21 @@ public class Weapons : MonoBehaviour
     public Camera mainCamera;
     public Transform cam;
     public Transform attackPoint;
-    public GameObject thrownObject;
-    public float throwForce;
+    public GameObject daggerObject, shurikenObject;
+    
+    public float throwForce;    
     public float throwUpwardForce;
-
     public int weaponslot;
+
+    private GameObject thrownObject;
+    private float tempforce;
 
     bool readyToThrow;
 
     // Start is called before the first frame update
     void Start()
     {
+        tempforce = throwForce;
         readyToThrow = true;
         playerController = GetComponentInParent<PlayerController>();
         mainCamera = Camera.main;
@@ -73,8 +77,8 @@ public class Weapons : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha9))
             selectedweapon = 8;
 
-        //if (Input.GetKeyDown(KeyCode.Alpha0))
-        //    selectedweapon = 9;
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+            selectedweapon = 9;
 
         if (previousSelectedWeapon != selectedweapon)
             SwapWeapons();
@@ -227,15 +231,21 @@ public class Weapons : MonoBehaviour
     {
         playerController.LSwordAttack();
     }
-
+    
     void Shuriken()
     {
-
+        
+        throwForce = 10f;
+        thrownObject = shurikenObject;
+        if (readyToThrow)
+            playerController.Throw();
     }
 
     // Special Attacks
     void Dagger()
     {
+        throwForce = tempforce;
+        thrownObject = daggerObject;
         if (readyToThrow)
             playerController.Throw();
     }
@@ -277,14 +287,15 @@ public class Weapons : MonoBehaviour
 
     void ShurikenHeavy()
     {
-
+        throwForce = 1f;
+        thrownObject = shurikenObject;
+        if (readyToThrow)
+            playerController.ShuriThrow();
     }
 
     public void Thrown()
     {
         readyToThrow = false;
-
-        //Quaternion rot = new Quaternion(4.038f, 81.843f, -90.581f, 0);
 
         // Instantiate object for throwing
         GameObject projectile = Instantiate(thrownObject, attackPoint.position, cam.rotation);
@@ -300,6 +311,35 @@ public class Weapons : MonoBehaviour
         Invoke(nameof(ResetThrow), throwCooldown);
 
         Destroy(projectile, 10);
+    }
+
+    public void ShuriThrown()
+    {
+        readyToThrow = false;
+
+        for (int i = -1; i <= 1; i++) // Loop to fire at three angles (-1, 0, 1)
+        {
+            // Instantiate object for throwing
+            GameObject projectile = Instantiate(thrownObject, attackPoint.position, cam.rotation);
+
+            // Modify the rotation based on the angle
+            Quaternion angleRotation = Quaternion.Euler(0, i * 30, 0); // Adjust 30 degrees to the left/right
+            projectile.transform.rotation = cam.rotation * angleRotation;
+
+            // Rigidbody component
+            Rigidbody projectileRb = projectile.GetComponent<Rigidbody>();
+
+            // Force
+            Vector3 force = projectile.transform.forward * throwForce + projectile.transform.up * throwUpwardForce;
+
+            projectileRb.AddForce(force, ForceMode.Impulse);
+
+            Destroy(projectile, 10); // Destroy after 10 seconds
+        }
+
+        // Cooldown
+        Invoke(nameof(ResetThrow), throwCooldown);
+
     }
 
     private void ResetThrow()
