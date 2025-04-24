@@ -479,6 +479,7 @@ public class PlayerController : FPSInput
 
         RH.transform.localPosition = Vector3.zero + new Vector3(0.6f, -1.46f, 0f);
         ChangeAnimationState(AXEHEAVY);
+        StartCoroutine(RAxeProjectile());
     }
 
     public void LSwordHeavy()
@@ -508,7 +509,7 @@ public class PlayerController : FPSInput
         foreach (GameObject gObject in cone.GetArray())
         {
             if(gObject.IsDestroyed()) continue;
-            print(gObject.name);
+            //print(gObject.name);
             
             if (Physics.Linecast(cam.transform.position, gObject.transform.position, out RaycastHit hits, attackLayer))
             {
@@ -713,6 +714,13 @@ public class PlayerController : FPSInput
         yield return new WaitForSeconds(30f);
 
         isLightningCooldown = false;
+    }
+
+    IEnumerator RAxeProjectile()
+    {
+        yield return new WaitForSeconds(2);
+
+        weap.FireCrescentWave();
     }
 
     //junjie add

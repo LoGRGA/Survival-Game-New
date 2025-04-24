@@ -11,10 +11,18 @@ public class Weapons : MonoBehaviour
     PlayerController playerController;
     public Shield shield;
 
+    //RunesAxe Stuff
+    public float waveSpeed = 10f; // Speed of the slash wave projectile
+    public float waveLifetime = 3f; // Time before the projectile disappears
+    public int waveDamage = 30; // Damage dealt by the projectile
+    //RunesAxe End
+
+    //Lightning Stuff
     public GameObject lightningPrefab;
     public float aoeRadius = 5.0f; // Radius for AOE damage
     public int aoeDamage = 100; // Damage dealt by the lightning strike
     public LayerMask raycastLayerMask;
+    //Lightning Stuff End
 
     //Settings
     float throwCooldown;
@@ -346,6 +354,26 @@ public class Weapons : MonoBehaviour
     {
         readyToThrow = true;
     }
+
+    //Runes Axe Stuff
+    public void FireCrescentWave()
+    {
+        // Create the crescent wave dynamically
+        GameObject crescentWave = new GameObject("CrescentWave");
+
+        // Use the player's root to determine the forward direction and spawn position
+        Transform playerRoot = transform.root; // Get the player's root object
+        Vector3 spawnPosition = playerRoot.position + new Vector3(0f, 1f, 0f) + playerRoot.forward.normalized * 1.5f; // Spawn in front of the player's root
+        crescentWave.transform.position = spawnPosition;
+    
+        // Align the crescent with the player's forward direction and parallel to the ground
+        crescentWave.transform.rotation = Quaternion.LookRotation(playerRoot.forward, Vector3.up);
+
+        // Add crescent wave components
+        CrescentWave crescentWaveScript = crescentWave.AddComponent<CrescentWave>();
+        crescentWaveScript.Initialize(waveSpeed, waveLifetime, waveDamage, raycastLayerMask);
+    }
+
 
     //Lightning Sword Stuff
     public void TriggerLightningStrike()
