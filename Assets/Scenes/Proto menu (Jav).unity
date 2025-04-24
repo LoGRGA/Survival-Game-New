@@ -2079,6 +2079,7 @@ GameObject:
   - component: {fileID: 272226163}
   - component: {fileID: 272226162}
   - component: {fileID: 272226161}
+  - component: {fileID: 272226166}
   m_Layer: 5
   m_Name: Leaderboard
   m_TagString: Untagged
@@ -2183,6 +2184,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &272226166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272226160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a66e67593bb95440babe10b9d6ed970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userTexts:
+  - {fileID: 228279317}
+  - {fileID: 202216308}
+  - {fileID: 1333695897}
+  - {fileID: 419600451}
+  - {fileID: 1314244683}
+  scoreTexts:
+  - {fileID: 1844305121}
+  - {fileID: 929327654}
+  - {fileID: 1110695170}
+  - {fileID: 2046099640}
+  - {fileID: 549326162}
+  timeTexts:
+  - {fileID: 2043456650}
+  - {fileID: 1810063751}
+  - {fileID: 319987558}
+  - {fileID: 695295047}
+  - {fileID: 1803713674}
 --- !u!1 &302827679
 GameObject:
   m_ObjectHideFlags: 0
@@ -8226,50 +8257,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1366957090}
-  - component: {fileID: 1366957089}
+  - component: {fileID: 1366957091}
   m_Layer: 0
-  m_Name: LeaderboardUI script
+  m_Name: LeaderboardManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1366957089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1366957088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25b19cc15a195cb4babee10fe2b3d298, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rankTexts:
-  - {fileID: 497045689}
-  - {fileID: 1267559401}
-  - {fileID: 1251472779}
-  - {fileID: 302827682}
-  - {fileID: 1656122497}
-  userTexts:
-  - {fileID: 228279317}
-  - {fileID: 202216308}
-  - {fileID: 1333695897}
-  - {fileID: 419600451}
-  - {fileID: 1314244683}
-  pointsTexts:
-  - {fileID: 1844305121}
-  - {fileID: 929327654}
-  - {fileID: 1110695170}
-  - {fileID: 2046099640}
-  - {fileID: 549326162}
-  timeTexts:
-  - {fileID: 2043456650}
-  - {fileID: 1810063751}
-  - {fileID: 319987558}
-  - {fileID: 695295047}
-  - {fileID: 1803713674}
 --- !u!4 &1366957090
 Transform:
   m_ObjectHideFlags: 0
@@ -8285,6 +8280,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1366957091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366957088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c97622c6dffe4f41beeb3c1ac63ae9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1390827683
 GameObject:
   m_ObjectHideFlags: 0
