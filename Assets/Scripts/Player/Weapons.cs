@@ -334,12 +334,23 @@ public class Weapons : MonoBehaviour
 
         foreach (Collider c in colliders)
         {
-            currentCollisions.Add(c.gameObject);
+            // Traverse up the hierarchy to find the Rigidbody
+            Transform currentTransform = c.transform;
+            Rigidbody parentRigidbody = null;
+
+            while (currentTransform != null)
+            {
+                parentRigidbody = currentTransform.GetComponent<Rigidbody>();
+                if (parentRigidbody != null) break; // Found the Rigidbody, exit the loop
+                currentTransform = currentTransform.parent; // Move up the hierarchy
+            }
+
+            currentCollisions.Add(currentTransform.gameObject);
             
         }
         foreach (GameObject gObject in currentCollisions)
         {
-            if (gObject.transform.parent.TryGetComponent(out EnemyBehaviour T))
+            if (gObject.transform.TryGetComponent(out EnemyBehaviour T))
             {
                 T.TakeDamage(aoeDamage); // Assuming a Damageable script handles taking damage
             }
