@@ -2495,7 +2495,7 @@ Transform:
   m_GameObject: {fileID: 5608605019753308457}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -37.368, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2508,6 +2508,7 @@ Transform:
   - {fileID: 8829496110014251544}
   - {fileID: 4926682930817491192}
   - {fileID: 3174045939207706678}
+  - {fileID: 3780740387592181358}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2013920719295553351
@@ -2807,9 +2808,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
+  flySword: {fileID: 0}
   attackIllusion: {fileID: 0}
   attack2Illusion: {fileID: 0}
   attack3Illusion: {fileID: 0}
+  blinkBackAttackIllusion: {fileID: 0}
+  jumpAttackIllusion: {fileID: 0}
+  flySowordIllusion: {fileID: 0}
 --- !u!1 &5613362182787198044
 GameObject:
   m_ObjectHideFlags: 0
@@ -3642,6 +3647,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3110764582246882186}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6921356482953559130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3780740387592181358}
+  m_Layer: 6
+  m_Name: SwordSummonPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3780740387592181358
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6921356482953559130}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2498721965202782237}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6957095079739080079
 GameObject:

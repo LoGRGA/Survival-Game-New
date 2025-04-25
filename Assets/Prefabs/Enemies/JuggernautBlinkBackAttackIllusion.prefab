@@ -3316,6 +3316,37 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.012146652, y: 0.1638501, z: 1.3190616}
     m_Extent: {x: 0.28796753, y: 0.030527323, z: 0.31646502}
   m_DirtyAABB: 0
+--- !u!1 &7173449586774340904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7634172766853639367}
+  m_Layer: 6
+  m_Name: SwordSummonPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7634172766853639367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7173449586774340904}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 708843966150095347}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7332786471284227183
 GameObject:
   m_ObjectHideFlags: 0
@@ -4260,7 +4291,7 @@ Transform:
   m_GameObject: {fileID: 9155696076568297481}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -37.368, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4273,6 +4304,7 @@ Transform:
   - {fileID: 4358236873864925252}
   - {fileID: 6705090771014952317}
   - {fileID: 2163941784751672067}
+  - {fileID: 7634172766853639367}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6956561216622765377
@@ -4572,11 +4604,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
+  flySword: {fileID: 0}
   attackIllusion: {fileID: 0}
   attack2Illusion: {fileID: 0}
   attack3Illusion: {fileID: 0}
   blinkBackAttackIllusion: {fileID: 0}
   jumpAttackIllusion: {fileID: 0}
+  flySowordIllusion: {fileID: 0}
 --- !u!1001 &7356641905692734085
 PrefabInstance:
   m_ObjectHideFlags: 0

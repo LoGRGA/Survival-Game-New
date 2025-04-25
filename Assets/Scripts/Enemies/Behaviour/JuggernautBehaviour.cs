@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Security;
 using UnityEngine;
 
 public class JuggernautBehaviour : EnemyBehaviour
 {
     //add in attack2 animation state
-    protected enum ExtendedAnimationState { Attack2, Attack3, Rage, BlinkBackAttack, JumpAttack}
+    protected enum ExtendedAnimationState { Attack2, Attack3, Rage, BlinkBackAttack, JumpAttack, FlySword, SwordAura}
 
     //Special Attack varaible
     protected bool isAttack = true;
@@ -16,19 +17,19 @@ public class JuggernautBehaviour : EnemyBehaviour
 
     protected float attackWindUpDuration2 = 0.4f; //from 9 to 21, 30fps
 
-    protected float attack2Range = 9f;
+    protected float attack2Range = 10f;
     protected float attack2Distance = 4f;
     protected float attack2Duration = 2.46f; //24fps
     protected float attack2WindUpDuration = 0.5f; //from 0 to 12, 24fps
     protected int attack2Damage = 5;
-    protected float attack2MoveDistance = 5f;
+    protected float attack2MoveDistance = 4f;
 
-    protected float attack3Range = 14f;
+    protected float attack3Range = 10f;
     protected float attack3Distance = 4f;
     protected float attack3Duration = 2.375f; //24fps
     protected float attack3WindUpDuration = 0.625f; //from 0 to 15, 24fps
     protected int attack3Damage = 10;
-    protected float attack3MoveDistance = 10f;
+    protected float attack3MoveDistance = 8f;
 
     //Melee attack skill
     protected float meleeAttackSkillAttackRange = 15f;
@@ -50,15 +51,29 @@ public class JuggernautBehaviour : EnemyBehaviour
     protected int jumpAttackDamage = 10;
     protected bool isJumpAttack = false;
     protected float jumpAttackJumpHeight = 3f;
-    
+
+    //range attack skill
+    protected float rangeAttackSkillAttackRange = 20f;
+    protected float rangeAttackSkillCoolDown = 20f;
+    protected bool isRangeAttackSkillCoolDown = false;
+    protected bool isCastingRangeSkill = false;
+
+    //Fly sword variables
+    protected float flySwordDuration = 2.65f;
+    protected float flySwordWindUpDuration = 1f;
+    protected bool isFlySword = true;
+    protected Transform swordSummonTrans;
+    public GameObject flySword;
+
+    //Sword Aura variables
+    protected float swordAuraDuration; 
+    protected bool isSwordAura = false;
+       
     
     //Rage variables
     protected bool isRaged = false;
     protected bool isRaging = false;
     protected float rageDuration = 2.33333f;
-
-
-
 
     //illusion gameobjects
     public GameObject attackIllusion;
@@ -66,6 +81,7 @@ public class JuggernautBehaviour : EnemyBehaviour
     public GameObject attack3Illusion;
     public GameObject blinkBackAttackIllusion;
     public GameObject jumpAttackIllusion;
+    public GameObject flySowordIllusion;
 
     //Coroutine variable
     protected Coroutine generateIllusionCoroutine;
@@ -88,11 +104,16 @@ public class JuggernautBehaviour : EnemyBehaviour
     protected AudioClip attack2SpeechAudioClip;
     protected AudioClip attack3AudioClip;
     protected AudioClip attack3SpeechAudioClip;
+
     protected AudioClip rageAudioClip;
+
     protected AudioClip blinkBackAttackBlinkAudioClip;
     protected AudioClip blinkBackAttackAudioClip;
     protected AudioClip jumpAttackAudioClip;
     protected AudioClip jumpAttackSpeechAudioClip;
+
+    protected AudioClip flySwordSpeechAudioClip;
+    protected AudioClip swordAuraSpeechAudioClip;
 
 
     protected void Awake() {
@@ -123,15 +144,18 @@ public class JuggernautBehaviour : EnemyBehaviour
         attackRaycastHeight = 0.3f;
 
         //fov
-        detectionRadius = 20f; fov.radius = detectionRadius;
+        detectionRadius = 30f; fov.radius = detectionRadius;
         detectionAngle = 145f; fov.angle = detectionAngle;
         fovRaycastHeight = 0.5f;
 
-        speed = 5f; agent.speed = speed;
+        speed = 4.5f; agent.speed = speed;
         rotationSpeed = 10f;
 
         //roar
         roarDuration = 2.183f;
+
+        //fly sword
+        swordSummonTrans = transform.Find("SwordSummonPoint").transform;
 
         //SFX
         audioSources = GetComponents<AudioSource>();
@@ -158,6 +182,10 @@ public class JuggernautBehaviour : EnemyBehaviour
 
         jumpAttackAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Jump Attack");
         jumpAttackSpeechAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Jump Attack Speech");
+
+        flySwordSpeechAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Fly Sword Speech");
+        swordAuraSpeechAudioClip = LoadAudioClip("Juggernaut SFX", "Juggernaut Sword Aura Speech");
+
     }
 
     // Update is called once per frame
@@ -170,15 +198,29 @@ public class JuggernautBehaviour : EnemyBehaviour
             Die();
         }
         //rage reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRaged && currentHealth <= maxHealth/2 && !isRaging){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRaged && currentHealth <= maxHealth/2 && !isRaging && !isCastingRangeSkill){
             Rage();
         }
         //roar reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRoared){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRoared && !isCastingRangeSkill){
             TryRoar();
         }
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= rangeAttackSkillAttackRange && !isRangeAttackSkillCoolDown && isFlySword && !isRaging && !isCastingRangeSkill){
+            if(currentHealth <= maxHealth/2){
+                FlySwordWithIllusion();   
+            }else{
+                FlySword(true);
+            } 
+        }
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= rangeAttackSkillAttackRange && !isRangeAttackSkillCoolDown && isSwordAura && !isRaging && !isCastingRangeSkill){
+            if(currentHealth <= maxHealth/2){
+                FlySwordWithIllusion();   
+            }else{
+                FlySword(true);
+            } 
+        }
         //blink back attack reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= meleeAttackSkillAttackRange && !isMeleeAttackSkillCoolDown && isBlinkBackAttack && !isRaging){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= meleeAttackSkillAttackRange && !isMeleeAttackSkillCoolDown && isBlinkBackAttack && !isRaging && !isCastingRangeSkill){
             if(currentHealth <= maxHealth/2){
                 BlinkBackAttackWithIllusion();   
             }else{
@@ -186,7 +228,7 @@ public class JuggernautBehaviour : EnemyBehaviour
             } 
         }
         //jump attack reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= meleeAttackSkillAttackRange && !isMeleeAttackSkillCoolDown && isJumpAttack && !isRaging){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= meleeAttackSkillAttackRange && !isMeleeAttackSkillCoolDown && isJumpAttack && !isRaging && !isCastingRangeSkill){
             if(currentHealth <= maxHealth/2){
                 JumpAttackWithIllusion();
             }else{
@@ -194,7 +236,7 @@ public class JuggernautBehaviour : EnemyBehaviour
             } 
         }
         //attack reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange && isAttack && !isRaging){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange && isAttack && !isRaging && !isCastingRangeSkill){
             if(currentHealth <= maxHealth/2){
                 AttackWithIllusion();
             }else{
@@ -202,7 +244,7 @@ public class JuggernautBehaviour : EnemyBehaviour
             } 
         }
         //attack2 reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack2Range && isAttack2 && !isRaging){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack2Range && isAttack2 && !isRaging && !isCastingRangeSkill){
            if(currentHealth <= maxHealth/2){
                 Attack2WithIllusion();
             }else{
@@ -210,7 +252,7 @@ public class JuggernautBehaviour : EnemyBehaviour
             } 
         }
         ///attack3 reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack3Range && isAttack3 && !isRaging){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack3Range && isAttack3 && !isRaging && !isCastingRangeSkill){
             if(currentHealth <= maxHealth/2){
                 Attack3WithIllusion();
             }else{
@@ -218,23 +260,23 @@ public class JuggernautBehaviour : EnemyBehaviour
             } 
         }
         //Chases reaction check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRaging){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRaging && !isCastingRangeSkill){
             Chase();
         }
         //patrolling if nothing happened 
-        else if(alive && !isAttacking && !isRoaring && !isHitting && !fov.canSeePlayer && !isRaging){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && !fov.canSeePlayer && !isRaging && !isCastingRangeSkill){
             Patrol();
             agent.enabled = false;
             isRoared = false;
         }
 
         //disable the movement when roaring
-        if((isDying || isAttacking || isRoaring || isHitting || isRaging) && !isResetPosition){
+        if((isDying || isAttacking || isRoaring || isHitting || isRaging || isCastingRangeSkill) && !isResetPosition){
             agent.enabled = false;
         }
 
         //face to player while attacking
-        if(isAttacking || isHitting || isRoaring || isFaceToPlayer || isRaging){
+        if(isAttacking || isHitting || isRoaring || isFaceToPlayer || isRaging || isCastingRangeSkill){
             FaceToPlayer();
         }
     }
@@ -453,12 +495,6 @@ public class JuggernautBehaviour : EnemyBehaviour
         }
     }
 
-    protected IEnumerator MeleeAttackSkillCoolDownTimer(){
-        isMeleeAttackSkillCoolDown = true;
-        yield return new WaitForSeconds(meleeAttackSkillCoolDown);
-        isMeleeAttackSkillCoolDown = false;
-    }
-
     //function that controll juugernaut move forward when use some attacks
     protected IEnumerator SmoothMoveForward(float distance, float duration){
         Vector3 startingPosition = transform.position;
@@ -471,6 +507,59 @@ public class JuggernautBehaviour : EnemyBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+    }
+
+    protected void FlySword(bool speech){
+        SetAnimationActive(ExtendedAnimationState.FlySword);
+        if(speech)PlaySFX(flySwordSpeechAudioClip);
+
+        StartCoroutine(CastRangeSkillTimer(flySwordDuration));
+        StartCoroutine(FlySwordLogic());
+        StartCoroutine(RangeAttackSkillCoolDownTimer());
+
+        isFlySword = false;
+        isSwordAura = true;
+    }
+
+    protected void FlySwordWithIllusion(){
+        FlySword(true);
+        generateIllusionCoroutine = StartCoroutine(GenerateIllusion2(flySowordIllusion, flySwordDuration));
+    }
+
+    protected IEnumerator CastRangeSkillTimer(float duration){
+        isCastingRangeSkill = true;
+        yield return new WaitForSeconds(duration);
+        isCastingRangeSkill = false;
+    }
+
+    protected IEnumerator FlySwordLogic(){
+        yield return new WaitForSeconds(flySwordWindUpDuration);
+        SummonSword();
+    }
+
+    protected void SummonSword(){
+        Instantiate(flySword, swordSummonTrans.position, swordSummonTrans.rotation);
+    }
+
+    protected void SwordAura(bool speech){
+
+    }
+
+    protected void SwordAuraWithIllusion(){
+        SwordAura(true);
+    }
+
+    protected IEnumerator MeleeAttackSkillCoolDownTimer(){
+        isMeleeAttackSkillCoolDown = true;
+        yield return new WaitForSeconds(meleeAttackSkillCoolDown);
+        isMeleeAttackSkillCoolDown = false;
+    }
+
+    protected IEnumerator RangeAttackSkillCoolDownTimer(){
+        isRangeAttackSkillCoolDown = true;
+        yield return new WaitForSeconds(rangeAttackSkillCoolDown);
+        isRangeAttackSkillCoolDown = false;
+
     }
 
     protected void Rage(){
@@ -522,7 +611,9 @@ public class JuggernautBehaviour : EnemyBehaviour
             { ExtendedAnimationState.Attack3, "Attack3" },
             { ExtendedAnimationState.Rage, "Rage" },
             { ExtendedAnimationState.BlinkBackAttack, "BlinkBackAttack"},
-            { ExtendedAnimationState.JumpAttack, "JumpAttack"}
+            { ExtendedAnimationState.JumpAttack, "JumpAttack"},
+            { ExtendedAnimationState.FlySword, "FlySword"},
+            { ExtendedAnimationState.SwordAura, "SwordAura"}
         };
     }
 
