@@ -12,6 +12,8 @@ public class JuggernautSwordColliderCheck : MonoBehaviour
 
     private GameObject rootObject;
 
+    private bool isDealDamage =  false;
+
     public GameObject swordHitSFX;
     
 
@@ -36,8 +38,12 @@ public class JuggernautSwordColliderCheck : MonoBehaviour
     private void OnTriggerEnter(Collider other){
         //if collide with player
         if (((1 << other.gameObject.layer) & playerLayer) != 0){
-            playerController.TakeDamge(10);
             InstantiateSwordHitSFX();
+            if(!isDealDamage){
+                playerController.TakeDamge(10);
+                isDealDamage = true;
+            }
+            
             Destroy(rootObject);
         }
 

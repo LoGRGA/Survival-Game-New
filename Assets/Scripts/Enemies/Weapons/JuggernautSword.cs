@@ -12,9 +12,6 @@ public class JuggernautSword : MonoBehaviour
     private AudioSource audioSource;
     private AudioClip rotationAudioClip;
 
-    
-
-
     // Start is called before the first frame update
     void Start()
     {

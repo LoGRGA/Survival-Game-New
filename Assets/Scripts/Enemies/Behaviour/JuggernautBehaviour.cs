@@ -54,21 +54,22 @@ public class JuggernautBehaviour : EnemyBehaviour
 
     //range attack skill
     protected float rangeAttackSkillAttackRange = 20f;
-    protected float rangeAttackSkillCoolDown = 20f;
+    protected float rangeAttackSkillCoolDown = 1f;
     protected bool isRangeAttackSkillCoolDown = false;
     protected bool isCastingRangeSkill = false;
 
     //Fly sword variables
     protected float flySwordDuration = 2.65f;
-    protected float flySwordWindUpDuration = 1f;
+    protected float flySwordWindUpDuration = 1f; // from 0 tp 60, 60 fps
     protected bool isFlySword = true;
     protected Transform swordSummonTrans;
     public GameObject flySword;
 
     //Sword Aura variables
-    protected float swordAuraDuration; 
+    protected float swordAuraDuration = 2.933333f; 
+    protected float swordAuraWindUpDuration = 1.75f; // from 0 to 105, 60fps
     protected bool isSwordAura = false;
-       
+    public GameObject swordAura;
     
     //Rage variables
     protected bool isRaged = false;
@@ -82,6 +83,7 @@ public class JuggernautBehaviour : EnemyBehaviour
     public GameObject blinkBackAttackIllusion;
     public GameObject jumpAttackIllusion;
     public GameObject flySowordIllusion;
+    public GameObject swordAuraIllusion;
 
     //Coroutine variable
     protected Coroutine generateIllusionCoroutine;
@@ -214,9 +216,9 @@ public class JuggernautBehaviour : EnemyBehaviour
         }
         else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= rangeAttackSkillAttackRange && !isRangeAttackSkillCoolDown && isSwordAura && !isRaging && !isCastingRangeSkill){
             if(currentHealth <= maxHealth/2){
-                FlySwordWithIllusion();   
+                SwordAuraWithIllusion();   
             }else{
-                FlySword(true);
+                SwordAura(true);
             } 
         }
         //blink back attack reation check
@@ -542,11 +544,29 @@ public class JuggernautBehaviour : EnemyBehaviour
     }
 
     protected void SwordAura(bool speech){
+        SetAnimationActive(ExtendedAnimationState.SwordAura);
+        if(speech)PlaySFX(swordAuraSpeechAudioClip);
 
+        StartCoroutine(CastRangeSkillTimer(swordAuraDuration));
+        StartCoroutine(SwordAuraLogic());
+        StartCoroutine(RangeAttackSkillCoolDownTimer());
+
+        isFlySword = true;
+        isSwordAura = false;
     }
 
     protected void SwordAuraWithIllusion(){
         SwordAura(true);
+        generateIllusionCoroutine = StartCoroutine(GenerateIllusion2(swordAuraIllusion, swordAuraDuration));
+    }
+
+    protected IEnumerator SwordAuraLogic(){
+        yield return new WaitForSeconds(swordAuraWindUpDuration);
+        SummonSwordAura();
+    }
+
+    protected void SummonSwordAura(){
+        Instantiate(swordAura, swordSummonTrans.position, swordSummonTrans.rotation);
     }
 
     protected IEnumerator MeleeAttackSkillCoolDownTimer(){

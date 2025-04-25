@@ -504,7 +504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  flySword: {fileID: 1160900233574315323, guid: 3b88129a7de35f7459f8ab66c0ffd487, type: 3}
+  flySword: {fileID: 4962201003841275910, guid: a139ed9680ca18d4095f4eeaa10ca169, type: 3}
   attackIllusion: {fileID: 0}
   attack2Illusion: {fileID: 0}
   attack3Illusion: {fileID: 0}
