@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -47256,6 +47256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a82d143606d928499f627c0842683dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundSlider: {fileID: 0}
+  masterMixer: {fileID: 0}
 --- !u!4 &1001950802
 Transform:
   m_ObjectHideFlags: 0
@@ -68533,7 +68535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1406194420
 Transform:
   m_ObjectHideFlags: 0
@@ -69590,15 +69592,15 @@ PrefabInstance:
       objectReference: {fileID: 695391699}
     - target: {fileID: 6931837785965017183, guid: 62dd43258d3c727429a7397147b9dbf8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1218.6
+      value: -1147.91
       objectReference: {fileID: 0}
     - target: {fileID: 6931837785965017183, guid: 62dd43258d3c727429a7397147b9dbf8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.29
+      value: 76.88
       objectReference: {fileID: 0}
     - target: {fileID: 6931837785965017183, guid: 62dd43258d3c727429a7397147b9dbf8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -201.3
+      value: -173.87
       objectReference: {fileID: 0}
     - target: {fileID: 6931837785965017183, guid: 62dd43258d3c727429a7397147b9dbf8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -74765,19 +74767,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4662756330567952693, guid: 1b914b8b1ae126e48a42d2f604f94149, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4662756330567952693, guid: 1b914b8b1ae126e48a42d2f604f94149, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7897925572925187176, guid: 1b914b8b1ae126e48a42d2f604f94149, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7897925572925187176, guid: 1b914b8b1ae126e48a42d2f604f94149, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8605805578148252361, guid: 1b914b8b1ae126e48a42d2f604f94149, type: 3}
       propertyPath: m_Name

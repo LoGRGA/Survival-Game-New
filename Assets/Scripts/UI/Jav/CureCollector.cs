@@ -38,6 +38,8 @@ public class CureCollect : MonoBehaviour
             // Load the next scene (make sure to set it in the inspector)
             if (!string.IsNullOrEmpty(sceneToLoad))
             {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 SceneManager.LoadScene(sceneToLoad);
             }
         }
