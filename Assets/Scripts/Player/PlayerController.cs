@@ -13,9 +13,9 @@ using TMPro;
 public class PlayerController : FPSInput
 {
     //HAZIQ Health Warning Panel 
-    public GameObject healthWarningPanel;
-    public TMP_Text healthWarningText;
-    private bool hasShownWarning = false;
+    //public GameObject healthWarningPanel;
+    //public TMP_Text healthWarningText;
+    //private bool hasShownWarning = false;
     //HAZIQ
 
     //
@@ -551,7 +551,7 @@ public class PlayerController : FPSInput
             ShieldStat shieldstat = GetComponentInChildren<ShieldStat>();
             shieldstat.BlockDamage(amount);
         }
-
+/*
         //Haziq Warning Panel
         if (!hasShownWarning && currentHealth <= maxHealth / 2)
         {
@@ -559,6 +559,7 @@ public class PlayerController : FPSInput
             hasShownWarning = true;
         }
         //Haziq
+*/
     }
     public void Heal(int amount)
     {
@@ -567,7 +568,7 @@ public class PlayerController : FPSInput
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);  // Prevent health from going above maxHealth
             healthText.SetText(currentHealth.ToString());  // Update health text display
             slider.value = currentHealth;  // Update slider value
-
+/*
         //HAZIQ
         // Reset warning Panel if health goes above 50%
         if (currentHealth > maxHealth / 2)
@@ -575,6 +576,7 @@ public class PlayerController : FPSInput
             hasShownWarning = false;
         }
         //HAZIQ
+*/
     }
 
     private void GrimHeal(EnemyBehaviour T)
@@ -732,7 +734,7 @@ public class PlayerController : FPSInput
     public void AddDebuff(string debuff){
         debuffList.Add(debuff);
     }
-
+/*
     //HAZIQ Add Warning Panel 
     private void ShowHealthWarning(string message)
     {
@@ -762,5 +764,5 @@ public class PlayerController : FPSInput
     }
 
     //HAZIQ
-
+*/
 }

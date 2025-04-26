@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JuggernautSword : MonoBehaviour
+public class JuggernautFlySword : MonoBehaviour
 {
     private Transform playerTransform;
     private float rotationSpeed = 10f;

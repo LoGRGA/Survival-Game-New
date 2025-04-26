@@ -54,7 +54,7 @@ public class JuggernautBehaviour : EnemyBehaviour
 
     //range attack skill
     protected float rangeAttackSkillAttackRange = 20f;
-    protected float rangeAttackSkillCoolDown = 1f;
+    protected float rangeAttackSkillCoolDown = 20f;
     protected bool isRangeAttackSkillCoolDown = false;
     protected bool isCastingRangeSkill = false;
 
@@ -70,11 +70,13 @@ public class JuggernautBehaviour : EnemyBehaviour
     protected float swordAuraWindUpDuration = 1.75f; // from 0 to 105, 60fps
     protected bool isSwordAura = false;
     public GameObject swordAura;
+    public GameObject juggernautSword;
     
     //Rage variables
     protected bool isRaged = false;
     protected bool isRaging = false;
     protected float rageDuration = 2.33333f;
+    public GameObject rageVFX;
 
     //illusion gameobjects
     public GameObject attackIllusion;
@@ -300,7 +302,7 @@ public class JuggernautBehaviour : EnemyBehaviour
     //override the Hit() funcction to include stop attack2
     protected override void Hit()
     { 
-        if(!isRaging){
+        if(!isRaging && !isCastingRangeSkill){
             base.Hit();
 
             if(generateIllusionCoroutine != null){StopCoroutine(generateIllusionCoroutine);}
@@ -317,6 +319,17 @@ public class JuggernautBehaviour : EnemyBehaviour
             StopAttack(jumpAttackTimerCoroutine);
             StopAttackLogic(jumpAttackLogicCoroutine);
         }
+    }
+
+    //override the Roar function
+    protected override IEnumerator Roaring(){
+        SetAnimationActive(baseAnimationState.Roar);
+        juggernautSword.SetActive(true);
+        isRoaring = true;
+        isRoared = true;
+        yield return new WaitForSeconds(roarDuration);
+        isRoaring = false;
+        juggernautSword.SetActive(false);
     }
 
     //override the Attack() function
@@ -532,6 +545,9 @@ public class JuggernautBehaviour : EnemyBehaviour
         isCastingRangeSkill = true;
         yield return new WaitForSeconds(duration);
         isCastingRangeSkill = false;
+        if(juggernautSword != null){
+            juggernautSword.SetActive(false);
+        }
     }
 
     protected IEnumerator FlySwordLogic(){
@@ -545,6 +561,7 @@ public class JuggernautBehaviour : EnemyBehaviour
 
     protected void SwordAura(bool speech){
         SetAnimationActive(ExtendedAnimationState.SwordAura);
+        juggernautSword.SetActive(true);
         if(speech)PlaySFX(swordAuraSpeechAudioClip);
 
         StartCoroutine(CastRangeSkillTimer(swordAuraDuration));
@@ -584,6 +601,7 @@ public class JuggernautBehaviour : EnemyBehaviour
 
     protected void Rage(){
         SetAnimationActive(ExtendedAnimationState.Rage);
+        rageVFX.SetActive(true);
         PlaySFX(rageAudioClip);
         StartCoroutine(RageTimer());
         isRaged = true;

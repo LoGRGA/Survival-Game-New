@@ -298,7 +298,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
-    protected IEnumerator Roaring()
+    protected virtual IEnumerator Roaring()
     {
         SetAnimationActive(baseAnimationState.Roar);
         isRoaring = true;
