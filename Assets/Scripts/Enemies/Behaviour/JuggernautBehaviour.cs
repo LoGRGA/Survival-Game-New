@@ -200,6 +200,13 @@ public class JuggernautBehaviour : EnemyBehaviour
         //death check
         if(currentHealth <= 0 && !isDying){
             Die();
+            //Javier Addition: Handles Boss death for objective
+            GetComponent<BossKillTracker>().HandleBossDeath();
+            // Javier Addition: ADDING SCORE WHEN ZOMBIE DIES
+            if (ScoreManager_new.instance != null)
+            {
+                ScoreManager_new.instance.AddScore(5000); // Adjust points to preference
+            }
         }
         //rage reation check
         else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRaged && currentHealth <= maxHealth/2 && !isRaging && !isCastingRangeSkill){

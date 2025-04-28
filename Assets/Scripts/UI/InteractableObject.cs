@@ -1,40 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class InteractableObject : MonoBehaviour
 {
-    [Header("Interaction Settings")]
-    public KeyCode interactKey = KeyCode.F;
-    public float interactDistance = 3f;
+    public GameObject tickImage; // Assign your green tick UI image here
+    public KeyCode interactKey = KeyCode.F; // Key to press
+    public Transform player; // Drag your player object here
 
-    [Header("Events")]
-    public UnityEvent onInteract;
+    private bool playerInRange = false;
 
-    private Transform player;
-
-    void Start()
+    private void Update()
     {
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
-    }
-
-    void Update()
-    {
-        if (player == null) return;
-
-        float distance = Vector3.Distance(transform.position, player.position);
-
-        if (distance <= interactDistance && Input.GetKeyDown(interactKey))
+        if (playerInRange && Input.GetKeyDown(interactKey))
         {
-            onInteract?.Invoke();  // Trigger any events assigned in the inspector
+            Interact();
         }
     }
 
-    // Optional: You can call this manually too
-    public void TriggerInteraction()
+    private void Interact()
     {
-        onInteract?.Invoke();
+        if (tickImage != null)
+        {
+            tickImage.SetActive(true);
+        }
+        // Optional: Disable door, play animation, etc.
+        Debug.Log("Door interacted and tick set active!");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform == player)
+        {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform == player)
+        {
+            playerInRange = false;
+        }
     }
 }
+
+
 

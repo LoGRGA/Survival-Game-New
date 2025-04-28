@@ -14,15 +14,17 @@ public class Player : MonoBehaviour
     //Gold Player Inventory
     public int gold;
     public TextMeshProUGUI goldAmountText;
+    public TextMeshProUGUI goldAmountText2;
 
 
-  
+
 
     // Update is called once per frame
     void Update()
     {
 
         goldAmountText.text = gold + " Gold";
+        goldAmountText2.text = gold + " Gold";
         //if (Input.GetKey(KeyCode.Space))
         //{
         //    Timer -= 1 * Time.deltaTime;

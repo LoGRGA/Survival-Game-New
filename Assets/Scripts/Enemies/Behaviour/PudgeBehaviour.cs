@@ -137,6 +137,8 @@ public class PudgeBehaviour : EnemyBehaviour
         //death check
         if(currentHealth <= 0 && !isDying){
             Die();
+            //Javier Addition: Handles Boss death for objective
+            GetComponent<BossKillTracker>().HandleBossDeath();
             // Javier Addition: ADDING SCORE WHEN ZOMBIE DIES
             if (ScoreManager_new.instance != null)
             {

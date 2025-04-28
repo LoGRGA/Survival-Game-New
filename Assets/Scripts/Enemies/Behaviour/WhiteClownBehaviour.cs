@@ -102,6 +102,11 @@ public class WhiteClownBehaviour : EnemyBehaviour
         //death check
         if(currentHealth <= 0 && !isDying){
             Die();
+            // Javier Addition: ADDING SCORE WHEN ZOMBIE DIES
+            if (ScoreManager_new.instance != null)
+            {
+                ScoreManager_new.instance.AddScore(100); // Adjust points to preference
+            }
         }
         ////hurricane reation check
         else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange && !isHurricaneCoolDown){
