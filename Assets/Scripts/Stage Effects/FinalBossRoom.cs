@@ -14,7 +14,7 @@ public class FinalBossRoom : MonoBehaviour
         [HideInInspector] public bool triggered = false;
     }
 
-    public PudgeBehaviour pudgeEnemy;
+    public JuggernautBehaviour pudgeEnemy;
     public List<ThresholdAction> actions;
 
     private float maxHealth;

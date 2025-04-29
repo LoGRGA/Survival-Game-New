@@ -22,13 +22,18 @@ public class BuffChest : MonoBehaviour
         {
             interactionCanvasGroup = borderObj.GetComponent<CanvasGroup>();
             if (interactionCanvasGroup != null)
+            {
                 interactionCanvasGroup.alpha = 0f; // Start invisible
+                interactionCanvasGroup.blocksRaycasts = true;
+                interactionCanvasGroup.interactable = true;
+            }
         }
         else
         {
             Debug.LogWarning("Interaction border not found.");
         }
     }
+
 
     private void Update()
     {
@@ -119,6 +124,7 @@ public class BuffChest : MonoBehaviour
             yield return null;
         }
         interactionCanvasGroup.alpha = 1f;
+     
     }
 
     private IEnumerator FadeOutUI()
