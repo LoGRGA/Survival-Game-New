@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     {
 
         goldAmountText.text = gold + " Gold";
-        goldAmountText2.text = gold + " Gold";
+        goldAmountText2.text = gold + " ";
         //if (Input.GetKey(KeyCode.Space))
         //{
         //    Timer -= 1 * Time.deltaTime;
