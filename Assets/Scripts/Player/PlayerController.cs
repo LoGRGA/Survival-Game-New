@@ -29,7 +29,7 @@ public class PlayerController : FPSInput
     private IEnumerator attackCoroutine;
 
     //Debuff Booleans
-    private bool isPoisoned, isBurned, isBleeding;
+    public bool isPoisoned, isBurned, isBleeding;
 
     public GameObject[] weapons;
 

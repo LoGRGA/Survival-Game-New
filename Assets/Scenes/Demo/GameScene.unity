@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15950,7 +15950,7 @@ GameObject:
   - component: {fileID: 325962117}
   - component: {fileID: 325962116}
   m_Layer: 5
-  m_Name: Debuffs
+  m_Name: Poison
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36802,8 +36802,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -54.5, y: 52.8}
-  m_SizeDelta: {x: 63.8129, y: 49.1202}
+  m_AnchoredPosition: {x: -53.436, y: 54.393}
+  m_SizeDelta: {x: 109.01, y: 84.786}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &758406491
 MonoBehaviour:
@@ -36825,7 +36825,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bc71f87f22ef687458f67f54b83e25ce, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ab2bb9a76f32e4746b1725b802d6968a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -41241,6 +41241,70 @@ Transform:
   - {fileID: 1050753889}
   m_Father: {fileID: 96446053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &856203296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 856203297}
+  - component: {fileID: 856203299}
+  - component: {fileID: 856203298}
+  m_Layer: 0
+  m_Name: DebuffHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &856203297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856203296}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1718.7487, y: 306.8237, z: -153.62659}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1435602565}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &856203298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856203296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc061dacaf949f43a2697727425ef19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedBuffIcon: {fileID: 598533856}
+  baseSpeed: 5
+  threshold: 0.1
+--- !u!114 &856203299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856203296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a90577354a167cf42bc4365307a2f7b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerController: {fileID: 1611738707}
+  poisonIcon: {fileID: 325962116}
+  burnIcon: {fileID: 1895008204}
+  bleedIcon: {fileID: 0}
 --- !u!1 &859198372
 GameObject:
   m_ObjectHideFlags: 0
@@ -58614,17 +58678,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201390025}
-  m_LocalRotation: {x: -0, y: -0, z: -0.21453756, w: 0.9767158}
+  m_LocalRotation: {x: -0, y: -0, z: 0.041570753, w: 0.99913555}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1736583758}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -39.702}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 4.765}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.0246582, y: 1.2042847}
-  m_SizeDelta: {x: 44.3518, y: 55.2827}
+  m_AnchoredPosition: {x: -2, y: -2.233}
+  m_SizeDelta: {x: 68.677, y: 64.688}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1201390027
 MonoBehaviour:
@@ -58646,7 +58710,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 34b26198c663b73459ba49e759afcc73, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b59a5a93fb753904dbf4b6e9ecf114a3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -70126,6 +70190,7 @@ Transform:
   - {fileID: 1186274489}
   - {fileID: 2045451292}
   - {fileID: 1181017150}
+  - {fileID: 856203297}
   - {fileID: 1001950802}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -77683,6 +77748,17 @@ Skybox:
   m_GameObject: {fileID: 1611738704}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: 95934441a51fdf943a858261c14db739, type: 2}
+--- !u!114 &1611738707 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5172402176488449063, guid: 62dd43258d3c727429a7397147b9dbf8, type: 3}
+  m_PrefabInstance: {fileID: 1611738702}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611738703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f7ea2c37dc754849ab6ec157747865b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1611738716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6931837785965017183, guid: 62dd43258d3c727429a7397147b9dbf8, type: 3}
@@ -84120,7 +84196,7 @@ GameObject:
   - component: {fileID: 1736583760}
   - component: {fileID: 1736583759}
   m_Layer: 5
-  m_Name: Up Damage
+  m_Name: Jump Boost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89383,7 +89459,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1846300091
 Transform:
   m_ObjectHideFlags: 0
@@ -91878,7 +91954,7 @@ GameObject:
   - component: {fileID: 1895008205}
   - component: {fileID: 1895008204}
   m_Layer: 5
-  m_Name: Debuff 2
+  m_Name: Burn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
