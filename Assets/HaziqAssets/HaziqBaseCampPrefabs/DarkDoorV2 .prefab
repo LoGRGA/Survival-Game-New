@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4770712450175393926}
+  - component: {fileID: -2100301227933098814}
   m_Layer: 0
-  m_Name: 'DarkDoor_V2 '
+  m_Name: 'DarkDoorV2 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,6 +34,21 @@ Transform:
   - {fileID: 6591774208295914584}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -180.00002, z: 0}
+--- !u!114 &-2100301227933098814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4903612798352489245}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5853a63a076b24f85832b1a4fb08e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teleportPosition: {x: -1153.2, y: 45.2, z: -192}
+  player: {fileID: 0}
+  interactionDistance: 3
 --- !u!1 &6562356383195281200
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +269,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9121341932446367434}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec5853a63a076b24f85832b1a4fb08e8, type: 3}
   m_Name: 

@@ -81,9 +81,11 @@ public class Pickup : MonoBehaviour
             // Step 1: Create a mapping from item names to preferred slots
             Dictionary<string, int> itemSlotMap = new Dictionary<string, int>()
         {
-            { "HealthPotion", 4 },  // slot 5
-            { "JumpPotion", 5 },    // slot 6
-            { "SpeedPotion", 6 }    // slot 7
+            { "HealthPotion", 4 },  // slot 5 Health
+            { "JumpPotion", 5 },    // slot 6 Jump
+            { "SpeedPotion", 6 },   // slot 7 Speed
+            { "KeyItem", 8 },        //slot 9 key
+            { "PickupBuffChest", 9 }
         };
 
             // Step 2: Check if itemName has a mapped slot
