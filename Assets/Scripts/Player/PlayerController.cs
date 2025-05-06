@@ -276,7 +276,7 @@ public class PlayerController : FPSInput
     {
         basicSpeed = attackSpeed;
         basicDamage = attackDamage;
-        attackDamage = 30;
+        attackDamage = 50;
 
         bool attack = Attacking();
         if (!attack)
@@ -292,7 +292,7 @@ public class PlayerController : FPSInput
         basicDamage = attackDamage;
         attackSpeed = 2.5f;
         attackDelay = 2f;
-        attackDamage = 45;
+        attackDamage = 60;
         hitSoundDelay = 2.5f;
 
         bool attack = Attacking();
@@ -307,7 +307,7 @@ public class PlayerController : FPSInput
     {
         basicSpeed = attackSpeed;
         basicDamage = attackDamage;
-        attackDamage = 15;
+        attackDamage = 60;
 
         bool attack = Attacking();
         if (!attack)
@@ -323,7 +323,7 @@ public class PlayerController : FPSInput
         basicDamage = attackDamage;
         attackSpeed = 3f;
         attackDelay = 2.5f;
-        attackDamage = 75;
+        attackDamage = 70;
         hitSoundDelay = 2.5f;
 
         bool attack = Attacking();
@@ -338,7 +338,7 @@ public class PlayerController : FPSInput
     {
         basicSpeed = attackSpeed;
         basicDamage = attackDamage;
-        attackDamage = 50;
+        attackDamage = 60;
 
         bool attack = Attacking();
         if (!attack)
@@ -354,7 +354,7 @@ public class PlayerController : FPSInput
         basicDamage = attackDamage;
         attackSpeed = 2.5f;
         attackDelay = 2f;
-        attackDamage = 45;
+        attackDamage = 150;
         hitSoundDelay = 2.5f;
 
         bool attack = Attacking();
@@ -369,7 +369,7 @@ public class PlayerController : FPSInput
     {
         basicSpeed = attackSpeed;
         basicDamage = attackDamage;
-        attackDamage = 30;
+        attackDamage = 100;
 
         bool attack = Attacking();
         if (!attack)
@@ -390,7 +390,7 @@ public class PlayerController : FPSInput
         basicDamage = attackDamage;
         attackSpeed = 1.5f;
         attackDelay = 1f;
-        attackDamage = 50;
+        attackDamage = 75;
         hitSoundDelay = 1f;
 
         bool attack = Attacking();
@@ -407,7 +407,7 @@ public class PlayerController : FPSInput
         basicDamage = attackDamage;
         attackSpeed = 2.5f;
         attackDelay = 2f;
-        attackDamage = 75;
+        attackDamage = 100;
         hitSoundDelay = 2f;
 
         bool attack = Attacking();
@@ -434,7 +434,7 @@ public class PlayerController : FPSInput
         basicDamage = attackDamage;
         attackSpeed = 2.5f;
         attackDelay = 2f;
-        attackDamage = 75;
+        attackDamage = 150;
         hitSoundDelay = 2f;
 
         cones.SelectCone(3);
@@ -454,7 +454,7 @@ public class PlayerController : FPSInput
         basicDamage = attackDamage;
         attackSpeed = 0.5f;
         attackDelay = 0.2f;
-        attackDamage = 10;
+        attackDamage = 30;
         hitSoundDelay = 0.2f;
 
         bool attack = Attacking();
@@ -470,7 +470,7 @@ public class PlayerController : FPSInput
         basicDamage = attackDamage;
         attackSpeed = 2.5f;
         attackDelay = 2f;
-        attackDamage = 75;
+        attackDamage = 50;
         hitSoundDelay = 2f;
 
         bool attack = Attacking();
@@ -713,7 +713,7 @@ public class PlayerController : FPSInput
     {
         isLightningCooldown = true;
 
-        yield return new WaitForSeconds(30f);
+        yield return new WaitForSeconds(7f);
 
         isLightningCooldown = false;
     }

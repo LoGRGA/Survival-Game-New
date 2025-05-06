@@ -14,13 +14,13 @@ public class Weapons : MonoBehaviour
     //RunesAxe Stuff
     public float waveSpeed = 10f; // Speed of the slash wave projectile
     public float waveLifetime = 3f; // Time before the projectile disappears
-    public int waveDamage = 30; // Damage dealt by the projectile
+    public int waveDamage = 50; // Damage dealt by the projectile
     //RunesAxe End
 
     //Lightning Stuff
     public GameObject lightningPrefab;
     public float aoeRadius = 5.0f; // Radius for AOE damage
-    public int aoeDamage = 100; // Damage dealt by the lightning strike
+    public int aoeDamage = 130; // Damage dealt by the lightning strike
     public LayerMask raycastLayerMask;
     //Lightning Stuff End
 
