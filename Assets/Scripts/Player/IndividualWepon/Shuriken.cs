@@ -9,7 +9,7 @@ public class Shuriken : MonoBehaviour
     public float rotationSpeed = 30f; // How fast the shuriken adjusts its direction
     public float lifeTime = 5f; // Lifetime of the shuriken before it is destroyed
     public float detectionRadius = 100f; // Radius to detect nearby enemies
-    public int damage = 75;
+    public int damage = 50;
 
     private Transform target;
     private float timer;

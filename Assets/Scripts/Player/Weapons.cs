@@ -409,8 +409,8 @@ public class Weapons : MonoBehaviour
             while (currentTransform != null)
             {
                 parentRigidbody = currentTransform.GetComponent<Rigidbody>();
-                if (parentRigidbody != null) break; // Found the Rigidbody, exit the loop
-                currentTransform = currentTransform.parent; // Move up the hierarchy
+                if (parentRigidbody != null) break;
+                currentTransform = currentTransform.parent;
             }
 
             currentCollisions.Add(currentTransform.gameObject);
@@ -420,7 +420,7 @@ public class Weapons : MonoBehaviour
         {
             if (gObject.transform.TryGetComponent(out EnemyBehaviour T))
             {
-                T.TakeDamage(aoeDamage); // Assuming a Damageable script handles taking damage
+                T.TakeDamage(aoeDamage);
             }
         }
     }
