@@ -12,7 +12,7 @@ public class SwordAura : MonoBehaviour
     private Vector3 targetPosition;
     private Vector3 moveDirection;
 
-    private float moveSpeed = 20f;
+    private float moveSpeed = 30f;
 
     public GameObject swordAuraHitSFX;
 

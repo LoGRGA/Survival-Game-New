@@ -21,7 +21,7 @@ public class JuggernautBehaviour : EnemyBehaviour
     protected float attack2Distance = 4f;
     protected float attack2Duration = 2.46f; //24fps
     protected float attack2WindUpDuration = 0.5f; //from 0 to 12, 24fps
-    protected int attack2Damage = 5;
+    protected int attack2Damage = 10;
     protected float attack2MoveDistance = 4f;
 
     protected float attack3Range = 10f;
@@ -33,7 +33,7 @@ public class JuggernautBehaviour : EnemyBehaviour
 
     //Melee attack skill
     protected float meleeAttackSkillAttackRange = 15f;
-    protected float meleeAttackSkillCoolDown = 15f;
+    protected float meleeAttackSkillCoolDown = 10f;
     protected bool isMeleeAttackSkillCoolDown = false;
 
     //BlinkBackAttack variable
@@ -41,20 +41,20 @@ public class JuggernautBehaviour : EnemyBehaviour
     protected float blinkBackAttackDuration = 2.4666666f; //30fps
     protected float blinkBackAttackBlinkWindUpDuration = 0.7f; // from 0 to 21, 30fps
     protected float blinkBackAttackWindUpDuration = 0.3f; //from 21 to 30, 30fps
-    protected int blinkBackAttackDamage = 10;
+    protected int blinkBackAttackDamage = 15;
     protected bool isBlinkBackAttack = true;
 
     //JumpAttack variable
     protected float jumpAttackDistance = 3f;
     protected float jumpAttackDuration = 2.3f; 
     protected float jumpAttackWindUpDuration = 0.467f; //from 0 to 14, 30fps
-    protected int jumpAttackDamage = 10;
+    protected int jumpAttackDamage = 15;
     protected bool isJumpAttack = false;
     protected float jumpAttackJumpHeight = 3f;
 
     //range attack skill
     protected float rangeAttackSkillAttackRange = 20f;
-    protected float rangeAttackSkillCoolDown = 20f;
+    protected float rangeAttackSkillCoolDown = 15f;
     protected bool isRangeAttackSkillCoolDown = false;
     protected bool isCastingRangeSkill = false;
 
@@ -121,7 +121,7 @@ public class JuggernautBehaviour : EnemyBehaviour
 
 
     protected void Awake() {
-        maxHealth = 300f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
+        maxHealth = 1200f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
     }
     
     // Start is called before the first frame update

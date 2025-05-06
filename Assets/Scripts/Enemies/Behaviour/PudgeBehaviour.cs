@@ -74,7 +74,7 @@ public class PudgeBehaviour : EnemyBehaviour
     
 
     protected virtual void Awake() {
-        maxHealth = 300f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
+        maxHealth = 600f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
         //Added for testing, will remove after stage 3 boss done
         currentHealth = maxHealth;
     }
@@ -379,7 +379,7 @@ public class PudgeBehaviour : EnemyBehaviour
         meatHook.transform.SetParent(null);
 
         //calculate the hook fly direction and rotation
-        hookReleaseDirection = (playerTransform.position - meatHook.transform.position).normalized;
+        hookReleaseDirection = (playerTransform.position + Vector3.up - meatHook.transform.position).normalized;
         hookRetractDirection = (meatHook.transform.position - hookOriginalPosition).normalized;
 
         Quaternion lookRotaion = Quaternion.LookRotation(hookReleaseDirection);

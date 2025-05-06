@@ -14,7 +14,7 @@ public class WhiteClownBehaviour : EnemyBehaviour
     protected float attack2Distance = 3f;
     protected float attack2Duration = 2f;
     protected float attack2WindUpDuration = 0.6f; //from frame 0 to 36
-    protected int attack2Damage = 5;
+    protected int attack2Damage = 15;
 
     //special hurricane variable
     protected float hurricaneRange = 4f;
@@ -45,7 +45,7 @@ public class WhiteClownBehaviour : EnemyBehaviour
     protected AudioClip hurricaneAudioClip;
 
     protected void Awake() {
-        maxHealth = 150f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
+        maxHealth = 200f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
     }
 
     // Start is called before the first frame update
@@ -68,7 +68,7 @@ public class WhiteClownBehaviour : EnemyBehaviour
         dealDamageDuration = 0.15f; //from frame 24 to 33
 
         attackDuration = 0.97f;
-        attackDamage = 5;
+        attackDamage = 10;
         attackRaycastHeight = 0.3f;
 
         obstacleLayerMask = LayerMask.GetMask("Obstacle");

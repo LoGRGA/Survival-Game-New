@@ -15,7 +15,7 @@ public class RotArea : MonoBehaviour
     private bool isAbleDealDamage = false;
     private float dealDamageTimer = 0f;
     private float dealDamageInterval = 1f;
-    private int dealDamageAmount = 1;
+    private int dealDamageAmount = 5;
 
 
     // Start is called before the first frame update

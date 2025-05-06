@@ -10,7 +10,7 @@ public class CrabBehaviour : EnemyBehaviour
     protected float throwForce = 7f;
 
     protected void Awake() {
-        maxHealth = 50f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
+        maxHealth = 60f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
         //Attack: 30 fps
         //Hit: 60 fps
     }

@@ -7,7 +7,7 @@ using UnityEngine;
 public class ZombieBehaviour : EnemyBehaviour
 {
     protected void Awake() {
-        maxHealth = 150f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
+        maxHealth = 50f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
     }
     
     // Start is called before the first frame update
@@ -38,7 +38,7 @@ public class ZombieBehaviour : EnemyBehaviour
         detectionAngle = 145f; fov.angle = detectionAngle;
         fovRaycastHeight = 0.5f;
 
-        speed = 3.5f; agent.speed = speed;
+        speed = 3f; agent.speed = speed;
         rotationSpeed = 10f;
 
         //roar

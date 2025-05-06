@@ -44,7 +44,7 @@ public class CrabBossBehaviour : EnemyBehaviour
     protected AudioClip summonAudioClip;
 
     protected void Awake() {
-        maxHealth = 150f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
+        maxHealth = 300f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
         //Attack: 30 fps
         //Hit: 60 fps
         //Summon：23fps

@@ -57,7 +57,7 @@ public class VampireBehaviour : EnemyBehaviour
         dealDamageDuration = 0.1f;
 
         attackDuration = 2.4f;
-        attackDamage = 5;
+        attackDamage = 10;
         attackRaycastHeight = 0.2f;
 
         //fov
@@ -65,7 +65,7 @@ public class VampireBehaviour : EnemyBehaviour
         detectionAngle = 145f; fov.angle = detectionAngle;
         fovRaycastHeight = 0.6f;
 
-        speed = 3.5f; agent.speed = speed;
+        speed = 4f; agent.speed = speed;
         rotationSpeed = 10f;
 
         //SFX
