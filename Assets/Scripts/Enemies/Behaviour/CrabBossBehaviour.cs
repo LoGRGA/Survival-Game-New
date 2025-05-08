@@ -100,6 +100,13 @@ public class CrabBossBehaviour : EnemyBehaviour
         //death check
         if(currentHealth <= 0 && !isDying){
             Die();
+            //Javier Addition: Handles Boss death for objective
+            GetComponent<BossKillTracker>().HandleBossDeath();
+            // Javier Addition: ADDING SCORE WHEN ZOMBIE DIES
+            if (ScoreManager_new.instance != null)
+            {
+                ScoreManager_new.instance.AddScore(500); // Adjust points to preference
+            }
         }
         //summon reation check
                 //summon crab
