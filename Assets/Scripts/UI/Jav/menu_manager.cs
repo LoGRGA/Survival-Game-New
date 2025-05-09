@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MenuManager : MonoBehaviour
 {
     public GameObject optionsMenu;      // Reference to the Options Menu
     public GameObject leaderboardMenu;  // Reference to the Leaderboard Menu
     public GameObject volumeMenu;       // Reference to the Volume Adjuster Menu
+    public MouseLook mouseLook, mouseLook2;         // Reference to the MouseLook script
+
 
     void Start()
     {
@@ -78,6 +81,12 @@ public class MenuManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Restore camera control
+        if (mouseLook != null)
+            mouseLook.enabled = true;
+        if (mouseLook2 != null)
+            mouseLook2.enabled = true;
     }
 
     // Unlock cursor when in UI
@@ -85,6 +94,12 @@ public class MenuManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        // Prevent camera movement
+        if (mouseLook != null)
+            mouseLook.enabled = false;
+        if (mouseLook2 != null)
+            mouseLook2.enabled = false;
     }
 
     void Update()

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -16974,6 +16974,28 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1037492927}
   m_SourcePrefab: {fileID: 100100000, guid: 62dd43258d3c727429a7397147b9dbf8, type: 3}
+--- !u!114 &882085199 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4758710906067011216, guid: 62dd43258d3c727429a7397147b9dbf8, type: 3}
+  m_PrefabInstance: {fileID: 882085198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037492924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec2179b64eca8af48992383f989ff504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &882085200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8648511260609363723, guid: 62dd43258d3c727429a7397147b9dbf8, type: 3}
+  m_PrefabInstance: {fileID: 882085198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 934009050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec2179b64eca8af48992383f989ff504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &885228418
 GameObject:
   m_ObjectHideFlags: 0
@@ -17886,6 +17908,7 @@ MonoBehaviour:
   pickupItems: []
   gold: 100
   goldAmountText: {fileID: 195318418}
+  goldAmountText2: {fileID: 0}
 --- !u!1 &953131612
 GameObject:
   m_ObjectHideFlags: 0
@@ -24735,9 +24758,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedweapon: 0
   shield: {fileID: 0}
+  waveSpeed: 10
+  waveLifetime: 3
+  waveDamage: 50
+  lightningPrefab: {fileID: 0}
+  aoeRadius: 5
+  aoeDamage: 130
+  raycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  mainCamera: {fileID: 0}
   cam: {fileID: 0}
   attackPoint: {fileID: 0}
   daggerObject: {fileID: 0}
+  shurikenObject: {fileID: 0}
   throwForce: 0
   throwUpwardForce: 0
   weaponslot: 0
@@ -38771,6 +38805,8 @@ MonoBehaviour:
   optionsMenu: {fileID: 2048397432}
   leaderboardMenu: {fileID: 1958664175}
   volumeMenu: {fileID: 1723068513}
+  mouseLook: {fileID: 882085200}
+  mouseLook2: {fileID: 882085199}
 --- !u!114 &2129143488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39393,22 +39429,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 879505909}
     m_Modifications:
-    - target: {fileID: 1900612657043524566, guid: 6e5c9079ff64da646999bed0ff07cfcb, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1900612657043524566, guid: 6e5c9079ff64da646999bed0ff07cfcb, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 0f34623e9ad182644a471caf7b1a5fcc, type: 3}
-      propertyPath: m_Name
-      value: Vampire
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 0f34623e9ad182644a471caf7b1a5fcc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f34623e9ad182644a471caf7b1a5fcc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -35.397167
@@ -39448,6 +39468,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0f34623e9ad182644a471caf7b1a5fcc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0f34623e9ad182644a471caf7b1a5fcc, type: 3}
+      propertyPath: m_Name
+      value: Vampire
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0f34623e9ad182644a471caf7b1a5fcc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900612657043524566, guid: 6e5c9079ff64da646999bed0ff07cfcb, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900612657043524566, guid: 6e5c9079ff64da646999bed0ff07cfcb, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3985180441671485067, guid: 6e5c9079ff64da646999bed0ff07cfcb, type: 3}
       propertyPath: m_AnchorMax.x

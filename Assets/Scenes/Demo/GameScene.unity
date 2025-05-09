@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -26917,6 +26917,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 967c2e216c4997447b472a5a935c6787, type: 3}
+--- !u!114 &505293695 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4758710906067011216, guid: 62dd43258d3c727429a7397147b9dbf8, type: 3}
+  m_PrefabInstance: {fileID: 1611738702}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1611738704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec2179b64eca8af48992383f989ff504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &506088644
 GameObject:
   m_ObjectHideFlags: 0
@@ -44205,6 +44216,8 @@ MonoBehaviour:
   optionsMenu: {fileID: 197408442}
   leaderboardMenu: {fileID: 50406011}
   volumeMenu: {fileID: 1406087464}
+  mouseLook: {fileID: 944766025}
+  mouseLook2: {fileID: 505293695}
 --- !u!114 &867947816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50415,6 +50428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a82d143606d928499f627c0842683dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundSlider: {fileID: 0}
+  masterMixer: {fileID: 0}
 --- !u!4 &1001950802
 Transform:
   m_ObjectHideFlags: 0
@@ -106801,6 +106816,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a82d143606d928499f627c0842683dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundSlider: {fileID: 0}
+  masterMixer: {fileID: 0}
 --- !u!4 &2039885241
 Transform:
   m_ObjectHideFlags: 0
