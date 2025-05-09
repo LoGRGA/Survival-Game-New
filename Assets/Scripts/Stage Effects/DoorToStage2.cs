@@ -8,6 +8,9 @@ public class DoorToStage2 : MonoBehaviour
     public GameObject player; // Reference to the player object
     public float interactionDistance = 3f; // Distance within which the player can interact
 
+    public GameObject stage1;
+    public GameObject stage2;
+
     void Update()
     {
         if (player != null && Input.GetKeyDown(KeyCode.F))
@@ -36,6 +39,9 @@ public class DoorToStage2 : MonoBehaviour
         CharacterController controller = player.GetComponent<CharacterController>();
         if (controller != null)
         {
+            stage1.SetActive(false);
+            stage2.SetActive(true);
+            
             controller.enabled = false; // Disable CharacterController before teleporting
             player.transform.position = newPosition;
             controller.enabled = true; // Re-enable CharacterController after teleporting
@@ -45,6 +51,6 @@ public class DoorToStage2 : MonoBehaviour
             player.transform.position = newPosition;
         }
 
-        Debug.Log("Player Teleported to: " + newPosition);
+        //Debug.Log("Player Teleported to: " + newPosition);
     }
 }

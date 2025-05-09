@@ -9,11 +9,17 @@ public class ZombieAreaSpawner : MonoBehaviour
     public float spawnInterval = 10f;
     public int zombiesPerSpawn = 2;
 
+    public float zombieAmount;
+
     void Start()
     {
-        StartCoroutine(SpawnZombies());
+        //StartCoroutine(SpawnZombies());
+        for (int i = 0; i < zombieAmount; i++){
+            SpawnZombie();
+        }
     }
 
+/*
     IEnumerator SpawnZombies()
     {
         while (true)
@@ -25,5 +31,11 @@ public class ZombieAreaSpawner : MonoBehaviour
             }
             yield return new WaitForSeconds(spawnInterval);
         }
+    }
+*/
+
+    void SpawnZombie(){
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        Instantiate(zombiePrefab, spawnPoint.position, Quaternion.identity);
     }
 }
