@@ -2,13 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System.Runtime.CompilerServices;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
-using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
-using TMPro;
 
 public class PlayerController : FPSInput
 {
