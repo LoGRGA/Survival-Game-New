@@ -29,7 +29,7 @@ public class PlayerController : FPSInput
     private IEnumerator attackCoroutine;
 
     //Debuff Booleans
-    public bool isPoisoned, isBurned, isBleeding;
+    public bool isPoisoned, isBurned, isBleeding, gDaoHeavy;
 
     public GameObject[] weapons;
 
@@ -117,6 +117,7 @@ public class PlayerController : FPSInput
     public const string AXEHEAVY = "Axe Heavy";
     public const string SLAM = "Slam";
     public const string SPIN = "Spin";
+    public const string SPIN1 = "SpinMirror";
     public const string THROW = "Throw";
     
     public const string BLOCk = "Block";
@@ -223,6 +224,10 @@ public class PlayerController : FPSInput
     public GameObject hitEffect;
     public AudioClip swordSwing;
     public AudioClip hitSound;
+    public AudioClip grimStartSFX;
+    public AudioClip grimEndSFX;
+    public AudioClip thunder;
+    public AudioClip smash;
 
     bool attacking = false;
     bool readyToAttack = true;
@@ -246,6 +251,12 @@ public class PlayerController : FPSInput
     {
         audioSource.pitch = Random.Range(0.9f, 1.1f);
         audioSource.PlayOneShot(swordSwing);
+    }
+
+    public void SmashAudio()
+    {
+        audioSource.pitch = Random.Range(0.9f, 1.1f);
+        audioSource.PlayOneShot(smash);
     }
 
     // Basic Attack
@@ -426,6 +437,7 @@ public class PlayerController : FPSInput
         isGrimSpeed = true;
         speed += 5f;
 
+        StartCoroutine(GrimSpeed());
     }
 
     public void HammerHeavy()
@@ -444,7 +456,8 @@ public class PlayerController : FPSInput
 
         //LH.transform.Rotate(-30f, 0f, 0f, Space.Self);
         //RH.transform.Rotate(-30f, 0f, 0f, Space.Self);
-        RH.transform.localPosition = Vector3.zero + new Vector3(0.3f, -1.46f, 0f);     
+        RH.transform.localPosition = Vector3.zero + new Vector3(0.3f, -1.46f, 0f);
+        SmashAudio();
         ChangeAnimationState(SLAM);
     }
 
@@ -457,11 +470,13 @@ public class PlayerController : FPSInput
         attackDamage = 30;
         hitSoundDelay = 0.2f;
 
-        bool attack = Attacking();
-        if (!attack)
-            return;
+        // Start attacking as long as RMB is held
+        if (!gDaoHeavy)
+        {
+            gDaoHeavy = true;
+            StartCoroutine(gDaoLoop());
+        }
 
-        ChangeAnimationState(SPIN);
     }
 
     public void RAxeHeavy()
@@ -704,13 +719,25 @@ public class PlayerController : FPSInput
 
     IEnumerator GrimSpeed()
     {
+        if(grimStartSFX)
+            audioSource.PlayOneShot(grimStartSFX);
+
         yield return new WaitForSeconds(20);
         isGrimSpeed = false;
         speed -= 5;
+
+        if (grimEndSFX)
+            audioSource.PlayOneShot(grimEndSFX);
     }
 
     IEnumerator LightningCooldown()
     {
+        if (thunder)
+        {
+            audioSource.pitch = Random.Range(0.9f, 1.2f);
+            audioSource.PlayOneShot(thunder);
+        }
+
         isLightningCooldown = true;
 
         yield return new WaitForSeconds(7f);
@@ -723,6 +750,35 @@ public class PlayerController : FPSInput
         yield return new WaitForSeconds(2);
 
         weap.FireCrescentWave();
+    }
+
+    IEnumerator gDaoLoop()
+    {
+        int count = 0;
+        while (Input.GetButton("Fire2"))
+        {
+            bool attack = Attacking();
+            if (attack)
+            {
+                if (count == 0) 
+                {
+                    ChangeAnimationState(SPIN);
+                    count++;
+                }
+
+                else if (count == 1)
+                {
+                    ChangeAnimationState(SPIN1);
+                    count--;
+                }
+            }
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        //Stop attacking when Fire2 is released
+        gDaoHeavy = false; 
+        ChangeAnimationState(IDLE);
     }
 
     //junjie add
