@@ -250,14 +250,8 @@ AnimatorStateMachine:
     m_State: {fileID: -4508114611296258846}
     m_Position: {x: 640, y: 20, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 7708503566404063311}
-    m_Position: {x: 920, y: -410, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 6509164069287259227}
     m_Position: {x: 640, y: 440, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 2792066719353076957}
-    m_Position: {x: 880, y: 350, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8462540035617134836}
     m_Position: {x: 640, y: 180, z: 0}
@@ -509,32 +503,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &2792066719353076957
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Scythe Heavy
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1101 &2880703578755678384
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -577,33 +545,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &7708503566404063311
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 2H Attack
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 3298876594328316340, guid: 086c9f7053296f642a268f6467a58186, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

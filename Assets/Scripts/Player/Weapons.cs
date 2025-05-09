@@ -108,43 +108,13 @@ public class Weapons : MonoBehaviour
     public void Idle()
     { 
         WeaponStats weap = GetComponentInChildren<WeaponStats>();
-
-        if (weap.transform.name == "Pocket_Knife" || weap.transform.name == "Dagger" || weap.transform.name == "Shuriken")
-        {
-            playerController.Idle();
-        }
-        else if (weap.transform.name == "Sword" || weap.transform.name == "Axe" || weap.transform.name == "Hammer" ||
-                weap.transform.name == "Runes_Axe" || weap.transform.name == "Lightning_Sword")
-        {
-            playerController.SwordIdle();
-        }
-        else if (weap.transform.name == "Guan_Dao" || weap.transform.name == "Shuriken")
-        {
-            playerController.THIdle();
-        }
-        else
-            playerController.Idle();
+        playerController.Idle();
     }
 
     public void Walk()
     {
         WeaponStats weap = GetComponentInChildren<WeaponStats>();
-
-        if (weap.transform.name == "Pocket_Knife" || weap.transform.name == "Dagger" || weap.transform.name == "Shuriken")
-        {
-            playerController.Walk();
-        }
-        else if (weap.transform.name == "Sword" || weap.transform.name == "Axe" || weap.transform.name == "Hammer" ||
-                weap.transform.name == "Runes_Axe" || weap.transform.name == "Lightning_Sword")
-        {
-            playerController.ShieldIdle();
-        }
-        else if (weap.transform.name == "Guan_Dao" || weap.transform.name == "Shuriken")
-        {
-            playerController.THIdle();
-        }
-        else
-            playerController.Walk();
+        playerController.Walk();
     }
 
     public void Attack()

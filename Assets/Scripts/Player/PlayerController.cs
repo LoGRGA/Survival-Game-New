@@ -23,13 +23,13 @@ public class PlayerController : FPSInput
     private List<string> debuffList = new List<string>();
 
     private Vector3 originalPos;
-    private bool isInvincible, isGrimSpeed, isLightningCooldown;
+    private bool isInvincible, isGrimSpeed, isLightningCooldown, gDaoHeavy, smashDelay;
     private Cone cone;
     private Cones cones;
     private IEnumerator attackCoroutine;
 
     //Debuff Booleans
-    public bool isPoisoned, isBurned, isBleeding, gDaoHeavy;
+    public bool isPoisoned, isBurned, isBleeding;
 
     public GameObject[] weapons;
 
@@ -115,7 +115,7 @@ public class PlayerController : FPSInput
     public const string SWORDHEAVY = "Sword Heavy";
     public const string AXEATTACK = "Axe Attack";
     public const string AXEHEAVY = "Axe Heavy";
-    public const string SLAM = "Slam";
+    public const string SLAM = "Hammer Heavy";
     public const string SPIN = "Spin";
     public const string SPIN1 = "SpinMirror";
     public const string THROW = "Throw";
@@ -253,10 +253,21 @@ public class PlayerController : FPSInput
         audioSource.PlayOneShot(swordSwing);
     }
 
-    public void SmashAudio()
+    IEnumerator SmashAudio()
     {
+        foreach (Animator anim in animator)
+        {
+            anim.speed = 0.5f;
+        }
+        ChangeAnimationState(SLAM);
+        yield return new WaitForSeconds(0.8f);
+
         audioSource.pitch = Random.Range(0.9f, 1.1f);
         audioSource.PlayOneShot(smash);
+        foreach (Animator anim in animator)
+        {
+            anim.speed = 1.0f;
+        }
     }
 
     // Basic Attack
@@ -442,12 +453,14 @@ public class PlayerController : FPSInput
 
     public void HammerHeavy()
     {
+        if (smashDelay)
+            return;
         basicSpeed = attackSpeed;
         basicDamage = attackDamage;
-        attackSpeed = 2.5f;
-        attackDelay = 2f;
+        attackSpeed = 1.0f;
+        attackDelay = 0.8f;
         attackDamage = 150;
-        hitSoundDelay = 2f;
+        hitSoundDelay = 1.0f;
 
         cones.SelectCone(3);
         bool attack = Attacking();
@@ -457,8 +470,8 @@ public class PlayerController : FPSInput
         //LH.transform.Rotate(-30f, 0f, 0f, Space.Self);
         //RH.transform.Rotate(-30f, 0f, 0f, Space.Self);
         RH.transform.localPosition = Vector3.zero + new Vector3(0.3f, -1.46f, 0f);
-        SmashAudio();
-        ChangeAnimationState(SLAM);
+        StartCoroutine(SmashAudio());
+        StartCoroutine(SmashDelay());
     }
 
     public void GDaoHeavy()
@@ -752,9 +765,24 @@ public class PlayerController : FPSInput
         weap.FireCrescentWave();
     }
 
+    IEnumerator SmashDelay()
+    {
+        smashDelay = true;
+
+        yield return new WaitForSeconds(3);
+
+        smashDelay = false;
+    }
+
     IEnumerator gDaoLoop()
     {
         int count = 0;
+
+        foreach (Animator anim in animator)
+        {
+            anim.speed = 1.4f;
+        }
+
         while (Input.GetButton("Fire2"))
         {
             bool attack = Attacking();
@@ -777,7 +805,11 @@ public class PlayerController : FPSInput
         }
 
         //Stop attacking when Fire2 is released
-        gDaoHeavy = false; 
+        foreach (Animator anim in animator)
+        {
+            anim.speed = 1.0f;
+        }
+        gDaoHeavy = false;
         ChangeAnimationState(IDLE);
     }
 
