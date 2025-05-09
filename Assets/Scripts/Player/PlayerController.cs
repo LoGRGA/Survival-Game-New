@@ -27,9 +27,10 @@ public class PlayerController : FPSInput
     private Cone cone;
     private Cones cones;
     private IEnumerator attackCoroutine;
+    private PlayerController playerController;
 
     //Debuff Booleans
-    public bool isPoisoned, isBurned, isBleeding;
+    public bool isPoisoned, isBurned, isBleeding, isStunned;
 
     public GameObject[] weapons;
 
@@ -59,6 +60,7 @@ public class PlayerController : FPSInput
         base.Start();
         // get the components
         charController = GetComponent<CharacterController>();
+        playerController = GetComponent<PlayerController>();
         animator = GetComponentsInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
         weap = GetComponentInChildren<Weapons>();
@@ -95,6 +97,11 @@ public class PlayerController : FPSInput
         if (Input.GetButtonDown("Fire2"))
         {
             weap.SpecialAttack();
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            playerController.AddDebuff("Bleed");
         }
 
         SetAnimations();
@@ -663,15 +670,21 @@ public class PlayerController : FPSInput
                     break;
                 case "Burn":
                     if (isBurned)
-                        StopCoroutine(Burned(5));
+                        StopCoroutine(Burned(3));
                     isBurned = true;
-                    StartCoroutine(Burned(5));
+                    StartCoroutine(Burned(3));
                     break;
                 case "Bleed":
                     if (isBleeding)
                         StopCoroutine(Bleeding(20));
                     isBleeding = true;
                     StartCoroutine(Bleeding(20));
+                    break;
+                case "Stun":
+                    if (isStunned)
+                        StopCoroutine(Stun(3));
+                    isStunned = true;
+                    StartCoroutine(Stun(3));
                     break;
                 default:
                     Debug.LogWarning("Debuff does not exist");
@@ -688,14 +701,14 @@ public class PlayerController : FPSInput
         {
             if (degenCounter != 0)
             {
-                TakeDamge(3);
+                //TakeDamge(3);
+                speed -= 3;
                 yield return new WaitForSeconds(1.0f);
-            }
-            else
-            {
-                isPoisoned = false;
+                speed += 3;
+                Debug.Log("Poison Counter left = " + degenCounter);
             }
         }
+        isPoisoned = false;
     }
 
     IEnumerator Burned(int burnCount)
@@ -706,12 +719,10 @@ public class PlayerController : FPSInput
             {
                 TakeDamge(5);
                 yield return new WaitForSeconds(3.0f);
-            }
-            else
-            {
-                isBurned = false;
+                Debug.Log("Burn Counter left = " + burnCounter);
             }
         }
+        isBurned = false;
     }
 
     IEnumerator Bleeding(int bleedCount)
@@ -720,14 +731,35 @@ public class PlayerController : FPSInput
         {
             if (bleedCounter != 0)
             {
+                speed -= 1;
                 TakeDamge(1);
                 yield return new WaitForSeconds(0.5f);
-            }
-            else
-            {
-                isBurned = false;
+                speed += 1;
+                Debug.Log("Bleed Counter left = " + bleedCounter);
             }
         }
+        isBleeding = false;
+    }
+
+    IEnumerator Stun(int stunCount)
+    {
+        // Disable player controls during stun
+        if (playerController != null)
+            playerController.enabled = false;
+
+        for (int stunCounter = stunCount; stunCounter > 0; stunCounter--)
+        {
+            if (stunCounter != 0)
+            {
+                yield return new WaitForSeconds(1f);
+                Debug.Log("Stun Counter left = " + stunCounter);
+            }
+        }
+        // Re-enable player controls after stun ends
+        if (playerController != null)
+            playerController.enabled = true;
+
+        isStunned = false;
     }
 
     IEnumerator GrimSpeed()
