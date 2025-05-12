@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -35183,6 +35183,8 @@ MonoBehaviour:
   teleportPosition: {x: -9.74, y: 24.05, z: -37.3}
   player: {fileID: 934009050}
   interactionDistance: 3
+  stage1: {fileID: 0}
+  stage2: {fileID: 0}
 --- !u!65 &1826441630
 BoxCollider:
   m_ObjectHideFlags: 0

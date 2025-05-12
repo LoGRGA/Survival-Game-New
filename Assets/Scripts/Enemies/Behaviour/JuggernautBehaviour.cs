@@ -425,7 +425,7 @@ public class JuggernautBehaviour : EnemyBehaviour
         PlaySFX2(attack3AudioClip);
         isDealingDamage = true;
         StartCoroutine(DealDamageTimer(dealDamageDuration));
-        StartCoroutine(DealDamage(attack3Damage, attack3Distance));
+        StartCoroutine(DealDamageStun(attack3Damage, attack3Distance));
         StartCoroutine(SmoothMoveForward(attack3MoveDistance, dealDamageDuration));
     }
     
@@ -485,7 +485,7 @@ public class JuggernautBehaviour : EnemyBehaviour
         PlaySFX2(jumpAttackAudioClip);
         isDealingDamage = true;
         StartCoroutine(DealDamageTimer(dealDamageDuration+ 0.1f));
-        StartCoroutine(DealDamage(jumpAttackDamage, jumpAttackDistance));
+        StartCoroutine(DealDamageStun(jumpAttackDamage, jumpAttackDistance));
     }
 
     protected IEnumerator Jump(){
@@ -660,6 +660,34 @@ public class JuggernautBehaviour : EnemyBehaviour
             { ExtendedAnimationState.FlySword, "FlySword"},
             { ExtendedAnimationState.SwordAura, "SwordAura"}
         };
+    }
+
+    protected IEnumerator DealDamageStun(int attackDamage, float attackDistance){
+        while(isDealingDamage && isAttacking){
+                DealDamageStunRayCast(attackDamage, attackDistance);
+                yield return null;
+        }
+    }
+
+    //deal damage to player with ray cast check
+    protected virtual void DealDamageStunRayCast(int attackDamage, float attackDistance){
+        RaycastHit hit;
+        Debug.DrawRay(attackRaycastTransformPosition, transform.forward, Color.red, 5f);
+        if (Physics.Raycast(attackRaycastTransformPosition, transform.forward, out hit, attackDistance, targetMask)){
+            //if (hit.collider.gameObject == playerTransform.gameObject){
+                DealDamageStun(hit, attackDamage);
+            //}
+        }
+    }
+
+    //deal damage to player
+    protected virtual void DealDamageStun(RaycastHit hit, int attackDamage){
+        PlayerController playerHealth = hit.collider.GetComponent<PlayerController>();
+        if (playerHealth != null){
+            playerHealth.TakeDamge(attackDamage);
+            playerHealth.AddDebuff("Stun");
+            isDealingDamage = false;
+        }
     }
 
 

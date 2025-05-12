@@ -42,7 +42,7 @@ public class CrabExplosion : MonoBehaviour
         if(other.tag=="Player"){
             PlayerController player = other.GetComponent<PlayerController>();
             player.TakeDamge(damage);
-            player.AddDebuff("fire");
+            player.AddDebuff("Burn");
         }
         else{
             EnemyBehaviour enemy = other.GetComponentInParent<EnemyBehaviour>();

@@ -147,6 +147,15 @@ public class VampireBehaviour : EnemyBehaviour
         }
     }
 
+    protected override void DealDamage(RaycastHit hit, int attackDamage){
+        PlayerController playerHealth = hit.collider.GetComponent<PlayerController>();
+        if (playerHealth != null){
+            playerHealth.TakeDamge(attackDamage);
+            playerHealth.AddDebuff("Bleed");
+            isDealingDamage = false;
+        }
+    }
+
     protected override void Attack()
     {
         base.Attack();
@@ -156,7 +165,7 @@ public class VampireBehaviour : EnemyBehaviour
     protected override IEnumerator AttackLogic(){
         if(alive && isAttacking){
             yield return new WaitForSeconds(attackWindUpDuration);
-            if(attackCounter > 3){
+            if(attackCounter > 1){
                 PlaySFX(attackAudioClip);
             }
             

@@ -54,6 +54,7 @@ public class SwordAura : MonoBehaviour
         //if collide with player
         if (((1 << other.gameObject.layer) & playerLayer) != 0){
             playerController.TakeDamge(10);
+            playerController.AddDebuff("Stun");
             InstantiateSwordAuraHitSFX();
             Destroy(gameObject);
         }

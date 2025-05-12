@@ -36,6 +36,7 @@ public class RotArea : MonoBehaviour
 
         if(isAbleDealDamage && dealDamageTimer >= dealDamageInterval){
             playerController.TakeDamge(dealDamageAmount);
+            playerController.AddDebuff("Poison");
             dealDamageTimer = 0f;
         }
     }
@@ -44,7 +45,7 @@ public class RotArea : MonoBehaviour
     {
         if (((1 << other.gameObject.layer) & playerLayer) != 0){
             isAbleDealDamage = true;
-            Debug.Log("isAbleDealDamage in trigger = " + isAbleDealDamage);
+            //Debug.Log("isAbleDealDamage in trigger = " + isAbleDealDamage);
         }
     }
 
