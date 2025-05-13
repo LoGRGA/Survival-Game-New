@@ -11,6 +11,11 @@ public class Weapons : MonoBehaviour
     PlayerController playerController;
     public Shield shield;
 
+    private bool debugMode = false;
+    private string[] weapons;
+    private string weaponName;
+    private int weaponIndex;
+
     //RunesAxe Stuff
     public float waveSpeed = 10f; // Speed of the slash wave projectile
     public float waveLifetime = 3f; // Time before the projectile disappears
@@ -49,18 +54,33 @@ public class Weapons : MonoBehaviour
         readyToThrow = true;
         playerController = GetComponentInParent<PlayerController>();
         mainCamera = Camera.main;
+        weapons = new string[2];
+        weapons[0] = "Pocket_Knife";
+        weaponName = weapons[0];
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            debugMode = !debugMode;
+        }
+            
+
         int previousSelectedWeapon = selectedweapon;
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
             selectedweapon = 0;
+            weaponIndex = 0;
+        }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
             selectedweapon = 1;
+            weaponIndex = 1;
+        }
 
 
         //Below are all temporary
@@ -93,15 +113,72 @@ public class Weapons : MonoBehaviour
     }
     public void SwapWeapons()
     {
-        int i = 0;
-
-        foreach(Transform weap in transform)
+        if (debugMode)
         {
-            if (i == selectedweapon)
-                weap.gameObject.SetActive(true);
-            else
-                weap.gameObject.SetActive(false);
-            i++;
+            int i = 0;
+
+            foreach (Transform weap in transform)
+            {
+                if (i == selectedweapon)
+                    weap.gameObject.SetActive(true);
+                else
+                    weap.gameObject.SetActive(false);
+                i++;
+            }
+        }
+        else
+        {
+            foreach (Transform weap in transform)
+            {
+                if (weap.transform.name == weaponName)
+                    weap.gameObject.SetActive(true);
+                else
+                    weap.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void ReplaceWeap(string weap)
+    {
+        Debug.Log(weap);
+
+        //Get the right weapon name
+        if (weap == "PocketKnife")
+            weaponName = "Pocket_Knife";
+        else if (weap == "Dagger")
+            weaponName = "Dagger";
+        else if (weap == "Sword")
+            weaponName = "Sword";
+        else if (weap == "Axe")
+            weaponName = "Axe";
+        else if (weap == "ScytheHealth")
+            weaponName = "Grim_Reaper_Scythe";
+        else if (weap == "Hammer")
+            weaponName = "Hammer";
+        else if (weap == "Polearm")
+            weaponName = "Guan_Dao";
+        else if (weap == "RunesAxe")
+            weaponName = "Runes_Axe";
+        else if (weap == "LightningSword")
+            weaponName = "Lightning_Sword";
+        else if (weap == "Shuriken")
+            weaponName = "Shuriken";
+        else
+        {
+            Debug.LogWarning("Weapon Does not Exist :(");
+            return;
+        }
+
+        //Get the right index to replace the weapon
+        if (weapons[1] != null)
+        {
+            weapons[weaponIndex] = weaponName;
+            SwapWeapons();
+        }
+        else
+        {
+            weapons[1] = weaponName;
+            SwapWeapons();
         }
     }
 

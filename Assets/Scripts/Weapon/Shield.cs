@@ -17,7 +17,7 @@ public class Shield : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int previousSelectedShield = selectedshield;
+        /*int previousSelectedShield = selectedshield;
 
         if (Input.GetKeyDown(KeyCode.J))
             selectedshield = 0;
@@ -33,6 +33,7 @@ public class Shield : MonoBehaviour
 
         if (previousSelectedShield != selectedshield)
             SwapShield();
+        */
     }
 
     public void SwapShield()

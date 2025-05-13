@@ -7,6 +7,8 @@ public class Pickup : MonoBehaviour
 
     //reference to the inventory
     private InventoryController inventory;
+    //public GameObject weap;
+    private Weapons weapons;
     public GameObject itemButton;
 
     //name of the item in the inventory
@@ -15,6 +17,7 @@ public class Pickup : MonoBehaviour
     void Start()
     {
         inventory = FindObjectOfType<InventoryController>();
+        weapons = FindObjectOfType<Weapons>();
     }
 
     //public void PickupItem()
@@ -124,6 +127,7 @@ public class Pickup : MonoBehaviour
                     //if the item that I pick up is the same the one in the inventory, it will stack
                     if (itemName == inventory.slots[i].transform.GetComponentInChildren<Spawn>().itemName) //stack
                     {
+                        weapons.ReplaceWeap(itemName);
                         Destroy(gameObject);
                         inventory.slots[i].GetComponent<Slot>().amount += 1;
                         break;
@@ -132,6 +136,8 @@ public class Pickup : MonoBehaviour
                 else if (inventory.isFull[i] == false)
                 {
                     //if not stackable
+                    Debug.Log(itemName);
+                    weapons.ReplaceWeap(itemName);
                     inventory.isFull[i] = true;
                     Instantiate(itemButton, inventory.slots[i].transform, false);
                     inventory.slots[i].GetComponent<Slot>().amount += 1;
