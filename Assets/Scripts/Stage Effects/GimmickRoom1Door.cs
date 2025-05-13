@@ -26,12 +26,12 @@ public class GimmickRoom1Door : MonoBehaviour
     {
         //teleport to room2
         if (player != null && Input.GetKeyDown(KeyCode.F) && isStay && !isGimmickRoom2Done){
-            StartCoroutine(TeleportPLayerToRoom2());
+            StartCoroutine(TeleportPlayerToRoom2());
         }
 
         //teleport to boos room
         else if (player != null && Input.GetKeyDown(KeyCode.F) && isStay && isGimmickRoom2Done){
-            StartCoroutine(TeleportPLayerToBossRoom());
+            StartCoroutine(TeleportPlayerToBossRoom());
         }
     }
 
@@ -49,7 +49,7 @@ public class GimmickRoom1Door : MonoBehaviour
         }
     }
 
-    IEnumerator TeleportPLayerToRoom2(){
+    IEnumerator TeleportPlayerToRoom2(){
         //stage2RoomTeleporter.GetComponent<Stage2RoomTeleporter>().isGimmickRoom2Done = true;
         player.GetComponent<PlayerController>().enabled = false;
         player.transform.position = gimmickRoom2Trans.position;
@@ -57,7 +57,7 @@ public class GimmickRoom1Door : MonoBehaviour
         player.GetComponent<PlayerController>().enabled = true;
     }
 
-    IEnumerator TeleportPLayerToBossRoom(){
+    IEnumerator TeleportPlayerToBossRoom(){
         player.GetComponent<PlayerController>().enabled = false;
         player.transform.position = bossRoomTrans.position;
         yield return new WaitForSeconds(0.1f);

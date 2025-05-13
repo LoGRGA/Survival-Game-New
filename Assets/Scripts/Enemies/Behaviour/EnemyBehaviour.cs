@@ -71,8 +71,8 @@ public class EnemyBehaviour : MonoBehaviour
     protected float roarDuration;
     protected bool isRoaring = false;
     protected bool isRoared = false;
-    protected float roarCoolDown = 10f;
-    protected bool isRoarCoolDown = false;
+    protected float roarCoolDown = 15f;
+    public bool isRoarCoolDown = false;
 
     //fov related
     protected FieldOfView fov; 

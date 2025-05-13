@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stage2BossRoomDoor : MonoBehaviour
+public class Stage3BossRoomDoor : MonoBehaviour
 {
     private bool isStay = false;
     public GameObject player;
-    public Transform stage3BossRoom;
+    public Transform cureRoomTrans;
 
-    public GameObject stage2;
     public GameObject stage3;
+    public GameObject cureRoom;
 
     private AudioSource audioSource;
     // Start is called before the first frame update
@@ -24,9 +24,9 @@ public class Stage2BossRoomDoor : MonoBehaviour
     {
         //teleport to room2
         if (player != null && Input.GetKeyDown(KeyCode.F) && isStay){
-            StartCoroutine(TeleportPlayerToStage3BossRoom());
-            stage2.SetActive(false);
-            stage3.SetActive(true);
+            StartCoroutine(TeleportPlayerToCureRoom());
+            stage3.SetActive(false);
+            cureRoom.SetActive(true);
         }
     }
 
@@ -44,9 +44,9 @@ public class Stage2BossRoomDoor : MonoBehaviour
         }
     }
 
-    IEnumerator TeleportPlayerToStage3BossRoom(){
+    IEnumerator TeleportPlayerToCureRoom(){
         player.GetComponent<PlayerController>().enabled = false;
-        player.transform.position = stage3BossRoom.position;
+        player.transform.position = cureRoomTrans.position;
         yield return new WaitForSeconds(0.1f);
         player.GetComponent<PlayerController>().enabled = true;
     }

@@ -145,7 +145,7 @@ public class PudgeBehaviour : EnemyBehaviour
                 ScoreManager_new.instance.AddScore(1000); // Adjust points as needed
             }
         }
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRoared){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRoared && !isRoarCoolDown){
             TryRoar();
         }
         //attack reation check

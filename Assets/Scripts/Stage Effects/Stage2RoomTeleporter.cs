@@ -43,8 +43,7 @@ public class Stage2RoomTeleporter : MonoBehaviour
     }
 
     private void TeleportPlayer(){
-        //int roomToTeleport = Random.Range(1, 3);
-        int roomToTeleport =1;
+        int roomToTeleport = Random.Range(1, 3);
         if(roomToTeleport == 1){
             isGimmickRoom1Done = true;
             TeleportPlayerTo(normalRoom1);

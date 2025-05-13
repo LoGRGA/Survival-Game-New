@@ -213,7 +213,7 @@ public class JuggernautBehaviour : EnemyBehaviour
             Rage();
         }
         //roar reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRoared && !isCastingRangeSkill){
+        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRoared && !isCastingRangeSkill && !isRoarCoolDown){
             TryRoar();
         }
         else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= rangeAttackSkillAttackRange && !isRangeAttackSkillCoolDown && isFlySword && !isRaging && !isCastingRangeSkill){
@@ -331,6 +331,7 @@ public class JuggernautBehaviour : EnemyBehaviour
     //override the Roar function
     protected override IEnumerator Roaring(){
         SetAnimationActive(baseAnimationState.Roar);
+        StartCoroutine(RoarCoolDownTimer());
         juggernautSword.SetActive(true);
         isRoaring = true;
         isRoared = true;
