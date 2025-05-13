@@ -18,6 +18,9 @@ public class Stage2RoomTeleporter : MonoBehaviour
     private bool isPlayerNearby = false;
     private int lastRoomIndex = -1;
 
+    public bool isGimmickRoom1Done = false;
+    public bool isGimmickRoom2Done = false;
+
     void Update()
     {
         if (isPlayerNearby && Input.GetKeyDown(KeyCode.F))
@@ -26,23 +29,42 @@ public class Stage2RoomTeleporter : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = true;
-            Debug.Log("Press F to teleport.");
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerNearby = false;
+        isPlayerNearby = false;
+    }
+
+    private void TeleportPlayer(){
+        //int roomToTeleport = Random.Range(1, 3);
+        int roomToTeleport =1;
+        if(roomToTeleport == 1){
+            isGimmickRoom1Done = true;
+            TeleportPlayerTo(normalRoom1);
+        }else{
+            isGimmickRoom2Done = true;
+            TeleportPlayerTo(normalRoom2);
         }
     }
 
+    private void TeleportPlayerTo(Transform room){
+        // Teleport the player
+        CharacterController controller = player.GetComponent<CharacterController>();
+        if (controller != null) controller.enabled = false;
+
+        player.transform.position = room.position;
+
+        if (controller != null) controller.enabled = true;
+    }
+
+/*
     private void TeleportPlayer()
     {
         Vector3 targetPosition = Vector3.zero;
@@ -118,4 +140,5 @@ public class Stage2RoomTeleporter : MonoBehaviour
 
         if (controller != null) controller.enabled = true;
     }
+*/
 }

@@ -71,6 +71,8 @@ public class EnemyBehaviour : MonoBehaviour
     protected float roarDuration;
     protected bool isRoaring = false;
     protected bool isRoared = false;
+    protected float roarCoolDown = 10f;
+    protected bool isRoarCoolDown = false;
 
     //fov related
     protected FieldOfView fov; 
@@ -284,7 +286,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     //chase player
     protected virtual void Chase(){
-        if(!isRoared){
+        if(!isRoared && !isRoarCoolDown){
             PlaySFX(roarAudioClip);
             roarCoroutine = StartCoroutine(Roaring());
         }else{
@@ -298,20 +300,27 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    protected void TryRoar(){
+        if(!isRoared && !isRoarCoolDown){
+            PlaySFX(roarAudioClip);
+            roarCoroutine = StartCoroutine(Roaring());
+        }
+    }
+
     protected virtual IEnumerator Roaring()
     {
         SetAnimationActive(baseAnimationState.Roar);
+        StartCoroutine(RoarCoolDownTimer());
         isRoaring = true;
         isRoared = true;
         yield return new WaitForSeconds(roarDuration);
         isRoaring = false;
     }
 
-    protected void TryRoar(){
-        if(!isRoared){
-            PlaySFX(roarAudioClip);
-            roarCoroutine = StartCoroutine(Roaring());
-        }
+    protected virtual IEnumerator RoarCoolDownTimer(){
+        isRoarCoolDown = true;
+        yield return new WaitForSeconds(roarCoolDown);
+        isRoarCoolDown = false;
     }
 
     //patrol logic
