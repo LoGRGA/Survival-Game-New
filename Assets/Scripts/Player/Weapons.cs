@@ -70,16 +70,54 @@ public class Weapons : MonoBehaviour
 
         int previousSelectedWeapon = selectedweapon;
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (weaponIndex == 0)
+            {
+                selectedweapon = 1;
+                weaponIndex = 1;
+                weaponName = weapons[1];
+            }
+            else if (weaponIndex == 1)
+            {
+                selectedweapon = 0;
+                weaponIndex = 0;
+                weaponName = weapons[0];
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            selectedweapon = 0;
-            weaponIndex = 0;
+            if (!debugMode)
+            {
+                if (weapons[0] != null)
+                {
+                    selectedweapon = 0;
+                    weaponIndex = 0;
+                    weaponName = weapons[0];
+                }
+                else { }
+
+            }
+            else
+                selectedweapon = 0;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            selectedweapon = 1;
-            weaponIndex = 1;
+            if (!debugMode)
+            {
+                if (weapons[1] != null)
+                {
+                    selectedweapon = 1;
+                    weaponIndex = 1;
+                    weaponName = weapons[1];
+                }
+                else { }
+
+            }
+            else
+                selectedweapon = 1;
         }
 
 
@@ -178,6 +216,8 @@ public class Weapons : MonoBehaviour
         else
         {
             weapons[1] = weaponName;
+            selectedweapon = 1;
+            weaponIndex = 1;
             SwapWeapons();
         }
     }
