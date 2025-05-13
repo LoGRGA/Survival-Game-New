@@ -74,15 +74,23 @@ public class Weapons : MonoBehaviour
         {
             if (weaponIndex == 0)
             {
-                selectedweapon = 1;
-                weaponIndex = 1;
-                weaponName = weapons[1];
+                if (weapons[1] != null)
+                {
+                    selectedweapon = 1;
+                    weaponIndex = 1;
+                    weaponName = weapons[1];
+                }
+                else { }
             }
             else if (weaponIndex == 1)
             {
-                selectedweapon = 0;
-                weaponIndex = 0;
-                weaponName = weapons[0];
+                if (weapons[0] != null)
+                {
+                    selectedweapon = 0;
+                    weaponIndex = 0;
+                    weaponName = weapons[0];
+                }
+                else { }
             }
         }
 
