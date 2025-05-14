@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     public GameObject leaderboardMenu;  // Reference to the Leaderboard Menu
     public GameObject volumeMenu;       // Reference to the Volume Adjuster Menu
     public MouseLook mouseLook, mouseLook2;         // Reference to the MouseLook script
+    public PlayerController playerController;
 
 
     void Start()
@@ -87,6 +88,8 @@ public class MenuManager : MonoBehaviour
             mouseLook.enabled = true;
         if (mouseLook2 != null)
             mouseLook2.enabled = true;
+        if (playerController != null)
+            playerController.enabled = true;
     }
 
     // Unlock cursor when in UI
@@ -100,6 +103,8 @@ public class MenuManager : MonoBehaviour
             mouseLook.enabled = false;
         if (mouseLook2 != null)
             mouseLook2.enabled = false;
+        if (playerController != null)
+            playerController.enabled = false;
     }
 
     void Update()
