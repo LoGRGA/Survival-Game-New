@@ -4,36 +4,46 @@ using UnityEngine;
 
 public class GateInteraction : MonoBehaviour
 {
-    public float riseAmount = 5f;              // How high the object rises
-    public float moveSpeed = 2f;               // How fast the object moves
-    private bool isPlayerInRange = false;      // Is the player in range?
-    private bool isRaised = false;             // Is the object raised?
-    private Vector3 initialPosition;           // Starting position
-    private Vector3 targetPosition;            // Target position
+    public float riseAmount = 5f;
+    public float moveSpeed = 2f;
+    private bool isPlayerInRange = false;
+    private bool isRaised = false;
+    private Vector3 initialPosition;
+    private Vector3 targetPosition;
 
-    //HAZIQ
     public InventoryController inventory;
-    //HAZIQ
+
+    [Header("Optional - Gimmick Script to Disable")]
+    public FinalBossRoom bossRoomScript; // Assign this in the Inspector
 
     private void Start()
     {
         initialPosition = transform.position;
         targetPosition = initialPosition;
 
-        //HAZIQ
         inventory = FindObjectOfType<InventoryController>();
-        //HAZIQ
 
+        // If key is already held, disable boss gimmick script
+        if (HasKeyItem() && bossRoomScript != null)
+        {
+            bossRoomScript.enabled = false;
+            Debug.Log("Player has key. FinalBossRoom script disabled at Start.");
+        }
     }
 
     private void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.F))
         {
-            // Check if the key is in slot 9 (index 8)
             if (HasKeyItem())
             {
                 TogglePosition();
+
+                if (bossRoomScript != null && bossRoomScript.enabled)
+                {
+                    bossRoomScript.enabled = false;
+                    Debug.Log("FinalBossRoom script disabled after opening gate with key.");
+                }
             }
             else
             {
@@ -41,7 +51,6 @@ public class GateInteraction : MonoBehaviour
             }
         }
 
-        // Smoothly move towards the target position
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
 
@@ -66,19 +75,18 @@ public class GateInteraction : MonoBehaviour
     {
         if (isRaised)
         {
-            targetPosition = initialPosition;                // Move back to the original position
+            targetPosition = initialPosition;
             Debug.Log("Object lowering...");
         }
         else
         {
-            targetPosition = initialPosition + Vector3.up * riseAmount;  // Move up
+            targetPosition = initialPosition + Vector3.up * riseAmount;
             Debug.Log("Object rising...");
         }
 
-        isRaised = !isRaised;  // Toggle the state
+        isRaised = !isRaised;
     }
 
-    //HAZIQ
     private bool HasKeyItem()
     {
         if (inventory == null || inventory.slots.Length < 11)
@@ -97,6 +105,4 @@ public class GateInteraction : MonoBehaviour
 
         return false;
     }
-
-    //HAZIQ
 }
