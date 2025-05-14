@@ -9,9 +9,10 @@ using Unity.VisualScripting;
 public class PlayerController : FPSInput
 {
     //HAZIQ Health Warning Panel 
-    //public GameObject healthWarningPanel;
-    //public TMP_Text healthWarningText;
-    //private bool hasShownWarning = false;
+    public GameObject healthWarningPanel;
+    public TMP_Text healthWarningText;
+    private bool hasShownWarning = false;
+    private bool isCooldownActive = false;
     //HAZIQ
 
     //
@@ -582,15 +583,16 @@ public class PlayerController : FPSInput
             ShieldStat shieldstat = GetComponentInChildren<ShieldStat>();
             shieldstat.BlockDamage(amount);
         }
-/*
+
         //Haziq Warning Panel
-        if (!hasShownWarning && currentHealth <= maxHealth / 2)
+        if (!hasShownWarning && currentHealth <= maxHealth / 2 && !isCooldownActive)
         {
             ShowHealthWarning("Your health is at 50 percent!\n Time to restock some health potion at my shop!\nCome!\nI will also put in a discount price for the potion!!");
             hasShownWarning = true;
+            StartCoroutine(WarningCooldown());
         }
         //Haziq
-*/
+
     }
     public void Heal(int amount)
     {
@@ -599,7 +601,7 @@ public class PlayerController : FPSInput
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);  // Prevent health from going above maxHealth
             healthText.SetText(currentHealth.ToString());  // Update health text display
             slider.value = currentHealth;  // Update slider value
-/*
+
         //HAZIQ
         // Reset warning Panel if health goes above 50%
         if (currentHealth > maxHealth / 2)
@@ -607,7 +609,7 @@ public class PlayerController : FPSInput
             hasShownWarning = false;
         }
         //HAZIQ
-*/
+
     }
 
     private void GrimHeal(EnemyBehaviour T)
@@ -856,7 +858,7 @@ public class PlayerController : FPSInput
     public void AddDebuff(string debuff){
         debuffList.Add(debuff);
     }
-/*
+
     //HAZIQ Add Warning Panel 
     private void ShowHealthWarning(string message)
     {
@@ -875,7 +877,7 @@ public class PlayerController : FPSInput
         foreach (char letter in message.ToCharArray())
         {
             healthWarningText.text += letter;
-            yield return new WaitForSeconds(0.030f); // Speed of typing (0.03 = fast, 0.1 = slower)
+            yield return new WaitForSeconds(0.020f); // Speed of typing (0.03 = fast, 0.1 = slower)
         }
     }
 
@@ -885,6 +887,15 @@ public class PlayerController : FPSInput
         healthWarningPanel.SetActive(false);
     }
 
+    private IEnumerator WarningCooldown()
+    {
+        isCooldownActive = true;
+        yield return new WaitForSeconds(30f); // Prevent re-triggering for 10 seconds
+        hasShownWarning = false; // Allow it to trigger again if still below 50%
+        isCooldownActive = false;
+    }
+
+
     //HAZIQ
-*/
+
 }
