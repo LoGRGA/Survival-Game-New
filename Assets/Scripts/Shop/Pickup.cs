@@ -137,7 +137,7 @@ public class Pickup : MonoBehaviour
                 {
                     //if not stackable
                     Debug.Log(itemName);
-                    weapons.ReplaceWeap(itemName);
+                    WeapReplace();
                     inventory.isFull[i] = true;
                     Instantiate(itemButton, inventory.slots[i].transform, false);
                     inventory.slots[i].GetComponent<Slot>().amount += 1;
@@ -148,5 +148,14 @@ public class Pickup : MonoBehaviour
 
             }
         }
+    }
+
+    private void WeapReplace()
+    {
+        if (itemName == "PocketKnife" || itemName == "Dagger" || itemName == "Sword" || itemName == "Axe" || itemName == "ScytheHealth" ||
+            itemName == "Hammer" || itemName == "Polearm" || itemName == "RunesAxe" || itemName == "LightningSword" || itemName == "Shuriken")
+            weapons.ReplaceWeap(itemName);
+        else
+            return;  
     }
 }
