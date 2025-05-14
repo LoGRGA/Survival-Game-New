@@ -49,18 +49,4 @@ public class Stage3BossRoom : MonoBehaviour
             door.SetActive(!targetFound);
         }
     }
-
-     // 可视化辅助（可选）
-    void OnDrawGizmosSelected()
-    {
-        if (triggerCollider == null) return;
-        
-        Gizmos.color = Color.red;
-        Gizmos.matrix = Matrix4x4.TRS(
-            triggerCollider.bounds.center, 
-            transform.rotation, 
-            Vector3.one
-        );
-        Gizmos.DrawCube(Vector3.zero, triggerCollider.bounds.size);
-    }
 }
