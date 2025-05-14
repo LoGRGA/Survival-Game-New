@@ -595,6 +595,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
+  isRoarCoolDown: 0
+  key: {fileID: 801745236298312623, guid: 4f75c826c8c55ac458548e2a992ccb60, type: 3}
+  hasKey: 0
 --- !u!4 &7607845493288896224 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4308596981445705757, guid: 75f6ff238ab6b2a4480b6ceb6015608d, type: 3}

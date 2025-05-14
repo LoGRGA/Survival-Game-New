@@ -691,5 +691,22 @@ public class JuggernautBehaviour : EnemyBehaviour
         }
     }
 
+    protected override void OnDisable(){
+        base.OnDisable();
+        isAttack = true;
+        isAttack2 = false;
+        isAttack3 = false;
+        isResetPosition = false;
+        isMeleeAttackSkillCoolDown = false;
+        isBlinkBackAttack = true;
+        isJumpAttack = false;
+        isRangeAttackSkillCoolDown = false;
+        isCastingRangeSkill = false;   
+        isFlySword = true;
+        isSwordAura = false;
+        isRaged = false;
+        isRaging = false;
+    }
+
 
 }

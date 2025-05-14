@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
@@ -506,5 +507,24 @@ public class EnemyBehaviour : MonoBehaviour
 
     public float GetFOVRaycastHeight(){
         return fovRaycastHeight;
+    }
+
+    protected virtual void OnDisable() {
+        StopAllCoroutines();
+        isDealingDamage = false;
+        isAttacking = false;
+        isIdling = true;
+        isRotating = false;
+        isMoving = false;
+        isRoaring = false;
+        isRoared = false;
+        isRoarCoolDown = false;
+        isFaceToPlayer = false;
+        isFaceToPlayerCoroutine = false;
+        isIdleCoroutine = false;
+        isMoveCoroutine = false;
+        hitable = true;
+        isHitting = false;
+        fov.canSeePlayer = false;
     }
 }

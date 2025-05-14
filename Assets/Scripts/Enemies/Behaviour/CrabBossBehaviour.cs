@@ -292,7 +292,14 @@ public class CrabBossBehaviour : EnemyBehaviour
         };
     }
 
-    
+    protected override void OnDisable(){
+        base.OnDisable();
+        isAttack = true;
+        isAttack2 = false;
+        isAttack3 = false;
+        isSummonHalf = false;
+        isSummoning = false;
+    }
 
 
 

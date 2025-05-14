@@ -17,11 +17,19 @@ public class FieldOfView : MonoBehaviour
 
     private EnemyBehaviour enemy;
 
+    private Coroutine fovCoroutine;
+
     private void Start(){
         playerRef = GameObject.FindGameObjectWithTag("Player");
-        StartCoroutine(FOVRoutine());
+        fovCoroutine = StartCoroutine(FOVRoutine());
 
         enemy = GetComponent<EnemyBehaviour>();
+    }
+
+    private void Update(){
+        if(fovCoroutine == null){
+            fovCoroutine = StartCoroutine(FOVRoutine());
+        }
     }
 
     private IEnumerator FOVRoutine(){
@@ -34,6 +42,7 @@ public class FieldOfView : MonoBehaviour
 
     private void FieldOfViewCheck(){
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
+        Debug.Log("track player");
 
         if(rangeChecks.Length != 0){
             Transform target = rangeChecks[0].transform;
@@ -65,6 +74,10 @@ public class FieldOfView : MonoBehaviour
             return enemy.GetFOVRaycastTransformPosition();
         }
         return new Vector3(0,0,0);
+    }
+
+    protected virtual void OnDisable(){
+        fovCoroutine = null;
     }
 }
 

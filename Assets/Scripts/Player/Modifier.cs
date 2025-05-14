@@ -31,6 +31,14 @@ public class Modifier : MonoBehaviour
         }
     }
 
+    public void DropItem(string itemName){
+        foreach(GameObject item in items){
+            if(item.name == itemName){
+                Instantiate(item, player.transform.position + player.transform.forward*3 + player.transform.up*0.5f, player.transform.rotation);
+            }
+        }
+    }
+
     public void TPtoStage1Boss(){
         player.transform.position = trans[0].position;
         foreach(GameObject stage in stages){

@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class ZombieBehaviour : EnemyBehaviour
 {
+    public GameObject key;
+    public bool hasKey = false;
+
     protected void Awake() {
         maxHealth = 50f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
     }
@@ -64,6 +67,11 @@ public class ZombieBehaviour : EnemyBehaviour
             {
                 ScoreManager_new.instance.AddScore(10); // Adjust points as needed
             }
+
+            //key spawn
+            if(hasKey){
+                Instantiate(key, gameObject.transform.position + new Vector3(0,1,0), playerTransform.transform.rotation);
+            }
         }
         
         //attack reation check
@@ -91,8 +99,4 @@ public class ZombieBehaviour : EnemyBehaviour
             FaceToPlayer();
         }
     }
-    //protected override void FixedUpdate()
-    //{
-    //    base.FixedUpdate();
-    //}
 }

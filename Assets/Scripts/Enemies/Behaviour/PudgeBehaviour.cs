@@ -464,4 +464,17 @@ public class PudgeBehaviour : EnemyBehaviour
             { ExtendedAnimationState.RetractHook, "RetractHook" }
         };
     }
+
+    protected override void OnDisable(){
+        base.OnDisable();
+        isAttack = true;
+        isAttack2 = false;
+        isAttack3 = false;
+        isRot = false;
+        isRotting = false;
+        isCastingRot = false;
+        isHookCoolDown = false;
+        isReleasingHook = false;
+        isRetractingHook = false;
+    }
 }
