@@ -78,9 +78,8 @@ GameObject:
   - component: {fileID: 6756800163092640661}
   - component: {fileID: 7668260613176376368}
   - component: {fileID: 5588920063373592826}
-  - component: {fileID: 3961406356212452713}
-  - component: {fileID: 1072381171809751539}
   - component: {fileID: 618358001753730371}
+  - component: {fileID: 3393041322644020841}
   m_Layer: 2
   m_Name: Runes_Axe
   m_TagString: Weapon
@@ -154,52 +153,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3961406356212452713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6237249499509582127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f504735b7f256a4daee75f10f261050, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 0}
-  attackDelay: 0.4
-  attackSpeed: 1
-  attackDamage: 65
-  hitEffect: {fileID: 5334228485563152753, guid: 4364d82a897c28945a6ee4170f8e70fb, type: 3}
-  swordSwing: {fileID: 8300000, guid: 7923190c5e80b4d4d9396acc5d0b48cf, type: 3}
-  hitSound: {fileID: 8300000, guid: 11245d3945c564b45a1bafad5ecb70e5, type: 3}
---- !u!54 &1072381171809751539
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6237249499509582127}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 3
 --- !u!65 &618358001753730371
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -221,3 +174,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.44209045, y: 1.147499, z: 0.20105404}
   m_Center: {x: -0.00000026077032, y: -0.016755998, z: 0.000000063329935}
+--- !u!114 &3393041322644020841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6237249499509582127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c9fff5519059f54daac8b1b2f2acee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemButton: {fileID: 8881411814208076843, guid: 7573fa796f69b3b4db5b51929cb01e9a, type: 3}
+  itemName: RunesAxe

@@ -127,7 +127,8 @@ public class Pickup : MonoBehaviour
                     //if the item that I pick up is the same the one in the inventory, it will stack
                     if (itemName == inventory.slots[i].transform.GetComponentInChildren<Spawn>().itemName) //stack
                     {
-                        weapons.ReplaceWeap(itemName);
+                        Debug.Log(itemName);
+                        WeapReplace();
                         Destroy(gameObject);
                         inventory.slots[i].GetComponent<Slot>().amount += 1;
                         break;

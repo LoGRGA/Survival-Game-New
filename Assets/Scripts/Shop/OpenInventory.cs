@@ -13,7 +13,8 @@ public class OpenInventory : MonoBehaviour
     public bool isPaused;
 
     //MouseLook 
-    public MouseLook MouseLook;
+    public MouseLook MouseLook, MouseLook2;
+    public PlayerController playerController;
     
 
     //check if inventory screen is open or not
@@ -39,6 +40,8 @@ public class OpenInventory : MonoBehaviour
             Time.timeScale = 0f;
             isOpen = true;
             MouseLook.canLook = false;
+            MouseLook2.canLook = false;
+            playerController.enabled = false;
 
         }
         else if (Input.GetKeyDown(KeyCode.I) && isOpen)
@@ -49,6 +52,8 @@ public class OpenInventory : MonoBehaviour
             Time.timeScale = 1f;
             isOpen = false;
             MouseLook.canLook = true;
+            MouseLook2.canLook = true;
+            playerController.enabled = true;
             
         }
     }

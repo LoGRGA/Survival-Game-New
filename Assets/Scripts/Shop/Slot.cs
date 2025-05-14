@@ -7,6 +7,7 @@ public class Slot : MonoBehaviour
 {
     private PlayerController player;
     private InventoryController inventory;
+
     public int i;
     public TextMeshProUGUI amountText;
     public int amount;
@@ -114,8 +115,4 @@ public class Slot : MonoBehaviour
             }
         }
     }
-
-   
-
-
 }

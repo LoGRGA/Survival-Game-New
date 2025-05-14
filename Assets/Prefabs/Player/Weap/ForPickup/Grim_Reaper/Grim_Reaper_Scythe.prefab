@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 1276287523255755739}
   - component: {fileID: 4363106949378474649}
   - component: {fileID: 7065840762118265556}
-  - component: {fileID: 6759511769082963101}
-  - component: {fileID: 7547166555313786719}
   - component: {fileID: 189879697381751472}
+  - component: {fileID: 5509200787008716994}
   m_Layer: 2
   m_Name: Grim_Reaper_Scythe
   m_TagString: Weapon
@@ -86,52 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6759511769082963101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7758716559037896046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f504735b7f256a4daee75f10f261050, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 0}
-  attackDelay: 0.4
-  attackSpeed: 1
-  attackDamage: 15
-  hitEffect: {fileID: 5334228485563152753, guid: 4364d82a897c28945a6ee4170f8e70fb, type: 3}
-  swordSwing: {fileID: 8300000, guid: 7923190c5e80b4d4d9396acc5d0b48cf, type: 3}
-  hitSound: {fileID: 8300000, guid: 11245d3945c564b45a1bafad5ecb70e5, type: 3}
---- !u!54 &7547166555313786719
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7758716559037896046}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 3
 --- !u!65 &189879697381751472
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -153,3 +106,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9570348, y: 1.7505791, z: 0.13890223}
   m_Center: {x: 0.16085869, y: 0.28207636, z: 0}
+--- !u!114 &5509200787008716994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7758716559037896046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c9fff5519059f54daac8b1b2f2acee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemButton: {fileID: 8881411814208076843, guid: b6d9a7452b536504b9645156bcc28704, type: 3}
+  itemName: ScytheHealth

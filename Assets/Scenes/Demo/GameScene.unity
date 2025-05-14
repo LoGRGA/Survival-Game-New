@@ -102749,6 +102749,8 @@ MonoBehaviour:
   pauseGame: {fileID: 1337277389}
   isPaused: 0
   MouseLook: {fileID: 1702857015}
+  MouseLook2: {fileID: 505293695}
+  playerController: {fileID: 1611738707}
   isOpen: 0
 --- !u!4 &1833609845
 Transform:
@@ -121330,6 +121332,75 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2134838998}
   m_Mesh: {fileID: 4300000, guid: f1aead78109bad7478147ea278c42647, type: 3}
+--- !u!1001 &2134845919
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1724315047025793543, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724315047025793543, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724315047025793543, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724315047025793543, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1148.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724315047025793543, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 77.20117
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724315047025793543, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -175
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724315047025793543, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724315047025793543, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724315047025793543, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724315047025793543, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724315047025793543, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724315047025793543, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1724315047025793543, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064390027456348349, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
+      propertyPath: m_Name
+      value: Pocket_Knife
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1304c67e9e2f14344af2a4f2afe6593c, type: 3}
 --- !u!1 &2135577223
 GameObject:
   m_ObjectHideFlags: 0
@@ -122767,6 +122838,7 @@ SceneRoots:
   - {fileID: 563406533}
   - {fileID: 910617364}
   - {fileID: 1227177247}
+  - {fileID: 2134845919}
   - {fileID: 261131879}
   - {fileID: 4868219919799390229}
   - {fileID: 223056764}
