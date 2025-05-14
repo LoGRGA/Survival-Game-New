@@ -660,7 +660,10 @@ public class PlayerController : FPSInput
                 case "Poison":
 
                     if (isPoisoned)
+                    {
+                        speed += 3;
                         StopCoroutine(PoisonDegen(10));
+                    }
                     isPoisoned = true;
                     StartCoroutine(PoisonDegen(10));
                     break;
@@ -672,15 +675,18 @@ public class PlayerController : FPSInput
                     break;
                 case "Bleed":
                     if (isBleeding)
+                    {
+                        speed += 1;
                         StopCoroutine(Bleeding(20));
+                    }
                     isBleeding = true;
                     StartCoroutine(Bleeding(20));
                     break;
                 case "Stun":
                     if (isStunned)
-                        StopCoroutine(Stun(3));
+                        StopCoroutine(Stun(1));
                     isStunned = true;
-                    StartCoroutine(Stun(3));
+                    StartCoroutine(Stun(1));
                     break;
                 default:
                     Debug.LogWarning("Debuff does not exist");
