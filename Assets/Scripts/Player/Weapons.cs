@@ -10,6 +10,7 @@ public class Weapons : MonoBehaviour
     public int selectedweapon = 0;
     PlayerController playerController;
     public Shield shield;
+    public GameObject shuriVisual;
 
     private bool debugMode = false;
     private string[] weapons;
@@ -65,6 +66,9 @@ public class Weapons : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             debugMode = !debugMode;
+            if(debugMode)
+                shuriVisual.SetActive(true);
+            else shuriVisual.SetActive(false);
         }
             
 
