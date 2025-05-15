@@ -802,6 +802,8 @@ public class PlayerController : FPSInput
         yield return new WaitForSeconds(7f);
 
         isLightningCooldown = false;
+        if(grimChargeSFX)
+            audioSource.PlayOneShot(grimChargeSFX);
     }
 
     IEnumerator RAxeProjectile()
