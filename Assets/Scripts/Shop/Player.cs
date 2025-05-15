@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gold = 300;
         goldAmountText.text = gold + " Gold";
         goldAmountText2.text = gold + " ";
         //if (Input.GetKey(KeyCode.Space))
