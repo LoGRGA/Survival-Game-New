@@ -105,7 +105,7 @@ public class PlayerController : FPSInput
 
         if (currentHealth <= 0)
         {
-            Death();
+            //Death();
         }
 
         SetAnimations();

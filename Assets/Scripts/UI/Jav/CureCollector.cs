@@ -45,7 +45,7 @@ public class CureCollect : MonoBehaviour
                 if(scoreManager != null)
                     PlayerPrefs.SetString("Score", scoreManager.score.ToString());
                 PlayerPrefs.Save();
-                SceneManager.LoadScene(sceneToLoad);
+                //SceneManager.LoadScene(sceneToLoad);
             }
         }
     }
