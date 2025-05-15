@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9fff5519059f54daac8b1b2f2acee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemButton: {fileID: 0}
+  itemButton: {fileID: 7875177831144122791, guid: f7df9a9f46a8fbc4895320769c5b7f93, type: 3}
   itemName: AxeRedWeapon

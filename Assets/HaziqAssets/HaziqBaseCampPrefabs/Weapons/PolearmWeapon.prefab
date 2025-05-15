@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9fff5519059f54daac8b1b2f2acee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemButton: {fileID: 0}
+  itemButton: {fileID: 7222619020181828870, guid: 7fb3b75e65b6c4a4ca59349a7c4ff6e0, type: 3}
   itemName: PolearmWeapon
