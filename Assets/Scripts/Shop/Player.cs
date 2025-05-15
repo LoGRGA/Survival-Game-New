@@ -16,7 +16,10 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI goldAmountText;
     public TextMeshProUGUI goldAmountText2;
 
-
+    private void Start()
+    {
+        gold = 1000;
+    }
 
 
     // Update is called once per frame

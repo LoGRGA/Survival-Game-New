@@ -8,6 +8,9 @@ public class ZombieBehaviour : EnemyBehaviour
 {
     public GameObject key;
     public bool hasKey = false;
+    //HAziq Code
+    private Player playerScript;
+    //Haziq Code
 
     protected void Awake() {
         maxHealth = 50f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
@@ -17,6 +20,9 @@ public class ZombieBehaviour : EnemyBehaviour
     protected override void Start()
     {
         base.Start();
+        //Haziq Code
+        playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //HAziq Code
         hipsTransform = transform.Find("mixamorig5:Hips").transform;
 
         //initiate enemy attributes
@@ -63,9 +69,9 @@ public class ZombieBehaviour : EnemyBehaviour
         if(currentHealth <= 0 && !isDying){
             Die();
             // Javier Addition: Give gold to player
-            if (GoldManager.instance != null)
+            if (playerScript != null)
             {
-                GoldManager.instance.AddGold(10);
+                playerScript.ReceiveGold(10);
             }
             // Javier Addition: ADDING SCORE WHEN ZOMBIE DIES
             if (ScoreManager_new.instance != null)
