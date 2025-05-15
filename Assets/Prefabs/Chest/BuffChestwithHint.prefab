@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 521731666697854365}
   - component: {fileID: 8726264210189748925}
   - component: {fileID: 3118679419745424232}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BuffChestwithHint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,6 +119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyPrefab: {fileID: 3019568617730713240, guid: 5dd5a1ab6047d4848b7668734815016f, type: 3}
-  interactionBorder: {fileID: 0}
   baseKeyChance: 5
   keyChanceIncrease: 2
+  fadeDuration: 0.5

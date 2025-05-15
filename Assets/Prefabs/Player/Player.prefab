@@ -122,10 +122,12 @@ MonoBehaviour:
   jumpSpeed: 15
   gravity: -9.8
   terminalVelocity: -20
+  healthWarningPanel: {fileID: 0}
+  healthWarningText: {fileID: 0}
   isPoisoned: 0
   isBurned: 0
   isBleeding: 0
-  gDaoHeavy: 0
+  isStunned: 0
   weapons: []
   cam: {fileID: 2022728005746751507}
   maxHealth: 100
@@ -147,6 +149,7 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: 11245d3945c564b45a1bafad5ecb70e5, type: 3}
   grimStartSFX: {fileID: 8300000, guid: 7fedaede646ace24da59c64c51d8dce3, type: 3}
   grimEndSFX: {fileID: 8300000, guid: 421a7731a3e1c7a418488f07df0212e7, type: 3}
+  grimChargeSFX: {fileID: 8300000, guid: 85212d6f15caa4a40a32523fe86ce33b, type: 3}
   thunder: {fileID: 8300000, guid: e41593b6b180be442af4176ec3553d80, type: 3}
   smash: {fileID: 8300000, guid: c60781f5ff56d2b43ad194e07daa89cb, type: 3}
 --- !u!82 &9188473529512258443
@@ -383,7 +386,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2304
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -567,7 +570,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2304
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -725,7 +728,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2304
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -902,7 +905,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2304
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0

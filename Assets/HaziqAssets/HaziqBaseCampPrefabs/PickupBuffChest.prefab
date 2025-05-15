@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4017709611768261436}
   - component: {fileID: 5178364237226507494}
   - component: {fileID: 1908476494838650033}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PickupBuffChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,6 +12,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponBoxSelector
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1cc6cc20abc7a464a9dec49ee02361cf, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 1cc6cc20abc7a464a9dec49ee02361cf, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100024, guid: 1cc6cc20abc7a464a9dec49ee02361cf, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1cc6cc20abc7a464a9dec49ee02361cf, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5

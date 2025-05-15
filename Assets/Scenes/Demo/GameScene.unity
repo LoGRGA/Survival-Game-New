@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -28970,7 +28970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5333125476936463675, guid: ea575ea81dafe064987c58170e2e0d02, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5333125476936689947, guid: ea575ea81dafe064987c58170e2e0d02, type: 3}
       propertyPath: m_LocalPosition.x
@@ -37404,7 +37404,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7384339936248480246, guid: af98424ec344b094e863cb071829c2f3, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7384339936248480246, guid: af98424ec344b094e863cb071829c2f3, type: 3}
       propertyPath: m_IsActive
@@ -39218,6 +39218,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Buff Selector (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1728619453497436, guid: e7152d23c09aee845a9594ff1308f6a8, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4232641428546220, guid: e7152d23c09aee845a9594ff1308f6a8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -98.852905
@@ -40005,7 +40009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5333125476936463675, guid: ea575ea81dafe064987c58170e2e0d02, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5333125476936463675, guid: ea575ea81dafe064987c58170e2e0d02, type: 3}
       propertyPath: m_IsActive
@@ -78064,6 +78068,10 @@ PrefabInstance:
     - target: {fileID: 1728619453497436, guid: e7152d23c09aee845a9594ff1308f6a8, type: 3}
       propertyPath: m_Name
       value: Buff Selector
+      objectReference: {fileID: 0}
+    - target: {fileID: 1728619453497436, guid: e7152d23c09aee845a9594ff1308f6a8, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1728619453497436, guid: e7152d23c09aee845a9594ff1308f6a8, type: 3}
       propertyPath: m_IsActive
@@ -119400,7 +119408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3116430944659500258, guid: 470fae93c26a2ae4ea076d99b1911dd3, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3116430944659500282, guid: 470fae93c26a2ae4ea076d99b1911dd3, type: 3}
       propertyPath: m_Name
@@ -119408,11 +119416,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3116430944659500282, guid: 470fae93c26a2ae4ea076d99b1911dd3, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3116430944659500286, guid: 470fae93c26a2ae4ea076d99b1911dd3, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5243405269513289510, guid: 470fae93c26a2ae4ea076d99b1911dd3, type: 3}
       propertyPath: itemUIPanel
@@ -123457,6 +123465,10 @@ PrefabInstance:
     - target: {fileID: 5793284249521529850, guid: f7e4ce77ce425b647ab4374f548c6ec7, type: 3}
       propertyPath: m_Name
       value: BuffChestwithHint
+      objectReference: {fileID: 0}
+    - target: {fileID: 5793284249521529850, guid: f7e4ce77ce425b647ab4374f548c6ec7, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5793284249521529850, guid: f7e4ce77ce425b647ab4374f548c6ec7, type: 3}
       propertyPath: m_IsActive

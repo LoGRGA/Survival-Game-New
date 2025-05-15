@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8769188396439200447}
   - component: {fileID: 6053702087115867438}
   - component: {fileID: 8474702228793767253}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BuffChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,6 +144,7 @@ MonoBehaviour:
   keyPrefab: {fileID: 3019568617730713240, guid: 5dd5a1ab6047d4848b7668734815016f, type: 3}
   baseKeyChance: 5
   keyChanceIncrease: 2
+  fadeDuration: 0.5
 --- !u!114 &8474702228793767253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,4 +157,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb0da7583c538df4c9f0b3c7b8c3a023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionText: {fileID: 0}
+  interactionBorder: {fileID: 0}

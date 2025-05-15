@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7567342744750409829}
   - component: {fileID: 4988713476786174873}
   - component: {fileID: -1271370705036977470}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: RNGItemChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}

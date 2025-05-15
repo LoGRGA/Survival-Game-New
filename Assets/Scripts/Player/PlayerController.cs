@@ -230,6 +230,7 @@ public class PlayerController : FPSInput
     public AudioClip hitSound;
     public AudioClip grimStartSFX;
     public AudioClip grimEndSFX;
+    public AudioClip grimChargeSFX;
     public AudioClip thunder;
     public AudioClip smash;
 
@@ -772,11 +773,20 @@ public class PlayerController : FPSInput
             audioSource.PlayOneShot(grimStartSFX);
 
         yield return new WaitForSeconds(20);
-        isGrimSpeed = false;
         speed -= 5;
 
         if (grimEndSFX)
             audioSource.PlayOneShot(grimEndSFX);
+        StartCoroutine(GrimCooldown());
+    }
+
+    IEnumerator GrimCooldown()
+    {
+        yield return new WaitForSeconds(7);
+        isGrimSpeed = false;
+
+        if(grimChargeSFX)
+            audioSource.PlayOneShot(grimChargeSFX);
     }
 
     IEnumerator LightningCooldown()

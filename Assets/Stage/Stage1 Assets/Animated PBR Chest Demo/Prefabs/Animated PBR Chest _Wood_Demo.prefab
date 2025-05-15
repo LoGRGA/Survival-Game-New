@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6200720779110778437}
   - component: {fileID: 6200720779116484477}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WoodChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6200720779110778457}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 6200720779110778461}
   - component: {fileID: 6200720779120667069}
   - component: {fileID: -5510570134106429069}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Animated PBR Chest _Wood_Demo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
