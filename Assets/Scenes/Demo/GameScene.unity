@@ -3173,6 +3173,10 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4294506751
       objectReference: {fileID: 0}
+    - target: {fileID: 7467465685207946171, guid: 48ee35bf540c85f4fae46af8af1b0555, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseItemJump
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -57985,6 +57989,10 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4294506751
       objectReference: {fileID: 0}
+    - target: {fileID: 7467465685207946171, guid: 48ee35bf540c85f4fae46af8af1b0555, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UseItemSpeed
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -76953,7 +76961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1337277390
 RectTransform:
   m_ObjectHideFlags: 0
