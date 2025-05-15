@@ -11,7 +11,9 @@ public class Weapons : MonoBehaviour
     PlayerController playerController;
     public Shield shield;
     public GameObject shuriVisual;
+    public Slot slot1, slot2;
 
+    private InventoryController inventory;
     private bool debugMode = false;
     private string[] weapons;
     private string weaponName;
@@ -54,15 +56,17 @@ public class Weapons : MonoBehaviour
         tempforce = throwForce;
         readyToThrow = true;
         playerController = GetComponentInParent<PlayerController>();
+        inventory = FindObjectOfType<InventoryController>();
         mainCamera = Camera.main;
         weapons = new string[2];
-        weapons[0] = "Pocket_Knife";
-        weaponName = weapons[0];
+        weapons[0] = null;
+        weapons[1] = null;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.K))
         {
             debugMode = !debugMode;
@@ -70,7 +74,11 @@ public class Weapons : MonoBehaviour
                 shuriVisual.SetActive(true);
             else shuriVisual.SetActive(false);
         }
-            
+        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.LogWarning(weapons[weaponIndex] + " " + selectedweapon);
+        }
 
         int previousSelectedWeapon = selectedweapon;
 
@@ -132,35 +140,44 @@ public class Weapons : MonoBehaviour
                 selectedweapon = 1;
         }
 
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            DropWeapon();
+        }
 
-        //Below are all temporary
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            selectedweapon = 2;
+        if (debugMode)
+        {
+            //Below are all temporary
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+                selectedweapon = 2;
 
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-            selectedweapon = 3;
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+                selectedweapon = 3;
 
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-            selectedweapon = 4;
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+                selectedweapon = 4;
 
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-            selectedweapon = 5;
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+                selectedweapon = 5;
 
-        if (Input.GetKeyDown(KeyCode.Alpha7))
-            selectedweapon = 6;
+            if (Input.GetKeyDown(KeyCode.Alpha7))
+                selectedweapon = 6;
 
-        if (Input.GetKeyDown(KeyCode.Alpha8))
-            selectedweapon = 7;
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+                selectedweapon = 7;
 
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-            selectedweapon = 8;
+            if (Input.GetKeyDown(KeyCode.Alpha9))
+                selectedweapon = 8;
 
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-            selectedweapon = 9;
+            if (Input.GetKeyDown(KeyCode.Alpha0))
+                selectedweapon = 9;
+        }
 
         if (previousSelectedWeapon != selectedweapon)
             SwapWeapons();
     }
+
+    //Changes weapon based on input/weapon name
     public void SwapWeapons()
     {
         if (debugMode)
@@ -220,9 +237,16 @@ public class Weapons : MonoBehaviour
         }
 
         //Get the right index to replace the weapon
-        if (weapons[1] != null)
+        if (weapons[1] != null && weapons[0] != null)
         {
             weapons[weaponIndex] = weaponName;
+            SwapWeapons();
+        }
+        else if (weapons[0] == null)
+        {
+            weapons[0] = weaponName;
+            selectedweapon = 0;
+            weaponIndex = 0;
             SwapWeapons();
         }
         else
@@ -232,6 +256,54 @@ public class Weapons : MonoBehaviour
             weaponIndex = 1;
             SwapWeapons();
         }
+    }
+
+    //Removing Weapon from weapon list
+    public void DropWeapon()
+    {
+        //Prevents dropping of items from full inventory
+        foreach (string weap in weapons)
+        {
+            if (weap == null)
+                return;
+        }
+
+        if (weaponIndex == 0)
+        {         
+            selectedweapon = 1;
+            weaponIndex = 1;
+            weaponName = weapons[1];
+            SwapWeapons();
+            weapons[0] = null;
+            DropItem(slot1);
+        }
+        else if (weaponIndex == 1)
+        {         
+            selectedweapon = 0;
+            weaponIndex = 0;
+            weaponName = weapons[0];
+            SwapWeapons();
+            weapons[1] = null;
+            DropItem(slot2);
+        }
+        else
+            return;
+    }
+
+    //Removing Weapon from Inventory
+    private void DropItem(Slot slot)
+    {
+        //Modified Drop Item Code from Slot.cs
+        slot.amount -= 1;
+        inventory.isFull[slot.i] = false;
+        Spawn itemObject = slot.transform.GetComponentInChildren<Spawn>(true);
+        Debug.LogWarning(itemObject.gameObject.name);
+        GameObject.Destroy(itemObject.gameObject);
+
+        Transform player = playerController.transform;
+        Vector3 playerposition = player.position + Camera.main.transform.forward * 4;
+        playerposition.y = player.position.y + 1;
+        Instantiate(itemObject.itemPrefab, playerposition, Quaternion.identity);
     }
 
     public void Idle()

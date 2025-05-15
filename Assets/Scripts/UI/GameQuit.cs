@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class QuitToMainMenu : MonoBehaviour
 {
-    public string mainMenuSceneName = "Proto menu"; 
+    public string mainMenuSceneName = "Proto menu (Jav)"; 
 
     public void QuitToMenu()
     {

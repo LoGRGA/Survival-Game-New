@@ -13,6 +13,7 @@ public class CureCollect : MonoBehaviour
     // Public reference for player and scene name (drag-and-drop in inspector)
     public GameObject player;
     public string sceneToLoad; // Name of the scene to load
+    public ScoreManager_new scoreManager;
 
     void Start()
     {
@@ -38,8 +39,12 @@ public class CureCollect : MonoBehaviour
             // Load the next scene (make sure to set it in the inspector)
             if (!string.IsNullOrEmpty(sceneToLoad))
             {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                //Cursor.lockState = CursorLockMode.None;
+                //Cursor.visible = true;
+                PlayerPrefs.SetString("GameOutcome", "victory");
+                if(scoreManager != null)
+                    PlayerPrefs.SetString("Score", scoreManager.score.ToString());
+                PlayerPrefs.Save();
                 SceneManager.LoadScene(sceneToLoad);
             }
         }

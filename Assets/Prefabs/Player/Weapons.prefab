@@ -58,6 +58,8 @@ MonoBehaviour:
   selectedweapon: 0
   shield: {fileID: 6414904991425455402, guid: 48bbdecbe7c699345971fb847394d5bb, type: 3}
   shuriVisual: {fileID: 6004060039625302190}
+  slot1: {fileID: 0}
+  slot2: {fileID: 0}
   waveSpeed: 10
   waveLifetime: 3
   waveDamage: 30
@@ -385,6 +387,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8873771600547180373, guid: fc2d00b3edb22164ea0778dc00e38cd8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8873771600547180373, guid: fc2d00b3edb22164ea0778dc00e38cd8, type: 3}
       propertyPath: weapContainer
       value: 
       objectReference: {fileID: 2219363962032047026}
@@ -445,6 +451,10 @@ PrefabInstance:
     - target: {fileID: 1724315047025793543, guid: 9fe1901fd8640314f9c5cbd3e594d540, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1943185753381005355, guid: 9fe1901fd8640314f9c5cbd3e594d540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1943185753381005355, guid: 9fe1901fd8640314f9c5cbd3e594d540, type: 3}
       propertyPath: weapContainer
@@ -534,6 +544,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2219363962032047026}
     m_Modifications:
+    - target: {fileID: 6569581907082863815, guid: 4d9132a312977ee44b4d1d3ac1e148b4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6569581907082863815, guid: 4d9132a312977ee44b4d1d3ac1e148b4, type: 3}
       propertyPath: weapContainer
       value: 
@@ -643,6 +657,10 @@ PrefabInstance:
     - target: {fileID: 3215642372368490066, guid: 3bbd45c405f901c43ac647a2d4c3b55e, type: 3}
       propertyPath: m_Name
       value: Dagger
+      objectReference: {fileID: 0}
+    - target: {fileID: 6102684977959285538, guid: 3bbd45c405f901c43ac647a2d4c3b55e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6102684977959285538, guid: 3bbd45c405f901c43ac647a2d4c3b55e, type: 3}
       propertyPath: weapContainer

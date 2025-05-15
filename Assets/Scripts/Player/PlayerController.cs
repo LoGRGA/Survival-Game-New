@@ -31,6 +31,8 @@ public class PlayerController : FPSInput
 
     public GameObject[] weapons;
 
+    public ScoreManager_new scoreManager;
+
     [Header("Camera")]
     public Camera cam;
 
@@ -99,6 +101,11 @@ public class PlayerController : FPSInput
         if (Input.GetKeyDown(KeyCode.X))
         {
             playerController.AddDebuff("Bleed");
+        }
+
+        if (currentHealth <= 0)
+        {
+            Death();
         }
 
         SetAnimations();
@@ -859,6 +866,16 @@ public class PlayerController : FPSInput
         }
         gDaoHeavy = false;
         ChangeAnimationState(IDLE);
+    }
+
+    private void Death()
+    {
+        PlayerPrefs.SetString("GameOutcome", "defeat");
+        
+        if (scoreManager != null)
+            PlayerPrefs.SetString("Score", scoreManager.score.ToString());
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("Chin Ann UI");
     }
 
     //junjie add

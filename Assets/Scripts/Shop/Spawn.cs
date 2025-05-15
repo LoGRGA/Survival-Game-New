@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawn : MonoBehaviour
 {
     public GameObject itemPrefab;
-    private Transform player;
+    private Transform player, cam;
 
     public int itemPrice;
 
@@ -14,6 +14,7 @@ public class Spawn : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     public void SpawnDroppedItem()

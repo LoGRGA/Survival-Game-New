@@ -8,15 +8,19 @@ using UnityEngine.Video;
 
 public class Victory : MonoBehaviour
 {
-    public TMP_Text scoreTexts;
+    public TMP_Text scoreTexts, scores;
+    public string scoring;
     public VideoPlayer clifford;
     public Button playClifford;
+    private bool skipVideo = false;
 
     public VideoPlayer previousVideo;
 
     // Start is called before the first frame update
     void Start()
     {
+        scores.SetText(scoring);
+
         playClifford.onClick.AddListener(ExitGame);
 
         VideoController2 vc = FindObjectOfType<VideoController2>();
@@ -32,14 +36,18 @@ public class Victory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(skipVideo && Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Proto Menu (Jav)");
+        }
     }
 
     public void Setup(int score)
     {
         gameObject.SetActive(true);
-        scoreTexts.text = "SCORE: " + score.ToString();
-        Debug.Log("Your Game SCORE");
+        scoreTexts.text = "SCORE: ";
+        scores.text = PlayerPrefs.GetString("Score", "none");
+        //Debug.Log("Your Game SCORE");
     }
 
     public void ExitGame()
@@ -54,11 +62,13 @@ public class Victory : MonoBehaviour
 
         clifford.Play();
         Debug.Log("Now playing second video");
+        skipVideo = true;
     }
 
     public void OnSecondVideoFinished(VideoPlayer vp)
     {
-        Application.Quit();
+        //Application.Quit();
         Debug.Log("Exiting the Game");
+        SceneManager.LoadScene("Proto Menu (Jav)");
     }
 }

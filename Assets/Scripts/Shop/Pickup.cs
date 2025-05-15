@@ -119,6 +119,11 @@ public class Pickup : MonoBehaviour
             //Normal Behaviour For other items
             for (int i = 0; i < inventory.slots.Length; i++)
             {
+                //To Remove Weapon from Full Inventory before Pickup Up
+                if (this.gameObject.tag == "Weapon")
+                {
+                    weapons.DropWeapon();
+                }
 
                 //stack items
                 //check if inventory is full  //max is 6 in a slot
@@ -127,8 +132,6 @@ public class Pickup : MonoBehaviour
                     //if the item that I pick up is the same the one in the inventory, it will stack
                     if (itemName == inventory.slots[i].transform.GetComponentInChildren<Spawn>().itemName) //stack
                     {
-                        Debug.Log(itemName);
-                        WeapReplace();
                         Destroy(gameObject);
                         inventory.slots[i].GetComponent<Slot>().amount += 1;
                         break;
@@ -137,7 +140,7 @@ public class Pickup : MonoBehaviour
                 else if (inventory.isFull[i] == false)
                 {
                     //if not stackable
-                    Debug.Log(itemName);
+                    Debug.LogWarning(itemName);
                     WeapReplace();
                     inventory.isFull[i] = true;
                     Instantiate(itemButton, inventory.slots[i].transform, false);
@@ -145,8 +148,6 @@ public class Pickup : MonoBehaviour
                     Destroy(gameObject);
                     break;
                 }
-
-
             }
         }
     }

@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Chin Ann UI.unity
-    guid: b71a8593375c5f34fa25a34003d53d38
-  - enabled: 1
     path: Assets/Scenes/Proto menu (Jav).unity
     guid: 4429641f085ab2743a9753e14cfd3b06
+  - enabled: 1
+    path: Assets/Scenes/Chin Ann UI.unity
+    guid: b71a8593375c5f34fa25a34003d53d38
   - enabled: 1
     path: Assets/Scenes/Demo/GameScene.unity
     guid: a39d4a7599d6f9e45a90d5da9cf62fac

@@ -115,4 +115,9 @@ public class Slot : MonoBehaviour
             }
         }
     }
+
+    public InventoryController GetInventory()
+    {
+        return inventory;
+    }
 }
