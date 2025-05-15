@@ -200,8 +200,13 @@ public class JuggernautBehaviour : EnemyBehaviour
         //death check
         if(currentHealth <= 0 && !isDying){
             Die();
-            //Javier Addition: Handles Boss death for objective
-            GetComponent<BossKillTracker>().HandleBossDeath();
+            // Javier Addition: Give gold to player
+            if (GoldManager.instance != null)
+            {
+                GoldManager.instance.AddGold(1000);
+            }
+            // Javier Addition: Give gold to player
+            GetComponent<EnemyGoldReward>()?.GiveGoldToPlayer();
             // Javier Addition: ADDING SCORE WHEN ZOMBIE DIES
             if (ScoreManager_new.instance != null)
             {

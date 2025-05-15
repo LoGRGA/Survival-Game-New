@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        gold = 300;
         goldAmountText.text = gold + " Gold";
         goldAmountText2.text = gold + " ";
         //if (Input.GetKey(KeyCode.Space))
@@ -62,15 +62,15 @@ public class Player : MonoBehaviour
         //}
 
     }
-
-    private void OnTriggerEnter(Collider other)
+    public void ReceiveGold(int amount)
     {
-        if(other.gameObject.tag == "PickUp")
-        {
-            pickupItems.Add(other.gameObject);
-        }
+        gold += amount;
 
+        if (goldAmountText != null)
+            goldAmountText.text = gold + " Gold";
 
+        if (goldAmountText2 != null)
+            goldAmountText2.text = gold.ToString();
     }
 
     private void OnTriggerExit(Collider other)

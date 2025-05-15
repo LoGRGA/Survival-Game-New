@@ -67,6 +67,15 @@ public class CrabSmallBehaviour : EnemyBehaviour
         //death check
         if(currentHealth <= 0 && !isDying){
             Die();
+            // Javier Addition: Give gold to player
+            if (GoldManager.instance != null)
+            {
+                GoldManager.instance.AddGold(50);
+            }
+            if (ScoreManager_new.instance != null)
+            {
+                ScoreManager_new.instance.AddScore(10); // Adjust points as needed
+            }
         }
         //attack reation check
         else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange){

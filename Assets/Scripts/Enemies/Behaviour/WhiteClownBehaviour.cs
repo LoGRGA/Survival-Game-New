@@ -102,6 +102,11 @@ public class WhiteClownBehaviour : EnemyBehaviour
         //death check
         if(currentHealth <= 0 && !isDying){
             Die();
+            // Javier Addition: Give gold to player
+            if(GoldManager.instance != null)
+            {
+                GoldManager.instance.AddGold(30);
+            }
             // Javier Addition: ADDING SCORE WHEN ZOMBIE DIES
             if (ScoreManager_new.instance != null)
             {
