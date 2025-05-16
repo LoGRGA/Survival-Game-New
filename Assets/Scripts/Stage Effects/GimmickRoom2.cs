@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GimmickRoom2 : MonoBehaviour
 {
@@ -10,12 +11,38 @@ public class GimmickRoom2 : MonoBehaviour
     public LayerMask hittableLayer;
 
     private bool isCoroutineStart = false;
+
+    private Material ogSkybox;
+    private AmbientMode ogAmbientMode;
+    private Color ogAmbientColor;
+
+    //For Main Camera to Change setting when Trigger
+    private Camera playerCam;
+    private CameraClearFlags ogClearFlags;
+    private Color ogBackgroundColor;
+
+    private bool darkRoomActive = true;
     // Start is called before the first frame update
     void Start()
     {
         triggerCollider = GetComponent<Collider>();
         StartCoroutine(CheckForHittableObjects());
         isCoroutineStart = true;
+
+        // Store the original ambient light color
+        ogAmbientColor = RenderSettings.ambientLight;
+        // Store the original Skybox Material
+        ogSkybox = RenderSettings.skybox;
+        //Store the original Ambient Mode
+        ogAmbientMode = RenderSettings.ambientMode;
+
+        //Find and save camera settings in the inspector
+        playerCam = Camera.main;
+        if (playerCam != null)
+        {
+            ogClearFlags = playerCam.clearFlags;
+            ogBackgroundColor = playerCam.backgroundColor;
+        }
     }
 
     // Update is called once per frame
@@ -46,6 +73,7 @@ public class GimmickRoom2 : MonoBehaviour
             if (colliders.Length <= 3)
             {
                 door.SetActive(true);
+                ResetDarkRoom();
             }
             else
             {
@@ -53,9 +81,31 @@ public class GimmickRoom2 : MonoBehaviour
             }
         }
     }
-    
+
     void OnDisable()
     {
         isCoroutineStart = false;
+    }
+    
+    public void ResetDarkRoom()
+    {
+        darkRoomActive = false;
+
+        // Restore original lighting
+        RenderSettings.skybox = ogSkybox;
+        RenderSettings.ambientMode = ogAmbientMode;
+        RenderSettings.ambientLight = ogAmbientColor;
+
+        // Restore camera settings
+        if (playerCam != null)
+        {
+            playerCam.clearFlags = ogClearFlags;
+            playerCam.backgroundColor = ogBackgroundColor;
+        }
+
+        // Turn off fog
+        RenderSettings.fog = false;
+
+        Debug.Log("Dark room deactivated and lighting reset.");
     }
 }
