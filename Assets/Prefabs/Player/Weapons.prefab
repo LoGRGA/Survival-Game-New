@@ -257,6 +257,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2496176404733127017, guid: 8e0d0d5038a0b0848a42b7d7de684b47, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2496176404733127017, guid: 8e0d0d5038a0b0848a42b7d7de684b47, type: 3}
+      propertyPath: m_Size.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2496176404733127017, guid: 8e0d0d5038a0b0848a42b7d7de684b47, type: 3}
+      propertyPath: m_Size.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9118559140796315543, guid: 8e0d0d5038a0b0848a42b7d7de684b47, type: 3}
+      propertyPath: damage
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
