@@ -31,8 +31,8 @@ public class BuffUIHandler : MonoBehaviour
     {
         if (playerController != null)
         {
-            bool speedBuffActive = FPSInput.speed > baseSpeed + threshold;
-            bool jumpBuffActive = FPSInput.jumpSpeed > playerController.baseJumpSpeed + jumpThreshold;
+            bool speedBuffActive = playerController.speed > baseSpeed + threshold;
+            bool jumpBuffActive = playerController.jumpSpeed > playerController.baseJumpSpeed + jumpThreshold;
 
             if (speedBuffIcon != null)
                 speedBuffIcon.SetActive(speedBuffActive);
