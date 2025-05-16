@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 270, y: 138}
+  m_AnchoredPosition: {x: 270, y: 132}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &210112213092225633
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 7907711711737013194, guid: dcd9f89e573a59244965903c0ebd89c4, type: 3}
   itemPrice: 70
-  itemName: HammerWeapon
+  itemName: Hammer
 --- !u!114 &4096052951803247211
 MonoBehaviour:
   m_ObjectHideFlags: 0

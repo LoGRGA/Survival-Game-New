@@ -919,7 +919,7 @@ public class PlayerController : FPSInput
     private IEnumerator WarningCooldown()
     {
         isCooldownActive = true;
-        yield return new WaitForSeconds(30f); // Prevent re-triggering for 10 seconds
+        yield return new WaitForSeconds(60f); // Prevent re-triggering for 60 seconds
         hasShownWarning = false; // Allow it to trigger again if still below 50%
         isCooldownActive = false;
     }

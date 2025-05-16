@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8667440135606933745}
   - component: {fileID: 7313667795629863218}
   m_Layer: 5
-  m_Name: AxeRedWeaponButton
+  m_Name: RuneAxeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemPrefab: {fileID: 1624186402939903305, guid: e0eccda27caf498419aa2c4638d4d5eb, type: 3}
   itemPrice: 60
-  itemName: AxeRedWeapon
+  itemName: RuneAxe
 --- !u!114 &7313667795629863218
 MonoBehaviour:
   m_ObjectHideFlags: 0
