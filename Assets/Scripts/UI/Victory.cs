@@ -19,7 +19,6 @@ public class Victory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scores.SetText(scoring);
 
         playClifford.onClick.AddListener(ExitGame);
 
@@ -70,5 +69,10 @@ public class Victory : MonoBehaviour
         //Application.Quit();
         Debug.Log("Exiting the Game");
         SceneManager.LoadScene("Proto Menu (Jav)");
+    }
+
+    public void SetScore()
+    {
+        scoreTexts.text = "SCORE: " + scoring;
     }
 }

@@ -35,9 +35,15 @@ public class SceneController : MonoBehaviour
 
     void ScoreUpdate()
     {
-        if(victory)
+        if (victory)
+        {
             victory.scoring = score;
+            victory.SetScore();
+        }
         else
+        {
             gameOver.scoring = score;
+            gameOver.SetScore();
+        }
     }
 }

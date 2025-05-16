@@ -42,7 +42,7 @@ public class FieldOfView : MonoBehaviour
 
     private void FieldOfViewCheck(){
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
-        Debug.Log("track player");
+        //Debug.Log("track player");
 
         if(rangeChecks.Length != 0){
             Transform target = rangeChecks[0].transform;

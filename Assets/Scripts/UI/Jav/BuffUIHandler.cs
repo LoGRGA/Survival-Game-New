@@ -8,7 +8,6 @@ public class BuffUIHandler : MonoBehaviour
     public GameObject jumpBuffIcon;
 
     private PlayerController playerController;
-    private FPSInput fpsInput;
 
     public float baseSpeed = 6f;
     public float threshold = 0.1f;
@@ -32,7 +31,7 @@ public class BuffUIHandler : MonoBehaviour
         if (playerController != null)
         {
             bool speedBuffActive = playerController.speed > baseSpeed + threshold;
-            bool jumpBuffActive = fpsInput.jumpSpeed > fpsInput.baseJumpSpeed + jumpThreshold;
+            bool jumpBuffActive = playerController.jumpSpeed > playerController.baseJumpSpeed + jumpThreshold;
 
             if (speedBuffIcon != null)
                 speedBuffIcon.SetActive(speedBuffActive);

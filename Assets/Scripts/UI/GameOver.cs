@@ -13,7 +13,7 @@ public class GameOver : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scores.SetText(scoring);
+        
     }
 
     // Update is called once per frame
@@ -42,5 +42,10 @@ public class GameOver : MonoBehaviour
     {
         SceneManager.LoadScene("Proto Menu (Jav)");
         Debug.Log("Exiting the Game");
+    }
+
+    public void SetScore()
+    {
+        scoreTexts.text = "SCORE: " + scoring;
     }
 }
