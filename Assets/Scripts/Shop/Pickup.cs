@@ -140,7 +140,6 @@ public class Pickup : MonoBehaviour
                 else if (inventory.isFull[i] == false)
                 {
                     //if not stackable
-                    Debug.LogWarning(itemName);
                     WeapReplace();
                     inventory.isFull[i] = true;
                     Instantiate(itemButton, inventory.slots[i].transform, false);

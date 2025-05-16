@@ -207,7 +207,7 @@ public class Weapons : MonoBehaviour
 
     public void ReplaceWeap(string weap)
     {
-        Debug.Log(weap);
+        //Debug.Log(weap);
 
         //Get the right weapon name
         if (weap == "PocketKnife")
