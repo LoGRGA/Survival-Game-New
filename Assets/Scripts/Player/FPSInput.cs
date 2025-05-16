@@ -13,7 +13,7 @@ public class FPSInput : MonoBehaviour
     public float gravity = -9.8f;  // Gravity setting
     public float terminalVelocity = -20f;  // Max falling speed
 
-    
+
 
     private float vertSpeed;
     protected Vector3 movement;
@@ -31,7 +31,7 @@ public class FPSInput : MonoBehaviour
         speed = baseSpeed;
         jumpSpeed = baseJumpSpeed;
 
-       
+
     }
 
     protected virtual void Update()
@@ -65,7 +65,13 @@ public class FPSInput : MonoBehaviour
     {
         speed += amount;
         speed = Mathf.Clamp(speed, 3f, 15f); // Set a reasonable limit
-        Debug.Log("Speed changed to: " + speed);
+        StartCoroutine(ChangeSpeedDuration());
+    }
+
+    private IEnumerator ChangeSpeedDuration()
+    {
+        yield return new WaitForSeconds(10f);
+        speed = baseSpeed;
     }
 
     // ?? Apply jump buffs and debuffs
@@ -73,6 +79,12 @@ public class FPSInput : MonoBehaviour
     {
         jumpSpeed += amount;
         jumpSpeed = Mathf.Clamp(jumpSpeed, 5f, 30f); // Set a reasonable limit
-        Debug.Log("Jump height changed to: " + jumpSpeed);
+        StartCoroutine(ChangeJumpDuration());
+    }
+
+    private IEnumerator ChangeJumpDuration()
+    {
+        yield return new WaitForSeconds(10f);
+        jumpSpeed = baseJumpSpeed;
     }
 }

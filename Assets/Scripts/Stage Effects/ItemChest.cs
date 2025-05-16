@@ -42,9 +42,9 @@ public class ItemChest : MonoBehaviour
         int i = Random.Range(0,10);
         audioSource.Play();
         yield return new WaitForSeconds(2f);
-        if(i<=4){
+        if(i<=3){
             Instantiate(items[0], gameObject.transform.position + new Vector3(0,0,0), items[0].transform.rotation);
-        }else if(i<=7){
+        }else if(i<=6){
             Instantiate(items[1], gameObject.transform.position + new Vector3(0,0,0), items[1].transform.rotation);
         }else{
             Instantiate(items[2], gameObject.transform.position + new Vector3(0,0,0), items[2].transform.rotation);

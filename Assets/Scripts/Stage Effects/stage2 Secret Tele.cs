@@ -2,10 +2,14 @@ using UnityEngine;
 
 public class TeleportPlayerOnInteract : MonoBehaviour
 {
-    public Vector3 teleportDestination;           // Set the target teleport location in the inspector
+    //public Vector3 teleportDestination;           // Set the target teleport location in the inspector
+    public Transform cureRoomTrans;
     public float interactionDistance = 3f;        // Distance at which the player can interact
     private GameObject player;
     private bool isPlayerNearby = false;
+
+    public GameObject stage2;
+    public GameObject cureRoom;
 
     void Start()
     {
@@ -30,15 +34,19 @@ public class TeleportPlayerOnInteract : MonoBehaviour
 
         if (controller != null)
         {
+            stage2.SetActive(false);
+            cureRoom.SetActive(true);
             controller.enabled = false;
-            player.transform.position = teleportDestination;
+            player.transform.position = cureRoomTrans.position;
             controller.enabled = true;
         }
         else
         {
-            player.transform.position = teleportDestination;
+            stage2.SetActive(false);
+            cureRoom.SetActive(true);
+            player.transform.position = cureRoomTrans.position;
         }
 
-        Debug.Log("Player teleported to: " + teleportDestination);
+        Debug.Log("Player teleported to: " + cureRoomTrans);
     }
 }

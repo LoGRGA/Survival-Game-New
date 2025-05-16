@@ -41,8 +41,8 @@ public class GateInteraction : MonoBehaviour
 
                 if (bossRoomScript != null && bossRoomScript.enabled)
                 {
-                    bossRoomScript.enabled = false;
-                    Debug.Log("FinalBossRoom script disabled after opening gate with key.");
+                    //bossRoomScript.enabled = false;
+                    //Debug.Log("FinalBossRoom script disabled after opening gate with key.");
                 }
             }
             else

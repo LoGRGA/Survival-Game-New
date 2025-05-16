@@ -986,6 +986,10 @@ MonoBehaviour:
   currentHealth: 0
   isRoarCoolDown: 0
   crabPrefab: {fileID: 2738493359499140267, guid: d2ac4c8474743064fba094c698d91544, type: 3}
+  weapons:
+  - {fileID: 7758716559037896046, guid: b6a53d4555e236148b2c4e6239fdc40a, type: 3}
+  - {fileID: 8011828142270945973, guid: da263ef8fea6cf74db4b3fc6fa63bb5a, type: 3}
+  - {fileID: 2014736638714789087, guid: 23c740d0991de9548871c1102b1017f5, type: 3}
 --- !u!1 &8605805578148252373 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100178, guid: 5779b1a41ccf45b45bfc238034373133, type: 3}

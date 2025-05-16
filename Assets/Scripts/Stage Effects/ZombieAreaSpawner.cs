@@ -11,10 +11,10 @@ public class ZombieAreaSpawner : MonoBehaviour
     //public float spawnInterval = 10f;
     //public int zombiesPerSpawn = 2;
 
-    private float zombieNoKeyAmount = 7;
-    private float zombieHasKeyAmount = 3;
-    private float weaponBoxAmount = 3;
-    private float itemBoxAmount = 5;
+    private float zombieNoKeyAmount = 5;
+    private float zombieHasKeyAmount = 5;
+    private float weaponBoxAmount = 5;
+    private float itemBoxAmount = 10;
 
     void Start()
     {

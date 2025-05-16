@@ -43,7 +43,10 @@ public class CrabBossBehaviour : EnemyBehaviour
     //SFX
     protected AudioClip summonAudioClip;
 
-    protected void Awake() {
+    public GameObject[] weapons;
+
+    protected void Awake()
+    {
         maxHealth = 300f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
         //Attack: 30 fps
         //Hit: 60 fps
@@ -96,9 +99,10 @@ public class CrabBossBehaviour : EnemyBehaviour
     protected override void Update()
     {
         base.Update();
-        
+
         //death check
-        if(currentHealth <= 0 && !isDying){
+        if (currentHealth <= 0 && !isDying)
+        {
             Die();
             // Javier Addition: Give gold to player
             if (GoldManager.instance != null)
@@ -112,30 +116,39 @@ public class CrabBossBehaviour : EnemyBehaviour
             {
                 ScoreManager_new.instance.AddScore(500); // Adjust points to preference
             }
+
+            int i = Random.Range(0, weapons.Length);
+            Instantiate(weapons[i], transform.position + transform.up, weapons[i].transform.rotation);
         }
         //summon reation check
-                //summon crab
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && currentHealth <= maxHealth / 2 && !isSummonHalf){
+        //summon crab
+        else if (alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && currentHealth <= maxHealth / 2 && !isSummonHalf)
+        {
             Summon();
         }
         //attack reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange && isAttack && !isSummoning){
+        else if (alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange && isAttack && !isSummoning)
+        {
             Attack();
         }
         //attack2 reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack2Range && isAttack2 && !isSummoning){
+        else if (alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack2Range && isAttack2 && !isSummoning)
+        {
             Attack2();
         }
         //attack3 reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack3Range && isAttack3 && !isSummoning){
+        else if (alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack3Range && isAttack3 && !isSummoning)
+        {
             Attack3();
         }
         //Chases reaction check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isSummoning){
+        else if (alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isSummoning)
+        {
             Chase();
         }
         //patrolling if nothing happened 
-        else if(alive && !isAttacking && !isRoaring && !isHitting && !fov.canSeePlayer && !isSummoning){
+        else if (alive && !isAttacking && !isRoaring && !isHitting && !fov.canSeePlayer && !isSummoning)
+        {
             Patrol();
             agent.enabled = false;
             isRoared = false;

@@ -24,29 +24,7 @@ public class CureCollect : MonoBehaviour
     {
         if (playerInRange && Input.GetKeyDown(interactKey))
         {
-            timeTaken = Time.time - startTime;
-            GameManager.Instance.GameComplete(timeTaken); // Save leaderboard stats
-
-            // Change the player's tag (optional)
-            if (player != null)
-            {
-                player.tag = "Finished"; // You can change this to any tag you prefer
-            }
-
-            // Optionally deactivate the cure object or destroy it
-            gameObject.SetActive(false);
-
-            // Load the next scene (make sure to set it in the inspector)
-            if (!string.IsNullOrEmpty(sceneToLoad))
-            {
-                //Cursor.lockState = CursorLockMode.None;
-                //Cursor.visible = true;
-                PlayerPrefs.SetString("GameOutcome", "victory");
-                if(scoreManager != null)
-                    PlayerPrefs.SetString("Score", scoreManager.score.ToString());
-                PlayerPrefs.Save();
-                SceneManager.LoadScene(sceneToLoad);
-            }
+            StartCoroutine(DelayWin());
         }
     }
 
@@ -63,6 +41,37 @@ public class CureCollect : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+        }
+    }
+
+    private IEnumerator DelayWin()
+    {
+        yield return new WaitForSeconds(5f);
+
+        timeTaken = Time.time - startTime;
+        GameManager.Instance.GameComplete(timeTaken); // Save leaderboard stats
+
+        // Change the player's tag (optional)
+        if (player != null)
+        {
+            player.tag = "Finished"; // You can change this to any tag you prefer
+        }
+
+        //delay for few seconds
+
+        // Optionally deactivate the cure object or destroy it
+        gameObject.SetActive(false);
+
+        // Load the next scene (make sure to set it in the inspector)
+        if (!string.IsNullOrEmpty(sceneToLoad))
+        {
+            //Cursor.lockState = CursorLockMode.None;
+            //Cursor.visible = true;
+            PlayerPrefs.SetString("GameOutcome", "victory");
+            if (scoreManager != null)
+                PlayerPrefs.SetString("Score", scoreManager.score.ToString());
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(sceneToLoad);
         }
     }
 }

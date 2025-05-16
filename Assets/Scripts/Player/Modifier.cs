@@ -46,8 +46,8 @@ public class Modifier : MonoBehaviour
             else stage.SetActive(false);
         }
     }
-
-    public void TPtoStage2Boss(){
+    
+    public void TPtoStage2Statue(){
         player.transform.position = trans[1].position;
         foreach(GameObject stage in stages){
             if(stage.name == "Stage2") stage.SetActive(true);
@@ -55,8 +55,18 @@ public class Modifier : MonoBehaviour
         }
     }
 
-    public void TPtoStage3Boss(){
+    public void TPtoStage2Boss()
+    {
         player.transform.position = trans[2].position;
+        foreach (GameObject stage in stages)
+        {
+            if (stage.name == "Stage2") stage.SetActive(true);
+            else stage.SetActive(false);
+        }
+    }
+
+    public void TPtoStage3Boss(){
+        player.transform.position = trans[3].position;
         foreach(GameObject stage in stages){
             if(stage.name == "Stage3") stage.SetActive(true);
             else stage.SetActive(false);
@@ -64,7 +74,7 @@ public class Modifier : MonoBehaviour
     }
 
     public void TPtoCureRoom(){
-        player.transform.position = trans[3].position;
+        player.transform.position = trans[4].position;
         foreach(GameObject stage in stages){
             if(stage.name == "Cure Room") stage.SetActive(true);
             else stage.SetActive(false);

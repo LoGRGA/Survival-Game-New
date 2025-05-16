@@ -6115,5 +6115,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
+  isRoarCoolDown: 0
   rot: {fileID: 8691752326244848637}
   meatHook: {fileID: 8205826494042055387}
+  weapons:
+  - {fileID: 6237249499509582127, guid: 1c8d167b86fed9442ac0261a473ea62c, type: 3}
+  - {fileID: 1516146185071122669, guid: 8eaf994358fe92146a38c070116c688c, type: 3}
+  - {fileID: 167897949941057898, guid: bdfdff92b7107824a8e70284a36fe4a1, type: 3}

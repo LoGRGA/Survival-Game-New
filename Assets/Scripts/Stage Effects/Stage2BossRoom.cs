@@ -9,39 +9,53 @@ public class Stage2BossRoom : MonoBehaviour
     public GameObject door;
     public LayerMask hittableLayer;
 
+    private bool isCoroutineStart = false;
     // Start is called before the first frame update
     void Start()
     {
         triggerCollider = GetComponent<Collider>();
         StartCoroutine(CheckForHittableObjects());
+        isCoroutineStart = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isCoroutineStart)
+        {
+            StartCoroutine(CheckForHittableObjects());
+        }
     }
 
 
-    private IEnumerator CheckForHittableObjects(){
+    private IEnumerator CheckForHittableObjects()
+    {
         while (true)
         {
             yield return new WaitForSeconds(checkInterval);
 
             Bounds colliderBounds = triggerCollider.bounds;
-    
+
             Collider[] colliders = Physics.OverlapBox(
-                colliderBounds.center,   
-                colliderBounds.extents,  
-                transform.rotation,   
+                colliderBounds.center,
+                colliderBounds.extents,
+                transform.rotation,
                 hittableLayer
             );
 
-            if (colliders.Length == 0){
+            if (colliders.Length == 0)
+            {
                 door.SetActive(true);
             }
-            else{
+            else
+            {
                 door.SetActive(false);
             }
         }
+    }
+    
+    void OnDisable()
+    {
+        isCoroutineStart = false;
     }
 }

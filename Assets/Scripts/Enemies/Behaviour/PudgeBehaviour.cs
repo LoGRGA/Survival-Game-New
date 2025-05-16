@@ -72,8 +72,11 @@ public class PudgeBehaviour : EnemyBehaviour
     protected AudioClip releaseHookAudioClip;
     protected AudioClip rotAudioClip;
     
+    public GameObject[] weapons;
+    
 
-    protected virtual void Awake() {
+    protected virtual void Awake()
+    {
         maxHealth = 600f; // ------------------------------------------------------------------needs to change -------------------------------------------------------------
         //Added for testing, will remove after stage 3 boss done
         currentHealth = maxHealth;
@@ -133,9 +136,10 @@ public class PudgeBehaviour : EnemyBehaviour
     protected override void Update()
     {
         base.Update();
-        
+
         //death check
-        if(currentHealth <= 0 && !isDying){
+        if (currentHealth <= 0 && !isDying)
+        {
             Die();
             // Javier Addition: Give gold to player
             if (GoldManager.instance != null)
@@ -149,37 +153,48 @@ public class PudgeBehaviour : EnemyBehaviour
             {
                 ScoreManager_new.instance.AddScore(1000); // Adjust points as needed
             }
+            
+            int i = Random.Range(0, weapons.Length);
+            Instantiate(weapons[i], transform.position + transform.up, weapons[i].transform.rotation);
         }
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRoared && !isRoarCoolDown){
+        else if (alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isRoared && !isRoarCoolDown)
+        {
             TryRoar();
         }
         //attack reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange && isAttack && !isReleasingHook && !isRetractingHook && !isCastingRot){
+        else if (alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange && isAttack && !isReleasingHook && !isRetractingHook && !isCastingRot)
+        {
             Attack();
         }
         //attack2 reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack2Range && isAttack2 && !isReleasingHook && !isRetractingHook){
+        else if (alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack2Range && isAttack2 && !isReleasingHook && !isRetractingHook)
+        {
             Attack2();
         }
         //attack3 reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack3Range && isAttack3 && !isReleasingHook && !isRetractingHook){
+        else if (alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attack3Range && isAttack3 && !isReleasingHook && !isRetractingHook)
+        {
             Attack3();
         }
         //rot reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange && isRot && !isReleasingHook && !isRetractingHook){
+        else if (alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && distanceToPlayer <= attackRange && isRot && !isReleasingHook && !isRetractingHook)
+        {
             Rot();
         }
         //hook reation check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isReleasingHook && !isRetractingHook && !isHookCoolDown && !isCastingRot){
+        else if (alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isReleasingHook && !isRetractingHook && !isHookCoolDown && !isCastingRot)
+        {
             Hook();
             agent.enabled = false;
         }
         //Chases reaction check
-        else if(alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isReleasingHook && !isRetractingHook && !isCastingRot){
+        else if (alive && !isAttacking && !isRoaring && !isHitting && fov.canSeePlayer && !isReleasingHook && !isRetractingHook && !isCastingRot)
+        {
             Chase();
         }
         //patrolling if nothing happened 
-        else if(alive && !isAttacking && !isRoaring && !isHitting && !fov.canSeePlayer){
+        else if (alive && !isAttacking && !isRoaring && !isHitting && !fov.canSeePlayer)
+        {
             Patrol();
             agent.enabled = false;
             isRoared = false;
