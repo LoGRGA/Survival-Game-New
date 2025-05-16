@@ -6,9 +6,10 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
 
 public class EnemyBehaviour : MonoBehaviour
-{   
+{
     //animator
     protected Animator animator;
     protected enum baseAnimationState{Idle, Roar, Move, Attack, Hit, Die};
@@ -127,6 +128,27 @@ public class EnemyBehaviour : MonoBehaviour
 
         //SFX
         audioSource = GetComponent<AudioSource>();
+        
+        AudioMixer masterMixer = Resources.Load<AudioMixer>("MasterMixer"); //Get MasterMixer
+
+        //Add Audiosource
+        if (audioSource != null && masterMixer != null)
+        {
+            AudioMixerGroup[] mixerGroups = masterMixer.FindMatchingGroups("Master");
+
+            if (mixerGroups.Length > 0)
+            {
+                audioSource.outputAudioMixerGroup = mixerGroups[0]; //Assign to Master group
+            }
+            else
+            {
+                Debug.LogWarning("Master group not found in MasterMixer!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("MasterMixer not found in Resources!");
+        }
     }
 
     // Update is called once per frame
