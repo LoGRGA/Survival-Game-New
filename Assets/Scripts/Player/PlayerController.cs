@@ -15,6 +15,9 @@ public class PlayerController : FPSInput
     private bool isCooldownActive = false;
     //HAZIQ
 
+    //junjie invincible
+    private Coroutine invincibleCor;
+
     //
     //------------------------------------------------------------------------------------junjie add debuff------------------------------------------------------------------------------
     private List<string> debuffList = new List<string>();
@@ -70,7 +73,7 @@ public class PlayerController : FPSInput
         healthText.SetText(currentHealth.ToString());
 
         slider.maxValue = maxHealth;
-        slider.value = currentHealth; 
+        slider.value = currentHealth;
 
         weapons = new GameObject[2];
 
@@ -130,7 +133,7 @@ public class PlayerController : FPSInput
     public const string SPIN = "Spin";
     public const string SPIN1 = "SpinMirror";
     public const string THROW = "Throw";
-    
+
     public const string BLOCk = "Block";
 
     string currentAnimationState;
@@ -144,7 +147,8 @@ public class PlayerController : FPSInput
         //Debug.Log(currentAnimationState);
         // PLAY THE ANIMATION //
         currentAnimationState = newState;
-        foreach (Animator anim in animator) {
+        foreach (Animator anim in animator)
+        {
             anim.CrossFadeInFixedTime(currentAnimationState, 0.2f);
         }
     }
@@ -228,7 +232,7 @@ public class PlayerController : FPSInput
     private float basicSpeed;
     private int basicDamage;
 
-    
+
     [HideInInspector] public LayerMask attackLayer;
 
     [Header("Attacking")]
@@ -289,7 +293,7 @@ public class PlayerController : FPSInput
         basicDamage = attackDamage;
 
         bool attack = Attacking();
-        if (!attack) 
+        if (!attack)
             return;
 
         if (attackCount == 0)
@@ -299,7 +303,7 @@ public class PlayerController : FPSInput
         }
         else
         {
-            RH.transform.localPosition =  new Vector3(-0.45f, -1.46f, 0.6f);
+            RH.transform.localPosition = new Vector3(-0.45f, -1.46f, 0.6f);
             RH.transform.Rotate(0, -20f, 0, Space.Self);
             ChangeAnimationState(ATTACK2);
             attackCount = 0;
@@ -454,7 +458,7 @@ public class PlayerController : FPSInput
 
     public void GrimHeavy()
     {
-        if(isGrimSpeed)
+        if (isGrimSpeed)
             return;
 
         isGrimSpeed = true;
@@ -548,9 +552,9 @@ public class PlayerController : FPSInput
 
         foreach (GameObject gObject in cone.GetArray())
         {
-            if(gObject.IsDestroyed()) continue;
+            if (gObject.IsDestroyed()) continue;
             //print(gObject.name);
-            
+
             if (Physics.Linecast(cam.transform.position, gObject.transform.position, out RaycastHit hits, attackLayer))
             {
                 HitTarget(hits.point);
@@ -586,7 +590,7 @@ public class PlayerController : FPSInput
             healthText.SetText(currentHealth.ToString());  // Update health text display
             slider.value = currentHealth;  // Update slider value
         }
-        else 
+        else
         {
             ShieldStat shieldstat = GetComponentInChildren<ShieldStat>();
             shieldstat.BlockDamage(amount);
@@ -604,11 +608,11 @@ public class PlayerController : FPSInput
     }
     public void Heal(int amount)
     {
-        
-            currentHealth += amount;
-            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);  // Prevent health from going above maxHealth
-            healthText.SetText(currentHealth.ToString());  // Update health text display
-            slider.value = currentHealth;  // Update slider value
+
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);  // Prevent health from going above maxHealth
+        healthText.SetText(currentHealth.ToString());  // Update health text display
+        slider.value = currentHealth;  // Update slider value
 
         //HAZIQ
         // Reset warning Panel if health goes above 50%
@@ -702,7 +706,7 @@ public class PlayerController : FPSInput
                     Debug.LogWarning("Debuff does not exist");
                     break;
             }
-            
+
         }
         debuffList.Clear();
     }
@@ -721,6 +725,7 @@ public class PlayerController : FPSInput
             }
         }
         isPoisoned = false;
+        speed = baseSpeed;
     }
 
     IEnumerator Burned(int burnCount)
@@ -776,7 +781,7 @@ public class PlayerController : FPSInput
 
     IEnumerator GrimSpeed()
     {
-        if(grimStartSFX)
+        if (grimStartSFX)
             audioSource.PlayOneShot(grimStartSFX);
 
         yield return new WaitForSeconds(20);
@@ -792,7 +797,7 @@ public class PlayerController : FPSInput
         yield return new WaitForSeconds(7);
         isGrimSpeed = false;
 
-        if(grimChargeSFX)
+        if (grimChargeSFX)
             audioSource.PlayOneShot(grimChargeSFX);
     }
 
@@ -809,7 +814,7 @@ public class PlayerController : FPSInput
         yield return new WaitForSeconds(7f);
 
         isLightningCooldown = false;
-        if(grimChargeSFX)
+        if (grimChargeSFX)
             audioSource.PlayOneShot(grimChargeSFX);
     }
 
@@ -843,7 +848,7 @@ public class PlayerController : FPSInput
             bool attack = Attacking();
             if (attack)
             {
-                if (count == 0) 
+                if (count == 0)
                 {
                     ChangeAnimationState(SPIN);
                     count++;
@@ -871,7 +876,7 @@ public class PlayerController : FPSInput
     private void Death()
     {
         PlayerPrefs.SetString("GameOutcome", "defeat");
-        
+
         if (scoreManager != null)
             PlayerPrefs.SetString("Score", scoreManager.score.ToString());
         PlayerPrefs.Save();
@@ -879,12 +884,14 @@ public class PlayerController : FPSInput
     }
 
     //junjie add
-    public void ChangePlayerPosition(Vector3 position){
+    public void ChangePlayerPosition(Vector3 position)
+    {
         transform.position = position;
     }
 
     //------------------------------------------------------------------------------------junjie add debuff------------------------------------------------------------------------------
-    public void AddDebuff(string debuff){
+    public void AddDebuff(string debuff)
+    {
         debuffList.Add(debuff);
     }
 
@@ -926,5 +933,24 @@ public class PlayerController : FPSInput
 
 
     //HAZIQ
+    //junjie invincible
+    public void Invincible()
+    {
+        invincibleCor = StartCoroutine(InvincibleCro());
+    }
+
+    private IEnumerator InvincibleCro()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            currentHealth = maxHealth;
+        }
+    }
+
+    public void DisableInvincible()
+    {
+        StopCoroutine(invincibleCor);
+    }
 
 }

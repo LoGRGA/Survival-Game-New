@@ -21,7 +21,7 @@ public class GimmickRoom2 : MonoBehaviour
     private CameraClearFlags ogClearFlags;
     private Color ogBackgroundColor;
 
-    private bool darkRoomActive = true;
+    private bool isRestDark = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,7 +73,11 @@ public class GimmickRoom2 : MonoBehaviour
             if (colliders.Length <= 3)
             {
                 door.SetActive(true);
-                ResetDarkRoom();
+                if (!isRestDark) {
+                    isRestDark = true;
+                    ResetDarkRoom();
+                }
+                
             }
             else
             {
@@ -89,8 +93,6 @@ public class GimmickRoom2 : MonoBehaviour
     
     public void ResetDarkRoom()
     {
-        darkRoomActive = false;
-
         // Restore original lighting
         RenderSettings.skybox = ogSkybox;
         RenderSettings.ambientMode = ogAmbientMode;
