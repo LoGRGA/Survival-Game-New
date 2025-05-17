@@ -27532,6 +27532,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1108258994}
     m_Modifications:
+    - target: {fileID: 262204049551368447, guid: 61822d60ed611874ca140cfaa600c93e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 739559605}
+    - target: {fileID: 262204049551368447, guid: 61822d60ed611874ca140cfaa600c93e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Sell
+      objectReference: {fileID: 0}
     - target: {fileID: 2367052295763772381, guid: 61822d60ed611874ca140cfaa600c93e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -27562,7 +27570,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4331610427848252823, guid: 61822d60ed611874ca140cfaa600c93e, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5061612
+      objectReference: {fileID: 0}
+    - target: {fileID: 5331158037248524854, guid: 61822d60ed611874ca140cfaa600c93e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 739559604}
+    - target: {fileID: 5331158037248524854, guid: 61822d60ed611874ca140cfaa600c93e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Sell
       objectReference: {fileID: 0}
     - target: {fileID: 5462320345244880246, guid: 61822d60ed611874ca140cfaa600c93e, type: 3}
       propertyPath: m_Pivot.x
@@ -27651,6 +27667,18 @@ PrefabInstance:
     - target: {fileID: 6221193423513144716, guid: 61822d60ed611874ca140cfaa600c93e, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7040227786360368708, guid: 61822d60ed611874ca140cfaa600c93e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 739559603}
+    - target: {fileID: 7040227786360368708, guid: 61822d60ed611874ca140cfaa600c93e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Sell
+      objectReference: {fileID: 0}
+    - target: {fileID: 7040227786360368708, guid: 61822d60ed611874ca140cfaa600c93e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: NPCSlotSpeed, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -41665,6 +41693,39 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733037716}
   m_Mesh: {fileID: 4300000, guid: 3034d06cd370d074cb40a9832536dd2d, type: 3}
+--- !u!114 &739559603 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 268719361534173184, guid: 61822d60ed611874ca140cfaa600c93e, type: 3}
+  m_PrefabInstance: {fileID: 495403555}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5510f2f84b8d014cbc1ecc7ed5e8d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &739559604 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 957053728803697873, guid: 61822d60ed611874ca140cfaa600c93e, type: 3}
+  m_PrefabInstance: {fileID: 495403555}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e5f4930aee0a204db3e8d53a69841ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &739559605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6385395388914936958, guid: 61822d60ed611874ca140cfaa600c93e, type: 3}
+  m_PrefabInstance: {fileID: 495403555}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ada0434bfc9d0b4284749249cb78612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &740661333 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8604962873369955392, guid: beef3bcde1610f04aa96275436147bb9, type: 3}
